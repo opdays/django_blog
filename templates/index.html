@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta content='width=device-width,initial-scale=1,maximum-scale=1' name='viewport'>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/static/css/main.css"/>
+    <link rel="stylesheet" href="/static/code.css"/>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">杨洋的个人主页</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target="#menu">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="nav navbar-nav">
+                <li><a href="/">文章</a></li>
+{#                <li><a href="#">python</a></li>#}
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+<div id="wrapper">
+    <div class="container">
+        <div id="content-header">
+
+        </div>
+        <div class="row">
+            <div id="left-container" class="col-xs-8 col-md-8 col-lg-8">
+                {% block left-container %}
+                {% endblock %}
+            </div>
+            <div id="right-container"
+                 class="col-xs-4 col-md-3 col-lg-3 col-lg-offset-1 col-xs-offset-0 col-md-offset-1">
+                <div class="wihite-block">
+                    <div class="sidebar">
+                        <div class="about">
+                            <img class="img-circle img-responsive center-block" src="{% static 'avator.jpg' %}"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="wihite-block">
+                    <div class="sidebar">
+                        <div class="about">
+                            <h4>
+                                关于作者
+                            </h4>
+                            <p>杨洋</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="wihite-block">
+                    <div class="sidebar">
+                        <div class="about">
+                            <h4>
+                                标签云
+                            </h4>
+                            <div class="tag">
+                                {% for tag in tags %}
+                                    <a href="/tag/{{ tag.id }}">{{ tag.tag }}</a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% block right-container %}
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="main-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="widget">
+                        <h4 class="title">友情链接</h4>
+                        <div class="content friend-links">
+                            {% for link in firendlink %}
+                            <a href="{{ link.linkurl }}" title="{{ link.linkname }}"
+                               target="_blank">{{ link.linkname }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="widget">
+                        <h4 class="title">标签云</h4>
+                        <div class="content tag-cloud">
+                            {% for tag in tags %}
+                                <a href="#">{{ tag }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="widget">
+                        <h4 class="title">赞助商</h4>
+                        <div class="content friend-links">
+                            <a href="https://www.upyun.com/" title="又拍云"
+                               onclick="_hmt.push(['_trackEvent', 'link', 'click', '又拍云'])" target="_blank">又拍云</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <span>Copyright © <a href="http://expo.bootcss.com">优站精选</a></span> |
+                    <span><a href="http://www.miibeian.gov.cn/" target="_blank">京ICP备11008151号</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+</body>
+<script src="{% static 'jquery-3.2.1.js' %}"></script>
+<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static '/js/main.js' %}"></script>
+</html>

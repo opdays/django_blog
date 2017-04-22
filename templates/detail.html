@@ -1,0 +1,42 @@
+{% extends "index.html" %}
+
+{% load custom_markdown %}
+{% block left-container %}
+
+    <article class="article-block" id="{{ article.id }}">
+
+
+            <div class="post-head">
+                <h1 class="post-title"><a href="/post/laravel-5-5-will-be-the-next-lts-release/">{{ article.title }}</a>
+                </h1>
+                <div class="post-meta">
+                    <span class="author">标签：
+                        {% for tag in article.tag_set.all %}
+                        <a href="#">{{ tag }}</a>|
+                        {% endfor %}
+                    </span> •
+                    <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}" title="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}">
+                        {{ article.date_time|date:'Y年m月d日 H时i分s秒' }}</time>
+                </div>
+            </div>
+{#            <div class="featured-media">#}
+{#                <a href="/post/laravel-5-5-will-be-the-next-lts-release/"><img#}
+{#                        src="http://image.golaravel.com/b/60/0540baaed781628b02aac992d1c8f.png"#}
+{#                        alt="Laravel 5.5 将是下一个 LTS 版本，预计 7/8 月份发布"></a>#}
+{#            </div>#}
+            <div class="post-content">
+                {{ article.content|custom_markdown }}
+            </div>
+
+            <footer class="post-footer clearfix">
+                <div class="pull-left tag-list">
+                    <i class="fa fa-folder-open-o"></i>
+
+                </div>
+                <div class="pull-right share">
+                </div>
+            </footer>
+
+
+        </article>
+{% endblock %}
