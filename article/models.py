@@ -1,5 +1,4 @@
 from django.db import models
-from django.core.urlresolvers import reverse
 
 # Create your models here.
 class Article(models.Model):
@@ -19,7 +18,7 @@ class Article(models.Model):
 class Tag(models.Model):
     id = models.AutoField(primary_key=True)
     tag = models.CharField(max_length=100,default='未分类')
-    articles = models.ManyToManyField(Article)
+    articles = models.ManyToManyField(Article,blank=True)
 
     class Meta:
         db_table = 'tag'

@@ -88,6 +88,29 @@ img#avator{
     padding: 6px 0 0 0;
 }
 
+/**/
+
+.pagination {
+    margin: 0 0 35px;
+    text-align: center;
+    display: block;
+}
+.pagination a {
+    text-align: center;
+    display: inline-block;
+    color: #ffffff;
+    background: #f4645f;
+    border-radius: 2px;
+}
+.pagination .page-number {
+    background: #f4645f;
+    color: #ffffff;
+    margin: 0 3px;
+    display: inline-block;
+    line-height: 36px;
+    padding: 0 14px;
+    border-radius: 2px;
+}
 
 
 /*article*/
@@ -125,7 +148,6 @@ a img {
 }
 .article-block .featured-media img {
     width: 100%;
-    height: 100px;
 }
 
 
@@ -173,6 +195,9 @@ a img {
     padding-top: 14px;
     padding-bottom: 20px;
     border-top: 1px solid #303030;
+}
+.copyright a {
+    color: #555;
 }
 .widget {
     margin-bottom: 35px;

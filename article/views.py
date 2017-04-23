@@ -1,0 +1,44 @@
+from django.shortcuts import render
+from .models import Article,Tag,FriendLink
+from django.http import Http404
+
+from django.core.paginator import Paginator ,EmptyPage, PageNotAnInteger
+# Create your views here.
+from .templatetags.custom_markdown import custom_markdown
+
+def blog_global_val(request):
+    articles = Article.objects.all()
+    tags = Tag.objects.all()
+    firendlink = FriendLink.objects.all()
+
+    return {
+        "articles":articles,
+        "tags":tags,
+        "firendlink":firendlink
+    }
+
+
+def article_list(request,page):
+    articles = Article.objects.all()
+    paginator = Paginator(articles, 1)
+    try:
+        articles = paginator.page(int(page if page else 1))
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
+    return render(request, "article_list.html",context={"articles": articles})
+def article_detail(request,id):
+    try:
+        article =  Article.objects.get(id=str(id))
+    except:
+        Http404
+    return render(request, "article_detail.html", context={"article": article})
+
+
+def tag_list(request,tag,page):
+    articles = Tag.objects.filter(tag =tag).first().articles.all()
+    paginator = Paginator(articles, 1)
+    try:
+        articles = paginator.page(int(page if page else 1))
+    except EmptyPage:
+        articles = paginator.page(paginator.num_pages)
+    return render(request, "tag_list.html",context={"tag":tag,"articles":articles})

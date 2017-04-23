@@ -24,13 +24,14 @@
         </div>
         <div class="collapse navbar-collapse" id="menu">
             <ul class="nav navbar-nav">
-                <li><a href="/">文章</a></li>
-{#                <li><a href="#">python</a></li>#}
+                <li><a href="{% url 'article_list' page='' %}">文章</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/admin"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
             </ul>
+
         </div>
+
 
     </div>
 </nav>
@@ -40,12 +41,12 @@
 
         </div>
         <div class="row">
-            <div id="left-container" class="col-xs-8 col-md-8 col-lg-8">
+            <div id="left-container" class="col-xs-12 col-md-8 col-lg-8">
                 {% block left-container %}
                 {% endblock %}
             </div>
             <div id="right-container"
-                 class="col-xs-4 col-md-3 col-lg-3 col-lg-offset-1 col-xs-offset-0 col-md-offset-1">
+                 class="col-xs-12 col-md-3 col-lg-3 col-lg-offset-1 hidden-xs">
                 <div class="wihite-block">
                     <div class="sidebar">
                         <div class="about">
@@ -71,7 +72,7 @@
                             </h4>
                             <div class="tag">
                                 {% for tag in tags %}
-                                    <a href="/tag/{{ tag.id }}">{{ tag.tag }}</a>
+                                    <a href="{% url 'tag_list' tag=tag page=''%}">{{ tag.tag }}</a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -90,10 +91,10 @@
                 <div class="col-sm-4">
                     <div class="widget">
                         <h4 class="title">友情链接</h4>
-                        <div class="content friend-links">
+                        <div class="content  tag-cloud">
                             {% for link in firendlink %}
-                            <a href="{{ link.linkurl }}" title="{{ link.linkname }}"
-                               target="_blank">{{ link.linkname }}</a>
+                                <a href="{{ link.linkurl }}" title="{{ link.linkname }}"
+                                   target="_blank">{{ link.linkname }}</a>
                             {% endfor %}
                         </div>
                     </div>
@@ -104,7 +105,7 @@
                         <h4 class="title">标签云</h4>
                         <div class="content tag-cloud">
                             {% for tag in tags %}
-                                <a href="#">{{ tag }}</a>
+                                <a href="{% url 'tag_list' tag=tag page=1 %}">{{ tag }}</a>
                             {% endfor %}
                         </div>
                     </div>

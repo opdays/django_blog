@@ -1,0 +1,61 @@
+{% extends "article_base.html" %}
+{% load static %}
+{% block left-container %}
+    {% for article in articles %}
+        <article class="article-block" id="{{ article.id }}">
+
+
+            <div class="post-head">
+                <h1 class="post-title"><a href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a>
+                </h1>
+                <div class="post-meta">
+                    <span class="author">标签：
+                        {% for tag in article.tag_set.all %}
+                            <a href="{% url 'tag_list' tag=tag page='' %}">{{ tag }}</a>|
+                        {% endfor %}
+                    </span> •
+                    <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}"
+                          title="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}">
+                        {{ article.date_time|date:'Y年m月d日 H时i分s秒' }}</time>
+                </div>
+            </div>
+            <div class="featured-media">
+                {% if article.image_url %}
+                    <a href="{% url 'article_detail' id=article.id %}"><img
+                            src="{{ article.image_url }}"
+                            alt=""></a>
+                {% endif %}
+            </div>
+            <div class="post-content">
+                {% load custom_markdown %}
+                <p>{{ article.content|truncatewords:"30" }}</p>
+            </div>
+            <div class="post-permalink">
+                <a href="{% url 'article_detail' id=article.id %}" class="btn btn-default btn-success">阅读全文</a>
+            </div>
+
+
+            <footer class="post-footer clearfix">
+                <div class="pull-left tag-list">
+                    <i class="fa fa-folder-open-o"></i>
+
+                </div>
+                <div class="pull-right share">
+                </div>
+            </footer>
+
+
+        </article>
+    {% endfor %}
+     <nav class="pagination" role="navigation">
+                {% if articles.has_previous %}
+                <a class="page-number" href="{% url 'article_list' page=articles.previous_page_number %}"><i class="fa glyphicon glyphicon-chevron-left"></i></a>
+                {% endif %}
+                <span class="page-number">第 {{ articles.number }} 页 ⁄ 共 {{ articles.paginator.num_pages }} 页</span>
+                {% if articles.has_next %}
+                <a class="page-number" href="{% url 'article_list' page=articles.next_page_number %}"><i class="fa glyphicon glyphicon-chevron-right"></i></a>
+                {% endif %}
+            </nav>
+{% endblock %}
+
+
