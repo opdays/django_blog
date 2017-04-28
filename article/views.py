@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from .models import Article,Tag,FriendLink
 from django.http import Http404
-
-from django.core.paginator import Paginator ,EmptyPage, PageNotAnInteger
+from django.conf import settings
+from django.core.paginator import Paginator ,EmptyPage
 # Create your views here.
 from .templatetags.custom_markdown import custom_markdown
 
@@ -14,13 +14,18 @@ def blog_global_val(request):
     return {
         "articles":articles,
         "tags":tags,
-        "firendlink":firendlink
+        "firendlink":firendlink,
+        'blog': settings.BLOG,
+        'author': settings.AUTHOR,
+        'avator': settings.AVATOR,
+        'QQ': settings.QQ,
+        'ICP':settings.ICP,
     }
 
 
 def article_list(request,page):
     articles = Article.objects.all()
-    paginator = Paginator(articles, 1)
+    paginator = Paginator(articles, settings.PER_PAGE_NUM)
     try:
         articles = paginator.page(int(page if page else 1))
     except EmptyPage:
@@ -36,7 +41,7 @@ def article_detail(request,id):
 
 def tag_list(request,tag,page):
     articles = Tag.objects.filter(tag =tag).first().articles.all()
-    paginator = Paginator(articles, 1)
+    paginator = Paginator(articles, settings.PER_PAGE_NUM)
     try:
         articles = paginator.page(int(page if page else 1))
     except EmptyPage:

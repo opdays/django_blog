@@ -97,7 +97,13 @@ ENV/
 
 # mkdocs documentation
 /site
+
+
+
+#我的
 */migrations
 migrations
 */__pycache__
 __pycache__
+public_static
+config.yaml
