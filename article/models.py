@@ -17,8 +17,10 @@ class Article(models.Model):
 
 class Tag(models.Model):
     id = models.AutoField(primary_key=True)
-    tag = models.CharField(max_length=100,default='未分类')
+    tag = models.CharField('标签',max_length=100,default='未分类')
+    color = models.CharField('颜色',max_length=16,default='#777')
     articles = models.ManyToManyField(Article,blank=True)
+
 
     class Meta:
         db_table = 'tag'

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load custom_markdown %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -74,7 +75,7 @@
                             </h4>
                             <div class="tag">
                                 {% for tag in tags %}
-                                    <a href="{% url 'tag_list' tag=tag page=''%}">{{ tag.tag }}</a>
+                                    <a href="{% url 'tag_list' tag=tag page=''%}" style="background-color: {{ tag.color }}">{{ tag.tag }}</a>
                                 {% endfor %}
                             </div>
                         </div>
@@ -138,7 +139,7 @@
 
 
 </div>
-
+<button class="btn" id="go_top" type="button" >Top</button>
 </body>
 <script src="{% static 'jquery-3.2.1.js' %}"></script>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>

@@ -1,5 +1,6 @@
 {% extends "article_base.html" %}
 {% load static %}
+{% load custom_markdown %}
 {% block left-container %}
     {% for article in articles %}
         <article class="article-block" id="{{ article.id }}">
@@ -11,7 +12,7 @@
                 <div class="post-meta">
                     <span class="author">标签：
                         {% for tag in article.tag_set.all %}
-                            <a href="{% url 'tag_list' tag=tag page='' %}">{{ tag }}</a>|
+                            <a href="{% url 'tag_list' tag=tag page='' %}">{% color_tag tag color=tag.color %}</a>
                         {% endfor %}
                     </span> •
                     <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}"

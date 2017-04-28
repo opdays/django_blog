@@ -4,7 +4,7 @@ from django.http import Http404
 from django.conf import settings
 from django.core.paginator import Paginator ,EmptyPage
 # Create your views here.
-from .templatetags.custom_markdown import custom_markdown
+#from .templatetags import custom_markdown,color_tag
 
 def blog_global_val(request):
     articles = Article.objects.all()

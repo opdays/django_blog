@@ -12,7 +12,7 @@
                 <div class="post-meta">
                     <span class="author">标签：
                         {% for tag in article.tag_set.all %}
-                        <a href="#">{{ tag }}</a>|
+                        <a href="{% url 'tag_list' tag=tag page='' %}">{% color_tag tag color=tag.color %}  </a>
                         {% endfor %}
                     </span> •
                     <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}" title="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}">
@@ -39,4 +39,5 @@
 
 
         </article>
+
 {% endblock %}

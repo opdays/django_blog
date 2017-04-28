@@ -157,7 +157,8 @@ a img {
 .tag a {
     border: 1px solid #ebebeb;
     padding: 2px 7px;
-    color: #959595;
+    //color: #959595;
+    color: #ffffff;
     line-height: 1.5em;
     display: inline-block;
     margin: 0 7px 7px 0;
@@ -172,8 +173,8 @@ a img {
 
 .tag a:hover {
     color: #ffffff;
-    background: #f4645f;
-    border: 1px solid #f4645f;
+    background: #f4645f !important;
+    //border: 1px solid #f4645f;
     text-decoration: none;
 }
 
@@ -252,3 +253,28 @@ a img {
     transition: all .2s ease;
 }
 /*footer*/
+
+
+/*go top*/
+#go_top {
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    padding: 9px;
+    color: aliceblue;
+    font-size: 20px;
+    border: 0px;
+    display: none;
+    background-color: #eb19c1;
+    border-radius:50px;
+    outline:none;
+    z-index: 100;
+}
+
+/*去掉a标签的下划线*/
+
+a:hover{
+    text-decoration: none;
+}
