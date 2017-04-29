@@ -64,6 +64,9 @@
                             </h4>
                             <p>{{ author }}</p>
                             <p>QQ: {{ QQ }}</p>
+                            <a href="https://github.com/yy584089958">
+                                <img src="{% static 'image/github_32.507936507937px_1181253_easyicon.net.png' %}">
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -74,8 +77,9 @@
                                 最近文章
                             </h4>
                             {% for article in articles %}
-                                <p><a href="">{{ article.title }}</a></p>
-                                {% endfor %}
+                                <p><a href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a></p>
+                                <hr>
+                            {% endfor %}
                         </div>
                     </div>
                 </div>
