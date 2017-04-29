@@ -6,6 +6,9 @@ from django.core.paginator import Paginator ,EmptyPage
 # Create your views here.
 #from .templatetags import custom_markdown,color_tag
 
+def index(request):
+    return render(request,"index.html")
+
 def blog_global_val(request):
     articles = Article.objects.all()
     tags = Tag.objects.all()

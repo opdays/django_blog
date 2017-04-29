@@ -23,6 +23,7 @@
             <div class="featured-media">
                 {% if article.image_url %}
                     <a href="{% url 'article_detail' id=article.id %}"><img
+                            class="img-thumbnail"
                             src="{{ article.image_url }}"
                             alt=""></a>
                 {% endif %}
@@ -30,7 +31,7 @@
             <div class="post-content">
                 <p>{{ article.content|custom_markdown|truncatewords:"30" }}</p>
             </div>
-            <div class="post-permalink">
+            <div class="">
                 <a href="{% url 'article_detail' id=article.id %}" class="btn btn-default btn-success">阅读全文</a>
             </div>
 

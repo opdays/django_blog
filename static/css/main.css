@@ -67,13 +67,21 @@ html,body{
     float: right;
 }
 img#avator{
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
-    margin: auto 60px;
+        -webkit-transition: transform 1s;
+    /*transform 旋转属性
+    transition 过度属性  定义过度属性为旋转属性 过度时间为1s
+     */
 }
-
-
+img#avator:hover{
+        transform: rotate(360deg);
+    /*鼠标移动头像 旋转360度   触发过度属性定义的旋转属性*/
+}
+@-webkit-keyframes mymove /* Safari and Chrome */
+{
+/*http://www.runoob.com/cssref/css3-pr-animation-keyframes.html*/
+0% {transform: rotate(0deg);}
+100% {;}
+}
 .wrap{
     position: absolute;
     left: 50%;
