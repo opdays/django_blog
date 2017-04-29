@@ -11,7 +11,7 @@
                 </h1>
                 <div class="post-meta">
                     <span class="author">标签：
-                        {% for tag in article.tag_set.all %}
+                        {% for tag in article.tags.all %}
                             <a href="{% url 'tag_list' tag=tag page='' %}">{% color_tag tag color=tag.color %}</a>
                         {% endfor %}
                     </span> •

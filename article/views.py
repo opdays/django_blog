@@ -26,6 +26,11 @@ def blog_global_val(request):
 def article_list(request,page):
     articles = Article.objects.all()
     paginator = Paginator(articles, settings.PER_PAGE_NUM)
+    if request.META.get('HTTP_X_FORWARDED_FOR'):
+        ip = request.META['HTTP_X_FORWARDED_FOR']
+    else:
+        ip = request.META['REMOTE_ADDR']
+    print(ip)
     try:
         articles = paginator.page(int(page if page else 1))
     except EmptyPage:

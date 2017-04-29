@@ -42,6 +42,7 @@ ALLOWED_HOSTS = ['blog.opdays.com','192.168.174.131', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+    'suit',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  # add中文
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -124,13 +126,16 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+#TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+#USE_TZ = True
+USE_TZ = False
+# 不要使用 UTC 只要设置了USE_TZ=True，django.util.timezone.now()输出地永远是UTC时间，不管你设置的TIME_ZONE是什么
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -140,3 +145,15 @@ STATICFILES_DIRS = [  # 公共静态资源
     os.path.join(BASE_DIR, "static"),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'public_static')  # 运行manage.py collectstatic 收集的目录
+
+
+# http://django-suit.readthedocs.io/en/develop/configuration.html
+SUIT_CONFIG = {
+    'ADMIN_NAME': u'博客后台',
+    #'SEARCH_URL': '/admin/api/server/',
+    # 搜索的时候将?q=xxxxx传入的url
+    'MENU': (
+        {'app': 'article', 'label': '文章'},
+    ),
+    'LIST_PER_PAGE': 17,
+}

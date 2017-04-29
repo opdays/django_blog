@@ -6,38 +6,108 @@
     <article class="article-block" id="{{ article.id }}">
 
 
-            <div class="post-head">
-                <h1 class="post-title"><a href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a>
-                </h1>
-                <div class="post-meta">
+        <div class="post-head">
+            <h1 class="post-title"><a href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a>
+            </h1>
+            <div class="post-meta">
                     <span class="author">标签：
-                        {% for tag in article.tag_set.all %}
-                        <a href="{% url 'tag_list' tag=tag page='' %}">{% color_tag tag color=tag.color %}  </a>
+                        {% for tag in article.tags.all %}
+                            <a href="{% url 'tag_list' tag=tag page='' %}">{% color_tag tag color=tag.color %}  </a>
                         {% endfor %}
                     </span> •
-                    <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}" title="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}">
-                        {{ article.date_time|date:'Y年m月d日 H时i分s秒' }}</time>
-                </div>
+                <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}"
+                      title="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}">
+                    {{ article.date_time|date:'Y年m月d日 H时i分s秒' }}</time>
             </div>
-{#            <div class="featured-media">#}
-{#                <a href="/post/laravel-5-5-will-be-the-next-lts-release/"><img#}
-{#                        src="http://image.golaravel.com/b/60/0540baaed781628b02aac992d1c8f.png"#}
-{#                        alt="Laravel 5.5 将是下一个 LTS 版本，预计 7/8 月份发布"></a>#}
-{#            </div>#}
-            <div class="post-content">
-                {{ article.content|custom_markdown }}
+        </div>
+        {#            <div class="featured-media">#}
+        {#                <a href="/post/laravel-5-5-will-be-the-next-lts-release/"><img#}
+        {#                        src="http://image.golaravel.com/b/60/0540baaed781628b02aac992d1c8f.png"#}
+        {#                        alt="Laravel 5.5 将是下一个 LTS 版本，预计 7/8 月份发布"></a>#}
+        {#            </div>#}
+        <div class="post-content">
+            {{ article.content|custom_markdown }}
+        </div>
+        <footer class="post-footer clearfix">
+            <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+            <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+            <script>
+                var cloudTieConfig = {
+                    url: document.location.href,
+                    sourceId: "",
+                    productKey: "1a396a9ccac74130ae84a9cbc030a7f9",
+                    target: "cloud-tie-wrapper"
+                };
+                var yunManualLoad = true;
+                Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
+            </script>
+            <div class="pull-left tag-list">
+                <i class="fa fa-folder-open-o"></i>
+
             </div>
-
-            <footer class="post-footer clearfix">
-                <div class="pull-left tag-list">
-                    <i class="fa fa-folder-open-o"></i>
-
-                </div>
-                <div class="pull-right share">
-                </div>
-            </footer>
+            <div class="pull-right share">
 
 
-        </article>
+                {% comment %}<div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a>
+    <a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>
+    window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "1",
+            "bdSize": "32"
+        },
+        "share": {},
+        "image": {
+            "viewList": ["qzone", "tsina", "tqq", "renren", "weixin"],
+            "viewText": "分享到：",
+            "viewSize": "24"
+        },
+        "selectShare": {
+            "bdContainerClass": null,
+            "bdSelectMiniList": ["qzone", "tsina", "tqq", "renren", "weixin"]
+        }
+    };
+    with(document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>{% endcomment %}
+            </div>
+        </footer>
 
+
+    </article>
+
+
+
+
+
+    <script>
+        window._bd_share_config = {
+            "common": {
+                "bdSnsKey": {},
+                "bdText": "",
+                "bdMini": "2",
+                "bdMiniList": false,
+                "bdPic": "",
+                "bdStyle": "0",
+                "bdSize": "16"
+            },
+            "slide": {
+                "type": "slide",
+                "bdImg": "7",
+                "bdPos": "left",
+                "bdTop": "183.66665649414062"
+            }
+        };
+        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+    </script>
 {% endblock %}

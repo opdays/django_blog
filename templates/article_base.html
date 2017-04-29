@@ -71,6 +71,18 @@
                     <div class="sidebar">
                         <div class="about">
                             <h4>
+                                最近文章
+                            </h4>
+                            {% for article in articles %}
+                                <p><a href="">{{ article.title }}</a></p>
+                                {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <div class="wihite-block">
+                    <div class="sidebar">
+                        <div class="about">
+                            <h4>
                                 标签云
                             </h4>
                             <div class="tag">
@@ -116,10 +128,12 @@
 
                 <div class="col-sm-4">
                     <div class="widget">
-                        <h4 class="title">赞助商</h4>
+                        <h4 class="title">模仿这两个</h4>
                         <div class="content friend-links">
-                            <a href="https://www.upyun.com/" title="又拍云"
-                               onclick="_hmt.push(['_trackEvent', 'link', 'click', '又拍云'])" target="_blank">又拍云</a>
+                            <a href="http://expo.bootcss.com/" title="Bootstrap中文网"
+                               target="_blank">Bootstrap中文网</a>
+                            <a href="http://www.golaravel.com/" title="Laravel"
+                               target="_blank">Laravel</a>
                         </div>
                     </div>
                 </div>
