@@ -25,6 +25,5 @@ $(function () {
         }, 1e3);
     }).hide();
 
-   $('table').addClass("table table-bordered table-hover table-striped");
 });
 

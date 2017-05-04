@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/static/css/main.css"/>
     <link rel="stylesheet" href="/static/code.css"/>
+    {% block custom_css %}
+                {% endblock %}
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -162,4 +164,7 @@
 <script src="{% static 'jquery-3.2.1.js' %}"></script>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static '/js/main.js' %}"></script>
+<script src="{% static '/article/md.js' %}"></script>
+{% block custom_js %}
+{% endblock %}
 </html>
