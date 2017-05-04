@@ -4,15 +4,20 @@
 
     {% include "list_container.html" %}
 
+{% if articles %}
     <nav class="pagination" role="navigation">
-                {% if articles.has_previous %}
-                <a class="page-number" href="{% url 'tag_list' tag=tag page=articles.previous_page_number %}"><i class="fa glyphicon glyphicon-chevron-left"></i></a>
-                {% endif %}
-                <span class="page-number">第 {{ articles.number }} 页 ⁄ 共 {{ articles.paginator.num_pages }} 页</span>
-                {% if articles.has_next %}
-                <a class="page-number" href="{% url 'tag_list' tag=tag page=articles.next_page_number %}"><i class="fa glyphicon glyphicon-chevron-right"></i></a>
-                {% endif %}
-            </nav>
-
+        {% if articles.has_previous %}
+            <a class="page-number" href="{% url 'tag_list' tag=tag page=articles.previous_page_number %}"><i
+                    class="fa glyphicon glyphicon-chevron-left"></i></a>
+        {% endif %}
+        <span class="page-number">第 {{ articles.number }} 页 ⁄ 共 {{ articles.paginator.num_pages }} 页</span>
+        {% if articles.has_next %}
+            <a class="page-number" href="{% url 'tag_list' tag=tag page=articles.next_page_number %}"><i
+                    class="fa glyphicon glyphicon-chevron-right"></i></a>
+        {% endif %}
+    </nav>
+    {% else %}
+    <h1> 还没有文章 正在学习 ... </h1>
+{% endif %}
 {% endblock %}
 
