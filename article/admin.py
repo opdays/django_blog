@@ -1,7 +1,9 @@
 from django.contrib import admin
+from django.db import models
 from .models import Article,Tag,FriendLink
 # Register your models here.
-
+from pagedown.widgets import AdminPagedownWidget
+from .form import ArticleForm
 
 class MembershipInline(admin.TabularInline):
     """
@@ -12,9 +14,14 @@ class MembershipInline(admin.TabularInline):
 
 
 class ArticleAdmin(admin.ModelAdmin):
+    #form = ArticleForm
     inlines = [
         MembershipInline,
     ]
+    # https://github.com/timmyomahony/django-pagedown
+    formfield_overrides = {
+        models.TextField: {'widget': AdminPagedownWidget(show_preview=False)},
+    }
 class TagAdmin(admin.ModelAdmin):
     inlines = [
         MembershipInline,

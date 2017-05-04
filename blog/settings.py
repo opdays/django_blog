@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'article',
+    'pagedown',
 ]
 
 MIDDLEWARE = [
@@ -157,3 +158,18 @@ SUIT_CONFIG = {
     ),
     'LIST_PER_PAGE': 17,
 }
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, "static/media")
+# MEDIA_URL = '/media/tiny_mce/'
+# ADMIN_MEDIA_PREFIX = '/static/admin/'
+#
+# TINYMCE_JS_ROOT = os.path.join(MEDIA_ROOT, "tiny_mce")
+# TINYMCE_JS_URL = os.path.join(STATIC_URL, "media/tiny_mce/tiny_mce.js")
+#
+# TINYMCE_DEFAULT_CONFIG = {
+# 'theme': 'advanced',
+# 'theme_advanced_toolbar_location' : 'top',
+# 'theme_advanced_toolbar_align' : 'left',
+# 'width': 600,
+# 'height': 400,
+# }
