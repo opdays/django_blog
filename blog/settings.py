@@ -100,6 +100,7 @@ DATABASES = {
         'PASSWORD': yaml.get('DATABASES').get('PASSWORD'),
         'HOST': yaml.get('DATABASES').get('HOST'),
         'PORT': yaml.get('DATABASES').get('PORT'),
+        'OPTIONS': {'charset': 'utf8mb4'},
     },
 
 }
