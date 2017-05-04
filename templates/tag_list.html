@@ -29,7 +29,7 @@
             </div>
             <div class="post-content">
                 {% load custom_markdown %}
-                <p>{{ article.content|truncatewords:"30" }}</p>
+                <p>{{ article.content|custom_markdown|truncatewords_html:"30" }}</p>
             </div>
             <div class="post-permalink">
                 <a href="{% url 'article_detail' id=article.id %}" class="btn btn-default btn-success">阅读全文</a>
