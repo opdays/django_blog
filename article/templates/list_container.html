@@ -5,7 +5,7 @@
     <ul class="note-list">
         {% for article in articles %}
             <div class="article-block" id="{{ article.id }}">
-                <li class="have-img">
+                <li {% if article.image_url %} class="have-img" {% endif %}>
 
                     {% if article.image_url %}
                         <a href="{% url 'article_detail' id=article.id %}" class="wrap-img"><img
@@ -15,7 +15,7 @@
                     <div class="content">
                         <a class="title" target="_blank"
                            href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a>
-                        <div class="abstract">
+                        <div class="abstract hidden-xs hidden-sm">
                             {{ article.content|custom_markdown|truncatewords_html:"10" }}
                         </div>
                         <div class="meta">
