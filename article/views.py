@@ -19,7 +19,6 @@ def blog_global_val(request):
         "tags":tags,
         "firendlink":firendlink,
         'blog': settings.BLOG,
-        'author': settings.AUTHOR,
         'avator': settings.AVATOR,
         'QQ': settings.QQ,
         'ICP':settings.ICP,

@@ -1,55 +1,58 @@
-html,body{
+html, body {
     background-color: #ebebeb;
 }
+
 .wihite-block {
     background-color: white;
-    padding: 2px 10px;
+    padding: 10px 10px;
     margin: 20px 0px;
+    border-radius: 10px;
+    //padding: 15px;
 }
 
 #wrapper {
     position: absolute;
     top: 60px;
     width: 100%;
-    //background: #0f181d;
-    //color: white;
+ // background: #0f181d;
+ // color: white;
+}
+
+.right-avator-bar{
+
 }
 
 
-.about{
-    border-radius: 3px;
-    padding: 15px;
-}
-.about>h1{
-    text-align: center;
-}
-.navbar-default .navbar-nav>li>a{
-    color : #ffffff;
-}
-.navbar-default{
-    background-color: #3b8cff;
-    border-color: #3b8cff;
-}
-
-.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
-    color: #ede1eb;
-    background-color: #0b93fa;
-}
-
-.navbar-default .navbar-brand{
+.navbar-default .navbar-nav > li > a {
     color: #ffffff;
 }
 
-.navbar-nav>li>a {
+.navbar-default {
+    //background-color: #3b8cff;
+    //border-color: #3b8cff;
+}
+
+.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+    color: #ede1eb;
+    //background-color: #0b93fa;
+}
+
+.navbar-default .navbar-brand {
+    color: #ffffff;
+}
+
+.navbar-nav > li > a {
     padding-top: 20px;
     padding-bottom: 20px;
     /* background-color: white; */
     font-size: 18px;
 }
+
 .navbar-toggle {
     margin-top: 13px;
     background-color: #e8e0e0;
 }
+
 .navbar-brand {
     float: left;
     height: 60px;
@@ -58,31 +61,38 @@ html,body{
     line-height: 27px;
 }
 
-.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover{
+.navbar-default .navbar-brand:focus, .navbar-default .navbar-brand:hover {
     color: #ffffff;
 }
 
-.blue-button{
+.blue-button {
     background-color: #3b8cff;
     float: right;
 }
-img#avator{
-        -webkit-transition: transform 1s;
+
+img#avator {
+    -webkit-transition: transform 1s;
     /*transform 旋转属性
     transition 过度属性  定义过度属性为旋转属性 过度时间为1s
      */
 }
-img#avator:hover{
-        transform: rotate(360deg);
+
+img#avator:hover {
+    transform: rotate(360deg);
     /*鼠标移动头像 旋转360度   触发过度属性定义的旋转属性*/
 }
+
 @-webkit-keyframes mymove /* Safari and Chrome */
 {
-/*http://www.runoob.com/cssref/css3-pr-animation-keyframes.html*/
-0% {transform: rotate(0deg);}
-100% {;}
+    /*http://www.runoob.com/cssref/css3-pr-animation-keyframes.html*/
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {;
+    }
 }
-.wrap{
+
+.wrap {
     position: absolute;
     left: 50%;
     top: 6px;
@@ -91,8 +101,9 @@ img#avator:hover{
     height: 47px;
     margin: 0 auto;
 }
-.btns{
-        width: 137px;
+
+.btns {
+    width: 137px;
     padding: 6px 0 0 0;
 }
 
@@ -103,6 +114,7 @@ img#avator:hover{
     text-align: center;
     display: block;
 }
+
 .pagination a {
     text-align: center;
     display: inline-block;
@@ -110,6 +122,7 @@ img#avator:hover{
     background: #f4645f;
     border-radius: 2px;
 }
+
 .pagination .page-number {
     background: #f4645f;
     color: #ffffff;
@@ -120,27 +133,28 @@ img#avator:hover{
     border-radius: 2px;
 }
 
-
 /*article*/
 
 .article-block {
-    padding: 35px;
+    padding: 30px 30px;
     background: #ffffff;
-    //margin-bottom: 35px;
+/ / margin-bottom: 35 px;
     position: relative;
     overflow: hidden;
     margin: 20px 0px;
+    border-radius: 10px;
 }
 
-.article-block .post-head{
+.article-block .post-head {
     text-align: center;
-    color:#959595;
+    color: #959595;
 }
 
 .article-block .featured-media {
     margin-top: 30px;
     overflow: hidden;
 }
+
 .article-block .post-content {
     margin: 30px 0;
 }
@@ -154,10 +168,10 @@ img#avator:hover{
 a img {
     outline: none;
 }
+
 .article-block .featured-media img {
     width: 100%;
 }
-
 
 /*article*/
 
@@ -165,7 +179,7 @@ a img {
 .tag a {
     border: 1px solid #ebebeb;
     padding: 2px 7px;
-    //color: #959595;
+/ / color: #959595;
     color: #ffffff;
     line-height: 1.5em;
     display: inline-block;
@@ -182,12 +196,11 @@ a img {
 .tag a:hover {
     color: #ffffff;
     background: #f4645f !important;
-    //border: 1px solid #f4645f;
+/ / border: 1 px solid #f4645f;
     text-decoration: none;
 }
 
 /**/
-
 
 /*footer*/
 .main-footer {
@@ -196,6 +209,7 @@ a img {
     color: #959595;
     margin-top: 20px;
 }
+
 .copyright {
     background: #111;
     font-size: 13px;
@@ -205,12 +219,15 @@ a img {
     padding-bottom: 20px;
     border-top: 1px solid #303030;
 }
+
 .copyright a {
     color: #555;
 }
+
 .widget {
     margin-bottom: 35px;
 }
+
 .widget .title {
     margin-top: 0;
     padding-bottom: 7px;
@@ -222,22 +239,23 @@ a img {
 .main-footer .widget .tag-cloud a {
     border: 1px solid #303030;
 }
+
 .widget .friend-links a:hover {
     color: #fff;
     text-decoration: none;
 }
 
-
-
 .main-footer .widget .tag-cloud a:hover {
     border: 1px solid #337ab7;
 }
+
 .widget .tag-cloud a:hover {
     color: #fff;
     background: #337ab7;
     border: 1px solid #337ab7;
     text-decoration: none;
 }
+
 .widget .friend-links a {
     display: block;
     border-bottom: 1px dashed #303030;
@@ -260,8 +278,8 @@ a img {
     -o-transition: all .2s ease;
     transition: all .2s ease;
 }
-/*footer*/
 
+/*footer*/
 
 /*go top*/
 #go_top {
@@ -276,13 +294,125 @@ a img {
     border: 0px;
     display: none;
     background-color: #eb19c1;
-    border-radius:50px;
-    outline:none;
+    border-radius: 50px;
+    outline: none;
     z-index: 100;
 }
 
 /*去掉a标签的下划线*/
 
-a:hover{
+a:hover {
     text-decoration: none;
+}
+
+
+/*简书 小图标*/
+/*@font-face {
+    font-family: iconfont;
+    src: url(/static/font/iconfont-886232fe88f40ee4d415a63c5d4b75b7.eot);
+    src: url(/static/font/iconfont-886232fe88f40ee4d415a63c5d4b75b7.eot) format("embedded-opentype"), url(/static/font/iconfont-aae62f92a9d619b3cc104d23301a52ea.woff) format("woff"), url(/static/font/iconfont-d78c8b30a940c228d52a06b52d0b2c85.ttf) format("truetype"), url(/static/font/iconfont-63bb4bf7ade3f839c68b1a63f7b90a44.svg) format("svg")
+}*/
+ul.relation li {
+    margin: 0 3px;
+    display: inline-block;
+}
+ul.relation a {
+    width: 50px;
+    height: 50px;
+    background-color: hsla(0,0%,71%,.2);
+    border-radius: 50%;
+    line-height: 50px;
+    display: block;
+    cursor: pointer;
+}
+.relation i.fa.fa-2x{
+    margin-left: 12px;
+    margin-top: 9px;
+    font-size: 24px;
+
+}
+ul.relation{
+    padding-left: 33px;
+}
+.relation .weixin {
+    color: #fff;
+    background-color: #00bb29;
+}
+.relation .github {
+    color: #fff;
+    background-color: #e05244;
+}
+.relation .qq {
+    color: #fff;
+    background-color: #498ad5;
+}
+
+
+
+/*简书*/
+
+.note-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.note-list li {
+    position: relative;
+    width: 100%;
+    margin: 0 0 17px;
+    padding: 0 2px 17px 0;
+   // border-bottom: 1px solid #f0f0f0;
+    word-wrap: break-word;
+    line-height: 20px;
+}
+.note-list .have-img .wrap-img {
+    margin-top: -58px;
+    bottom: 40px;
+    width: 125px;
+    height: 100px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+}
+
+.note-list .have-img .wrap-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    border: 1px solid #f0f0f0;
+}
+.note-list .have-img>div {
+    padding-right: 135px;
+}
+
+.note-list .author {
+    margin-bottom: 14px;
+    font-size: 13px;
+}
+.note-list .title {
+    margin: -7px 0 4px;
+    display: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+.note-list .abstract {
+    margin: 0 0 8px;
+    font-size: 13px;
+    line-height: 24px;
+}
+.note-list .abstract h1,h2,h3,h4,h4,h5,h6,p,code,pre{
+    /*强制把markdown的标题 变小*/
+    font-size: 13px;
+    line-height: 24px;
+}
+.note-list .meta {
+    padding-right: 0!important;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+}
+.note-list .post-date {
+    color: #959595;
 }

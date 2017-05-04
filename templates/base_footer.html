@@ -1,0 +1,50 @@
+<footer class="main-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="widget">
+                    <h4 class="title">友情链接</h4>
+                    <div class="content  tag-cloud">
+                        {% for link in firendlink %}
+                            <a href="{{ link.linkurl }}" title="{{ link.linkname }}"
+                               target="_blank">{{ link.linkname }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="widget">
+                    <h4 class="title">标签云</h4>
+                    <div class="content tag-cloud">
+                        {% for tag in tags %}
+                            <a href="{% url 'tag_list' tag=tag page=1 %}">{{ tag }}</a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="widget">
+                    <h4 class="title">模仿这两个</h4>
+                    <div class="content friend-links">
+                        <a href="http://expo.bootcss.com/" title="Bootstrap中文网"
+                           target="_blank">Bootstrap中文网</a>
+                        <a href="http://www.golaravel.com/" title="Laravel"
+                           target="_blank">Laravel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="copyright">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <span>Copyright © <a href="http://expo.bootcss.com">优站精选</a></span> |
+                <span><a href="http://www.miibeian.gov.cn/" target="_blank">{{ ICP }}</a></span>
+            </div>
+        </div>
+    </div>
+</div>
