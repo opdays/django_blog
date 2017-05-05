@@ -6,8 +6,10 @@
 var goTop = function () {
     if (document.body.scrollTop > 500) {
         $('#go_top').show();
+        $('#go_parise').show();
     } else {
         $('#go_top').hide();
+        $('#go_parise').hide();
     }
 };
 
@@ -24,6 +26,11 @@ $(function () {
             scrollTop: 0
         }, 1e3);
     }).hide();
+
+    // $('#go_parise').click(function () {
+    //
+    //     location.href = location.href +"#praise";
+    // }).hide();
 
 });
 

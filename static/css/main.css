@@ -297,7 +297,7 @@ a img {
     height: 50px;
     position: fixed;
     right: 50px;
-    bottom: 80px;
+    bottom: 50px;
     padding: 9px;
     color: aliceblue;
     font-size: 20px;
@@ -432,7 +432,17 @@ ul.relation li {
 .praise-list .list-group-item{
     margin-bottom: 20px;
 }
-
+#go_parise {
+    position: fixed;
+    bottom: 50px;
+    left: 0px;
+    padding: 9px;
+    color: aliceblue;
+    border: 0px;
+    display: none;
+    outline: none;
+    z-index: 100;
+}
 .post-meta .praise {
     color: #d9534f;
 }

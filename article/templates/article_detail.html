@@ -27,7 +27,7 @@
         </div>
         <footer class="post-footer clearfix">
             <div>
-                <button class="btn btn-danger btn-lg center-block" id="praise">
+                <button class="btn btn-danger btn-lg center-block praise">
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>赞一下
                 </button>
 
@@ -130,7 +130,7 @@
         </div><!-- /.modal -->
     </div>
 
-
+<button class="btn btn-danger praise" id="go_parise" type="button">点赞去</button>
 
 
 
@@ -162,7 +162,7 @@
 {% block custom_js %}
     <script>
         $(function () {
-            $('#praise').click(function () {
+            $('.btn.praise').click(function () {
                 var result = null;
                 $.ajax({
                     url: "{%  url "query_ip" %}",
