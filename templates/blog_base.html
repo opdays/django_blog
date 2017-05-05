@@ -60,7 +60,7 @@
                             <div class="tag">
                                 {% for tag in tags %}
                                     <a href="{% url 'tag_list' tag=tag page='' %}" class="btn"
-                                       style="background-color: {{ tag.color }}">{{ tag.tag }}</a>
+                                       style="background-color: {{ tag.color }}">{{ tag.tag }}({{ tag.articles.all|length }})</a>
                                 {% endfor %}
                             </div>
                         </div>

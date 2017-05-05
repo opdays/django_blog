@@ -6,6 +6,7 @@ class Article(models.Model):
     date_time = models.DateTimeField('时间',auto_now_add=True)
     content = models.TextField('内容',blank=True, null=True)
     image_url = models.CharField('图片地址',max_length=255,blank=True,null=True)
+
     # discuess = models.ForeignKey('Discuss')
     class Meta:  # 按时间下降排序
         db_table = 'article'
@@ -42,6 +43,22 @@ class FriendLink(models.Model):
     def __str__(self):
         return self.linkname
 
+class Praise(models.Model):
+    """
+    文章点赞 一个文章可以有多个赞
+    """
+    id = models.AutoField(primary_key=True)
+    ip = models.CharField('IP地址',max_length=32,null=True,blank=True,default=None)
+    contry = models.CharField('国家',max_length=32,null=True,blank=True,default=None)
+    city = models.CharField('城市', max_length=32, null=True, blank=True, default=None)
+    description = models.CharField('描述', max_length=100, null=True, blank=True, default=None)
+    date_time = models.DateTimeField('时间',auto_now_add=True)
+
+    article = models.ForeignKey(Article,related_name='praises',blank=False)
+
+
+    class Meta:
+        unique_together = (("ip","description","article"),)
 # class Discuss(models.Model):
 #     id = models.AutoField(primary_key=True)
 #     email = tag = models.CharField('邮箱',max_length=100,blank=False,null=False)

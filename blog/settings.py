@@ -37,7 +37,7 @@ SECRET_KEY = '^3jdhax4m6_czq(@bktyem+pgsnpm*l2t@it5(w_)w&l#l6b^j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(yaml.get('DEBUG'))
 
-ALLOWED_HOSTS = ['blog.opdays.com','192.168.174.131', '127.0.0.1']
+ALLOWED_HOSTS = ['blog.opdays.com', '192.168.174.131', '127.0.0.1']
 
 # Application definition
 
@@ -128,14 +128,14 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-#TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-#USE_TZ = True
+# USE_TZ = True
 USE_TZ = False
 # 不要使用 UTC 只要设置了USE_TZ=True，django.util.timezone.now()输出地永远是UTC时间，不管你设置的TIME_ZONE是什么
 
@@ -148,17 +148,17 @@ STATICFILES_DIRS = [  # 公共静态资源
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'public_static')  # 运行manage.py collectstatic 收集的目录
 
-
 # http://django-suit.readthedocs.io/en/develop/configuration.html
 SUIT_CONFIG = {
     'ADMIN_NAME': u'博客后台',
-    #'SEARCH_URL': '/admin/api/server/',
+    # 'SEARCH_URL': '/admin/api/server/',
     # 搜索的时候将?q=xxxxx传入的url
     'MENU': (
         {'app': 'article', 'label': '文章'},
     ),
     'LIST_PER_PAGE': 17,
 }
+
 
 # MEDIA_ROOT = os.path.join(BASE_DIR, "static/media")
 # MEDIA_URL = '/media/tiny_mce/'
@@ -174,3 +174,6 @@ SUIT_CONFIG = {
 # 'width': 600,
 # 'height': 400,
 # }
+
+
+QQWRY = os.path.join(BASE_DIR, "other/qqwry.dat")

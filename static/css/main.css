@@ -425,3 +425,14 @@ ul.relation li {
 .note-list .post-date {
     color: #959595;
 }
+
+
+
+/*点赞*/
+.praise-list .list-group-item{
+    margin-bottom: 20px;
+}
+
+.post-meta .praise {
+    color: #d9534f;
+}

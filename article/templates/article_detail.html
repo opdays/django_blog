@@ -1,7 +1,6 @@
 {% extends "blog_base.html" %}
 
 
-
 {% load custom_markdown %}
 {% block left-container %}
 
@@ -19,32 +18,78 @@
                     </span> •
                 <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}"
                       title="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}">
-                    {{ article.date_time|date:'Y年m月d日 H时i分s秒' }}</time>
+                    {{ article.date_time|date:'Y-m-d' }}</time>
+                <span class="praise"><i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ article.praises.all|length }}<span>
             </div>
         </div>
-        {#            <div class="featured-media">#}
-        {#                <a href="/post/laravel-5-5-will-be-the-next-lts-release/"><img#}
-        {#                        src="http://image.golaravel.com/b/60/0540baaed781628b02aac992d1c8f.png"#}
-        {#                        alt="Laravel 5.5 将是下一个 LTS 版本，预计 7/8 月份发布"></a>#}
-        {#            </div>#}
         <div class="post-content">
             {{ article.content|custom_markdown }}
         </div>
         <footer class="post-footer clearfix">
-            <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
-            <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
-            <script>
-                var cloudTieConfig = {
-                    url: document.location.href,
-                    sourceId: "",
-                    productKey: "1a396a9ccac74130ae84a9cbc030a7f9",
-                    target: "cloud-tie-wrapper"
-                };
-                var yunManualLoad = true;
-                Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
-            </script>
+            <div>
+                <button class="btn btn-danger btn-lg center-block" id="praise">
+                    <i class="fa fa-thumbs-up" aria-hidden="true"></i>赞一下
+                </button>
+
+
+            </div>
+
+            <div id="praise-wrapper" class="praise-wrapper">
+                <div class="tie-title-bar"><span class="tie-title">网友点赞 {{ article.praises.all|length }}个赞
+                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                </span>
+
+                </div>
+
+                <div class="praise-list">
+                    <ul class="list-group">
+                        {% for priaise in article.praises.all %}
+                            <li class="list-group-item">
+                                <div class="row container-fluid">
+                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                        <span>{{ priaise.description }}</span>
+                                        <i class="fa fa-star"
+                                           aria-hidden="true"></i>
+                                        <div class="time pull-right">
+                                            <span>{{ priaise.date_time | date:'Y年m月d日 H时i分s秒' }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                            <p>{{ priaise.ip }}</p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                            <p>{{ priaise.contry }}</p>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                            <p>{{ priaise.city }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        {% endfor %}
+                    </ul>
+
+                </div>
+
+            </div>
+
+
+            {#            <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>#}
+            {#            <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>#}
+            {#            <script>#}
+            {#                var cloudTieConfig = {#}
+            {#                    url: document.location.href,#}
+            {#                    sourceId: "",#}
+            {#                    productKey: "1a396a9ccac74130ae84a9cbc030a7f9",#}
+            {#                    target: "cloud-tie-wrapper"#}
+            {#                };#}
+            {#                var yunManualLoad = true;#}
+            {#                Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);#}
+            {#            </script>#}
+
+
             <div class="pull-left tag-list">
-                <i class="fa fa-folder-open-o"></i>
 
             </div>
             <div class="pull-right share">
@@ -56,12 +101,41 @@
 
     </article>
 
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="praise_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">点赞</h4>
+                </div>
+                <div class="modal-body">
+                    <h4 id="ip"></h4>
+                    <h4 id="city"></h4>
+                    <h4 id="contry"></h4>
+                    描述:<input class="form-control" type="text" id="description">
+                    {#                    <div class="alert alert-success" role="alert">#}
+                    {#                        <a href="#" class="close" data-dismiss="alert">#}
+                    {#                            &times;#}
+                    {#                        </a>#}
+                    {#                        <strong>success！</strong>您的网络连接有问题。#}
+                    {#                    </div>#}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="button" class="btn btn-success" id="submit_praise">点赞</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
 
 
 
 
     <script>
-    /*百度分享*/
+        /*百度分享*/
         window._bd_share_config = {
             "common": {
                 "bdSnsKey": {},
@@ -81,10 +155,53 @@
             }
         };
         with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
-
     </script>
 {% endblock %}
 
 {% load static %}
 {% block custom_js %}
+    <script>
+        $(function () {
+            $('#praise').click(function () {
+                var result = null;
+                $.ajax({
+                    url: "{%  url "query_ip" %}",
+                    type: "GET",
+                    dateType: "json",
+                    success: function (result) {
+                        $(".modal-body #contry").html(result.contry);
+                        $(".modal-body #city").html(result.city);
+                        $(".modal-body #ip").html(result.ip);
+                    },
+                });
+
+                $('#praise_modal').modal();
+                $(".alert").hide();
+            });
+            $("#submit_praise").click(function () {
+                var postObject = {};
+                postObject.ip = $(".modal-body #ip").text();
+                postObject.contry = $(".modal-body #contry").text();
+                postObject.city = $(".modal-body #city").text();
+                postObject.description = $(".modal-body #description").val();
+                postObject.article_id = $("article.article-block.article-detail").attr('id');
+                if (description.length >= 10) {
+                    alert("不能多于10个字符");
+                    return true;
+                }
+                $.ajax({
+                    url: "{% url "submit_praise" %}",
+                    type: "POST",
+                    data: postObject,
+                    success: function (result) {
+                        location.reload();
+                    },
+                    error: function (error) {
+                        alert("描述重复了");
+                    }
+
+                });
+            });
+        })
+    </script>
 {% endblock %}
