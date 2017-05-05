@@ -71,6 +71,8 @@ html, body {
 }
 
 img#avator {
+    width: 200px;
+    height: 200px;
     -webkit-transition: transform 1s;
     /*transform 旋转属性
     transition 过度属性  定义过度属性为旋转属性 过度时间为1s
@@ -91,6 +93,15 @@ img#avator:hover {
     100% {;
     }
 }
+
+.panel-black>.panel-heading {
+    color: #ddd;
+    background-color: #101010;
+    border-color: #ddd;
+}
+
+
+
 
 .wrap {
     position: absolute;
@@ -148,7 +159,7 @@ img#avator:hover {
 }
 
 .note-list .article-block {
-    padding: 30px 0px 30px 10px;
+    padding: 20px 0px 20px 10px;
     background: #ffffff;
 / / margin-bottom: 35 px;
     position: relative;
@@ -187,30 +198,17 @@ a img {
 
 /*article*/
 
-/*tag*/
-.tag a {
-    border: 1px solid #ebebeb;
-    padding: 2px 7px;
-/ / color: #959595;
-    color: #ffffff;
-    line-height: 1.5em;
-    display: inline-block;
-    margin: 0 7px 7px 0;
-    -webkit-transition: all 0.2s ease;
-    -o-transition: all 0.2s ease;
-    transition: all 0.2s ease;
 
-    text-decoration: none;
-    background-color: transparent;
-    outline: none;
+.tag>.btn{
+    margin:0 7px 7px 0;
+    color: white;
 }
-
-.tag a:hover {
-    color: #ffffff;
-    background: #f4645f !important;
-/ / border: 1 px solid #f4645f;
-    text-decoration: none;
-}
+/*.tag a:hover {*/
+    /*color: #ffffff;*/
+    /*background: #f4645f !important;*/
+/*/ / border: 1 px solid #f4645f;*/
+    /*text-decoration: none;*/
+/*}*/
 
 /**/
 
@@ -390,14 +388,16 @@ ul.relation li {
     /*padding-right: 135px;*/
 /*}*/
 
+.note-list .time-and-tag-block {
+    margin-bottom: 10px;
+}
 .note-list .author {
     margin-bottom: 14px;
     font-size: 13px;
 }
 .note-list .title {
     margin: -7px 0 4px;
-    display: inherit;
-    font-size: 18px;
+    font-size: 36px;
     font-weight: 700;
     line-height: 1.5;
     color:black;

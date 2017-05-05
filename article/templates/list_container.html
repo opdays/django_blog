@@ -8,40 +8,54 @@
 
                 <li>
                     <div class="row container-fluid">
-                        {% if article.image_url %}
-                            <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
-                        {% else %}
-                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                        {% endif %}
-                        <div class="">
+                        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
                             <a class="title" target="_blank"
                                href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a>
-                            <div class="abstract hidden-xs">
-                                {{ article.content|custom_markdown|truncatewords_html:"10"|striptags }}
-                            </div>
-                            <div class="meta">
+                        </div>
+                        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12 time-and-tag-block">
+
+                            <i class="fa fa-calendar"></i>
+                            <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分' }}">
+                                {{ article.date_time|date:'Y-m-d H:i' }}</time>
+                            <span><i class="fa fa-eye"></i> 189</span>
+
+                            <div class="pull-right">
                                 <i class="fa fa-tags"></i>
                                 {% for tag in article.tags.all %}
                                     <a href="{% url 'tag_list' tag=tag page='' %}">
                                         {% color_tag tag color=tag.color %}</a>
                                 {% endfor %}
-
-                                <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分' }}">
-                                    {{ article.date_time|date:'Y年m月d日 H:i' }}</time>
-                                <span><i class="fa fa-eye"></i> 189</span>
                             </div>
+
                         </div>
-                        </div>
+                        <!--图片和文章开始-->
+                        <!--图片-->
                         {% if article.image_url %}
-                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                                <a href="{% url 'article_detail' id=article.id %}" ><img
+                            <!--xs 手机图片占全屏-->
+                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-4">
+                                <a href="{% url 'article_detail' id=article.id %}"><img
                                         src="{{ article.image_url }}" class="img-responsive img-rounded"
                                         alt=""></a>
 
                             </div>
                         {% endif %}
-                        </div>
+                        <!--图片结束 文章-->
+                        {% if article.image_url %}
+                            <!--如果有图片文章占8格子 没有占12格子-->
+                            <!--xs 手机文章占全屏-->
+                            <div class="col-lg-8 col-md-8 col-xs-12 col-sm-8">
+                        {% else %}
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                        {% endif %}
 
+
+                        <div class="abstract">
+                            {{ article.content|custom_markdown|truncatewords_html:"30"|striptags }}
+                        </div>
+                        </div>
+                        <!--文章结束-->
+
+                        <div> <!--end 12-->
                 </li>
             </div>
         {% endfor %}
