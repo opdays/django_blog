@@ -50,7 +50,7 @@ html, body {
 
 .navbar-toggle {
     margin-top: 13px;
-    background-color: #e8e0e0;
+    background-color: #555;
 }
 
 .navbar-brand {
@@ -134,9 +134,21 @@ img#avator:hover {
 }
 
 /*article*/
-
-.article-block {
+.article-detail a{
+    color: black;
+}
+.article-detail.article-block {
     padding: 30px 30px;
+    background: #ffffff;
+/ / margin-bottom: 35 px;
+    position: relative;
+    overflow: hidden;
+    margin: 20px 0px;
+    border-radius: 10px;
+}
+
+.note-list .article-block {
+    padding: 30px 0px 30px 10px;
     background: #ffffff;
 / / margin-bottom: 35 px;
     position: relative;
@@ -316,7 +328,7 @@ ul.relation li {
     margin: 0 3px;
     display: inline-block;
 }
-ul.relation a {
+.right-author-bar a {
     width: 50px;
     height: 50px;
     background-color: hsla(0,0%,71%,.2);
@@ -324,25 +336,24 @@ ul.relation a {
     line-height: 50px;
     display: block;
     cursor: pointer;
+    margin: 0px auto;
 }
-.relation i.fa.fa-2x{
+.right-author-bar i.fa.fa-2x{
     margin-left: 12px;
     margin-top: 9px;
     font-size: 24px;
 
 }
-ul.relation{
-    padding-left: 33px;
-}
-.relation .weixin {
+
+.right-author-bar .weixin {
     color: #fff;
     background-color: #00bb29;
 }
-.relation .github {
+.right-author-bar .github {
     color: #fff;
     background-color: #e05244;
 }
-.relation .qq {
+.right-author-bar .qq {
     color: #fff;
     background-color: #498ad5;
 }
@@ -360,31 +371,24 @@ ul.relation{
 .note-list li {
     position: relative;
     width: 100%;
-    margin: 0 0 17px;
-    padding: 0 2px 17px 0;
    // border-bottom: 1px solid #f0f0f0;
     word-wrap: break-word;
     line-height: 20px;
 }
-.note-list .have-img .wrap-img {
-    margin-top: -58px;
-    bottom: 40px;
-    width: 125px;
-    height: 100px;
-    position: absolute;
-    top: 50%;
-    right: 0;
-}
+/*.note-list  .wrap-img {*/
+    /*width: 125px;*/
+    /*height: 100px;*/
+/*}*/
 
-.note-list .have-img .wrap-img img {
+.note-list  .wrap-img img {
     width: 100%;
     height: 100%;
     border-radius: 4px;
     border: 1px solid #f0f0f0;
 }
-.note-list .have-img>div {
-    padding-right: 135px;
-}
+/*.note-list .have-img>div {*/
+    /*padding-right: 135px;*/
+/*}*/
 
 .note-list .author {
     margin-bottom: 14px;
@@ -396,6 +400,7 @@ ul.relation{
     font-size: 18px;
     font-weight: 700;
     line-height: 1.5;
+    color:black;
 }
 .note-list .abstract {
     margin: 0 0 8px;

@@ -5,35 +5,43 @@
     <ul class="note-list">
         {% for article in articles %}
             <div class="article-block" id="{{ article.id }}">
-                <li {% if article.image_url %} class="have-img" {% endif %}>
 
-                    {% if article.image_url %}
-                        <a href="{% url 'article_detail' id=article.id %}" class="wrap-img"><img
-                                src="{{ article.image_url }}"
-                                alt=""></a>
-                    {% endif %}
-                    <div class="content">
-                        <a class="title" target="_blank"
-                           href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a>
-                        <div class="abstract hidden-xs hidden-sm">
-                            {{ article.content|custom_markdown|truncatewords_html:"10" }}
-                        </div>
-                        <div class="meta">
-                            <i class="fa fa-tags"></i>
-                            {% for tag in article.tags.all %}
-                                <a href="{% url 'tag_list' tag=tag page='' %}">
-                                    {% color_tag tag color=tag.color %}</a>
-                            {% endfor %}
+                <li>
+                    <div class="row container-fluid">
+                        {% if article.image_url %}
+                            <div class="col-lg-8 col-md-8 col-xs-8 col-sm-8">
+                        {% else %}
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                        {% endif %}
+                        <div class="">
+                            <a class="title" target="_blank"
+                               href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a>
+                            <div class="abstract hidden-xs">
+                                {{ article.content|custom_markdown|truncatewords_html:"10"|striptags }}
+                            </div>
+                            <div class="meta">
+                                <i class="fa fa-tags"></i>
+                                {% for tag in article.tags.all %}
+                                    <a href="{% url 'tag_list' tag=tag page='' %}">
+                                        {% color_tag tag color=tag.color %}</a>
+                                {% endfor %}
 
-                            <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分' }}">
-                                {{ article.date_time|date:'Y年m月d日 H时i分' }}</time>
-                            <span><i class="fa fa-eye"></i> 189</span>
+                                <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分' }}">
+                                    {{ article.date_time|date:'Y年m月d日 H:i' }}</time>
+                                <span><i class="fa fa-eye"></i> 189</span>
+                            </div>
                         </div>
-                        <div class="post-permalink pull-right">
-                            <a href="{% url 'article_detail' id=article.id %}"
-                               class="btn btn-default btn-success">阅读全文</a>
                         </div>
-                    </div>
+                        {% if article.image_url %}
+                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                <a href="{% url 'article_detail' id=article.id %}" ><img
+                                        src="{{ article.image_url }}" class="img-responsive img-rounded"
+                                        alt=""></a>
+
+                            </div>
+                        {% endif %}
+                        </div>
+
                 </li>
             </div>
         {% endfor %}

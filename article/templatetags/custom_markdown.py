@@ -34,3 +34,11 @@ def a_color_tag(value, color):
     if not color:
         color = '#777'
     return mark_safe("<span style='background-color:%s'>%s</span>" % (color, value))
+
+@register.filter()
+@stringfilter
+def delete_markdown_tag(value):
+    import re
+    regex=re.compile(r'[_*>#]+]')
+    value,_ = regex.subn("",value)
+    return value
