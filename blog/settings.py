@@ -24,8 +24,8 @@ BLOG = yaml.get('BLOG')
 ICP = yaml.get('ICP')
 ARTICLE = yaml.get('ARTICLE')
 PER_PAGE_NUM = ARTICLE.get('PER_PAGE_NUM')
+ABOUT = ARTICLE.get('ABOUT')
 AVATOR = ARTICLE.get('AVATOR')
-AUTHOR = ARTICLE.get('AUTHOR')
 QQ = ARTICLE.get('QQ')
 
 # Quick-start development settings - unsuitable for production
