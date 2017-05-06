@@ -390,7 +390,7 @@ ul.relation li {
     font-size: 24px;
     font-weight: 700;
     line-height: 1.5;
-    color:#101010;
+    color:#0A0;
     text-decoration: none;
 }
 .note-list .title:visited{
@@ -401,11 +401,7 @@ ul.relation li {
     font-size: 13px;
     line-height: 24px;
 }
-.note-list .abstract h1,h2,h3,h4,h4,h5,h6,p,code,pre{
-    /*强制把markdown的标题 变小*/
-    font-size: 13px;
-    line-height: 24px;
-}
+
 .note-list .meta {
     padding-right: 0!important;
     font-size: 12px;
@@ -437,4 +433,33 @@ ul.relation li {
     color: #d9534f;
 }
 
-.emoji ul>li {}
+
+/*markdown 过滤样式*/
+
+.post-content h1,.post-content h2,.post-content h3{
+    /*强制把markdown的标题 变成linux.cn 样子*/
+    display: block;
+    font-weight: 300;
+    background-image: linear-gradient(to right bottom, #F44336, #FFC107);
+    background-color: #F44336;
+    color: #FFF;
+    font-size: 1.4em;
+    line-height: 1.8em;
+    margin: 10px 10px 10px 0;
+    padding: 8px 15px;
+    letter-spacing: 3px;
+    border-left: solid #333 10px;
+    text-shadow: 1px 1px 1px #666;
+    box-shadow: 1px 1px 2px #666;
+}
+.post-content p>code{
+    -moz-border-radius: 4px;
+    /* -webkit-border-radius: 4px; */
+    /*-o-border-radius: 4px;*/
+    /*-ms-border-radius: 4px;*/
+    /*-khtml-border-radius: 5px;*/
+    margin: 0 4px;
+    color: #74e67c;
+    background-color: #111;
+}
+
