@@ -2,7 +2,6 @@ import markdown2
 
 from django import template
 from django.template.defaultfilters import stringfilter
-from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 register = template.Library()  # 自定义filter时必须加上
@@ -35,10 +34,11 @@ def a_color_tag(value, color):
         color = '#777'
     return mark_safe("<span style='background-color:%s'>%s</span>" % (color, value))
 
+
 @register.filter()
 @stringfilter
 def delete_markdown_tag(value):
     import re
-    regex=re.compile(r'[_*>#]+]')
-    value,_ = regex.subn("",value)
+    regex = re.compile(r'[_*>#]+]')
+    value, _ = regex.subn("", value)
     return value

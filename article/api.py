@@ -13,7 +13,6 @@ def query_ip(request):
         ip = request.META['HTTP_X_FORWARDED_FOR']
     else:
         ip = request.META['REMOTE_ADDR']
-    print(ip)
     result = q.lookup(ip)
     print(result)
     if result:

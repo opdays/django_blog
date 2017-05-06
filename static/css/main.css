@@ -145,7 +145,7 @@ img#avator:hover {
 }
 
 /*article*/
-.article-detail a{
+.article-detail .post-head a{
     color: #101010;
 }
 .article-detail.article-block {
