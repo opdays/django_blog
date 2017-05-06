@@ -1,6 +1,5 @@
 {% load custom_markdown %}
 <div id="list-container">
-
     <!-- 文章列表模块 -->
     <ul class="note-list">
         {% for article in articles %}
@@ -50,7 +49,7 @@
 
 
                         <div class="abstract">
-                            {{ article.content|custom_markdown|truncatewords_html:"30"|striptags }}
+                            {{ article.content|custom_markdown|truncatewords_html:"20"|striptags }}
                         </div>
                         </div>
                         <!--文章结束-->

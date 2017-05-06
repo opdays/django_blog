@@ -54,3 +54,6 @@ def tag_list(request, tag, page):
     except EmptyPage:
         articles = paginator.page(paginator.num_pages)
     return render(request, "tag_list.html", context={"tag": tag, "articles": articles})
+
+def demo(request):
+    return render(request,"demo.html")

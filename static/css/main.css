@@ -103,16 +103,6 @@ img#avator:hover {
 
 
 
-.wrap {
-    position: absolute;
-    left: 50%;
-    top: 6px;
-    z-index: 15;
-    width: 980px;
-    height: 47px;
-    margin: 0 auto;
-}
-
 .btns {
     width: 137px;
     padding: 6px 0 0 0;
@@ -446,3 +436,5 @@ ul.relation li {
 .post-meta .praise {
     color: #d9534f;
 }
+
+.emoji ul>li {}

@@ -1,0 +1,21 @@
+<div class="field">
+    {% load static %}
+    描述:<input type="text" id="description" class="form-control">
+    <link rel="stylesheet" type="text/css" href="/static/emoji/jquery-emoji-picker/css/jquery.emojipicker.css">
+    <link rel="stylesheet" type="text/css" href="/static/emoji/jquery-emoji-picker/css/jquery.emojipicker.tw.css">
+
+    <script type="text/javascript" src="/static/emoji/jquery-emoji-picker/js/jquery.emojipicker.js"></script>
+    <script type="text/javascript" src="/static/emoji/jquery-emoji-picker/js/jquery.emojis.js"></script>
+    <script>
+        $(document).ready(function (e) {
+            $('#description').emojiPicker({
+                width: '200px',
+                height: '200px',
+                position: 'left',
+            });
+            $("div.emojiPickerIconWrap").css("width", "100%");
+            $('input#description').css("width", "100%");
+        });
+    </script>
+</div>
+

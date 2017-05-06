@@ -1,9 +1,7 @@
 {% extends "blog_base.html" %}
 
-
 {% load custom_markdown %}
 {% block left-container %}
-
     <article class="article-block article-detail" id="{{ article.id }}">
 
 
@@ -19,7 +17,8 @@
                 <time class="post-date" datetime="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}"
                       title="{{ article.date_time|date:'Y年m月d日 H时M分S秒' }}">
                     {{ article.date_time|date:'Y-m-d' }}</time>
-                <span class="praise"><i class="fa fa-thumbs-up" aria-hidden="true"></i>{{ article.praises.all|length }}<span>
+                <span class="praise"><i class="fa fa-thumbs-up"
+                                        aria-hidden="true"></i>{{ article.praises.all|length }}<span>
             </div>
         </div>
         <div class="post-content">
@@ -30,7 +29,6 @@
                 <button class="btn btn-danger btn-lg center-block praise">
                     <i class="fa fa-thumbs-up" aria-hidden="true"></i>赞一下
                 </button>
-
 
             </div>
 
@@ -55,8 +53,8 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                                            <p>{{ priaise.ip }}</p>
-                                            <p>{{ priaise.contry }} {{ priaise.city }}</p>
+                                        <p>{{ priaise.ip }}</p>
+                                        <p>{{ priaise.contry }} {{ priaise.city }}</p>
                                     </div>
                                 </div>
                             </li>
@@ -66,20 +64,6 @@
                 </div>
 
             </div>
-
-
-            {#            <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>#}
-            {#            <script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>#}
-            {#            <script>#}
-            {#                var cloudTieConfig = {#}
-            {#                    url: document.location.href,#}
-            {#                    sourceId: "",#}
-            {#                    productKey: "1a396a9ccac74130ae84a9cbc030a7f9",#}
-            {#                    target: "cloud-tie-wrapper"#}
-            {#                };#}
-            {#                var yunManualLoad = true;#}
-            {#                Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);#}
-            {#            </script>#}
 
 
             <div class="pull-left tag-list">
@@ -107,13 +91,8 @@
                     <h4 id="ip"></h4>
                     <h4 id="city"></h4>
                     <h4 id="contry"></h4>
-                    描述:<input class="form-control" type="text" id="description">
-                    {#                    <div class="alert alert-success" role="alert">#}
-                    {#                        <a href="#" class="close" data-dismiss="alert">#}
-                    {#                            &times;#}
-                    {#                        </a>#}
-                    {#                        <strong>success！</strong>您的网络连接有问题。#}
-                    {#                    </div>#}
+{#                    描述:<input class="form-control" type="text" id="description">#}
+                    {% include "demo2.html" %}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -123,22 +102,33 @@
         </div><!-- /.modal -->
     </div>
 
-<button class="btn btn-danger praise" id="go_parise" type="button">赞</button>
+    <button class="btn btn-danger praise" id="go_parise" type="button">赞</button>
+
+
+
+{% endblock %}
+
+{% load static %}
+{% block custom_css %}
+{% endblock %}
+{% block custom_js %}
 
 
 
     <script>
         /*百度分享*/
+        var logo = location.protocol + "//" + location.host + "/static/images.jpg";
         window._bd_share_config = {
             "common": {
                 "bdSnsKey": {},
-                "bdText": "",
+                "bdText": "{{ article.title }}",
                 "bdMini": "2",
                 "bdMiniList": false,
-                "bdPic": "",
+                "bdPic": {% if article.image_url  %} "{{ article.image_url  }}" {% else %} logo {% endif %},
                 "bdStyle": "0",
-                "bdSize": "16",
-                bdUrl: window.location.href + "?weixin"
+                "bdSize": "4",
+                bdDesc: "{{ article.title }}",
+                bdUrl: window.location.href,
             },
             "slide": {
                 "type": "slide",
@@ -148,12 +138,6 @@
             }
         };
         with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
-    </script>
-{% endblock %}
-
-{% load static %}
-{% block custom_js %}
-    <script>
         $(function () {
             $('.btn.praise').click(function () {
                 var result = null;
@@ -179,9 +163,10 @@
                 postObject.description = $(".modal-body #description").val();
                 postObject.article_id = $("article.article-block.article-detail").attr('id');
                 if (description.length >= 10) {
-                    alert("不能多于10个字符");
+                    alert("不能多于200个字符");
                     return true;
                 }
+                console.log(postObject.description);
                 $.ajax({
                     url: "{% url "submit_praise" %}",
                     type: "POST",
