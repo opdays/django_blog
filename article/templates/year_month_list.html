@@ -1,0 +1,22 @@
+{% extends "blog_base.html" %}
+{% load static %}
+{% block left-container %}
+
+    {% include "list_container.html" %}
+
+{% if articles %}
+    <nav class="pagination" role="navigation">
+        {% if articles.has_previous %}
+            <a class="page-number" href="{% url 'year_month_list' year=year month=month page=articles.previous_page_number %}"><i
+                    class="fa fa-arrow-left"></i></a>
+        {% endif %}
+        <span class="page-number">第 {{ articles.number }} 页 ⁄ 共 {{ articles.paginator.num_pages }} 页</span>
+        {% if articles.has_next %}
+            <a class="page-number" href="{% url 'year_month_list' year=year month=month page=articles.next_page_number %}"><i
+                    class="fa fa-arrow-right"></i></a>
+        {% endif %}
+    </nav>
+    {% else %}
+    <h1> 还没有文章 正在学习 ... </h1>
+{% endif %}
+{% endblock %}

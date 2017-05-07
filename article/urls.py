@@ -7,5 +7,7 @@ urlpatterns = [
     url(r'^(?P<id>\d+)$', views.article_detail, name="article_detail"),
     url(r'^api/query_ip$', api.query_ip, name="query_ip"),
     url(r'^api/submit_praise$', api.sumbit_praise, name="submit_praise"),
-    url(r'^demo$', views.demo, name="views.demo"),
+    url(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]+)/(?P<page>\d*)$',
+        views.year_month_list,
+        name="year_month_list"),
 ]

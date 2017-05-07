@@ -73,17 +73,31 @@
                 </div>
                 <div class="panel panel-default panel-black">
                     <div class="panel-heading">
+                        <h3 class="panel-title">年月归档</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            {% for y,m,c in year_month_number %}
+                                <li class="list-group-item"><a
+                                        href="{% url 'year_month_list' year=y month=m page='' %}">{{ y }}年{{ m }}月({{ c }})</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="panel panel-default panel-black">
+                    <div class="panel-heading">
                         <h3 class="panel-title">最近文章</h3>
                     </div>
                     <div class="panel-body">
                         <ul class="list-group">
-                            {% for article in articles %}
+                            {% for article in recently_articles %}
                                 <li class="list-group-item"><a
                                         href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a></li>
                             {% endfor %}
                         </ul>
                     </div>
                 </div>
+
 
                 {% block right-container %}
 
