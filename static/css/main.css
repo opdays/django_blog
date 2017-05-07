@@ -460,7 +460,7 @@ ul.relation li {
     /*强制把markdown的标题 变成linux.cn 样子*/
     display: block;
     font-weight: 300;
-    background-image: linear-gradient(to right bottom, #F44336, #FFC107);
+    background-image: linear-gradient(to right bottom, #337ab7, #66d9ef);
     background-color: #F44336;
     color: #FFF;
     font-size: 1.2em;
@@ -476,7 +476,7 @@ ul.relation li {
     /*强制把markdown的标题 变成linux.cn 样子*/
     display: block;
     font-weight: 300;
-    background-image: linear-gradient(to right bottom, #F44336, #FFC107);
+    background-image: linear-gradient(to right bottom, #75715e, #a6e22e);
     background-color: #F44336;
     color: #FFF;
     font-size: 1em;
