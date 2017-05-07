@@ -91,8 +91,8 @@
                     <h4 id="ip"></h4>
                     <h4 id="city"></h4>
                     <h4 id="contry"></h4>
-{#                    描述:<input class="form-control" type="text" id="description">#}
-                    {% include "demo2.html" %}
+                    描述:<input class="form-control" type="text" id="description">
+{#                    {% include "demo2.html" %}速度太慢fuck#}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -101,7 +101,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
-
     <button class="btn btn-danger praise" id="go_parise" type="button">赞</button>
 
 
@@ -153,7 +152,6 @@
                 });
 
                 $('#praise_modal').modal();
-                $(".alert").hide();
             });
             $("#submit_praise").click(function () {
                 var postObject = {};
