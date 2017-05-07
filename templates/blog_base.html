@@ -18,7 +18,7 @@
 {% include "base_header.html" %}
 <!--导航条end-->
 <div id="wrapper">
-    <div class="container">
+    <div class="container-fluid container">
         <div id="content-header">
 
         </div>
@@ -28,78 +28,79 @@
                 {% endblock %}
             </div>
             <div id="right-container"
-                 class="col-xs-12 col-md-3 col-lg-3 col-lg-offset-1 col-md-offset-1 hidden-xs">
+                 class="col-xs-12 col-md-3 col-lg-3 col-lg-offset-1 col-md-offset-1 hidden-xs" style="position: relative">
                 <!--xs 手机隐藏 md平板 lg电脑 8 1 3-->
-                <div class="wihite-block" style="background-color: #ebebeb;">
-                    <div class="right-avator-bar">
-                        <img class="img-circle img-responsive center-block" id="avator" src="{{ AVATOR }}"/>
-                    </div>
-                </div>
-                <div class="wihite-block">
-                    <div class="row right-author-bar">
-                        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                            <a class="github" data-toggle="tooltip" data-placement="top"
-                               title="https://github.com/yy584089958"
-                               href="https://github.com/yy584089958" target="_blank"><i
-                                    class="fa fa-2x fa-github" style="margin-left: 14px;"></i></a>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                            <a class="weixin" href="#"><i class="fa fa-2x  fa-weixin"></i></a>
-                        </div>
-                        <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                            <a class="qq" data-toggle="tooltip" data-placement="top" title="{{ QQ }}" href="#"><i
-                                    class="fa fa-2x fa-qq"></i></a>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-                            <p>{{ ABOUT }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default panel-black">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">标签云</h3>
-                    </div>
-
-                    <div class="panel-body">
-                        <div class="right-tag-bar">
-                            <div class="tag">
-                                {% for tag in tags %}
-                                    <a href="{% url 'tag_list' tag=tag page='' %}" class="btn"
-                                       style="background-color: {{ tag.color }}">{{ tag.tag }}({{ tag.articles.all|length }})</a>
-                                {% endfor %}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default panel-black">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">年月归档</h3>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            {% for y,m,c in year_month_number %}
-                                <li class="list-group-item"><a
-                                        href="{% url 'year_month_list' year=y month=m page='' %}">{{ y }}年{{ m }}月({{ c }})</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
-                <div class="panel panel-default panel-black">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">最近文章</h3>
-                    </div>
-                    <div class="panel-body">
-                        <ul class="list-group">
-                            {% for article in recently_articles %}
-                                <li class="list-group-item"><a
-                                        href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                </div>
 
 
                 {% block right-container %}
+                    <div class="wihite-block" style="background-color: #ebebeb;">
+                        <div class="right-avator-bar">
+                            <img class="img-circle img-responsive center-block" id="avator" src="{{ AVATOR }}"/>
+                        </div>
+                    </div>
+                    <div class="wihite-block">
+                        <div class="row right-author-bar">
+                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                <a class="github" data-toggle="tooltip" data-placement="top"
+                                   title="https://github.com/yy584089958"
+                                   href="https://github.com/yy584089958" target="_blank"><i
+                                        class="fa fa-2x fa-github" style="margin-left: 14px;"></i></a>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                <a class="weixin" href="#"><i class="fa fa-2x  fa-weixin"></i></a>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                <a class="qq" data-toggle="tooltip" data-placement="top" title="{{ QQ }}" href="#"><i
+                                        class="fa fa-2x fa-qq"></i></a>
+                            </div>
+                            <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+                                <p>{{ ABOUT }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-black">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">标签云</h3>
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="right-tag-bar">
+                                <div class="tag">
+                                    {% for tag in tags %}
+                                        <a href="{% url 'tag_list' tag=tag page='' %}" class="btn"
+                                           style="background-color: {{ tag.color }}">{{ tag.tag }}({{ tag.articles.all|length }})</a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-black">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">年月归档</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                {% for y,m,c in year_month_number %}
+                                    <li class="list-group-item"><a
+                                            href="{% url 'year_month_list' year=y month=m page='' %}">{{ y }}年{{ m }}月({{ c }})</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel panel-default panel-black">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">最近文章</h3>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="list-group">
+                                {% for article in recently_articles %}
+                                    <li class="list-group-item"><a
+                                            href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
 
                 {% endblock %}
             </div>

@@ -7,34 +7,33 @@ html, body {
     padding: 10px 10px;
     margin: 20px 0px;
     border-radius: 10px;
-    //padding: 15px;
+/ / padding: 15 px;
 }
 
 #wrapper {
     position: absolute;
     top: 60px;
     width: 100%;
- // background: #0f181d;
- // color: white;
+/ / background: #0f181d;
+/ / color: white;
 }
 
-.right-avator-bar{
+.right-avator-bar {
 
 }
-
 
 .navbar-default .navbar-nav > li > a {
     color: #ffffff;
 }
 
 .navbar-default {
-    //background-color: #3b8cff;
-    //border-color: #3b8cff;
+/ / background-color: #3b8cff;
+/ / border-color: #3b8cff;
 }
 
 .navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
     color: #ede1eb;
-    //background-color: #0b93fa;
+/ / background-color: #0b93fa;
 }
 
 .navbar-default .navbar-brand {
@@ -94,14 +93,11 @@ img#avator:hover {
     }
 }
 
-.panel-black>.panel-heading {
+.panel-black > .panel-heading {
     color: #ddd;
     background-color: #101010;
     border-color: #ddd;
 }
-
-
-
 
 .btns {
     width: 137px;
@@ -135,9 +131,10 @@ img#avator:hover {
 }
 
 /*article*/
-.article-detail .post-head a{
+.article-detail .post-head a {
     color: #101010;
 }
+
 .article-detail.article-block {
     padding: 30px 30px;
     background: #ffffff;
@@ -188,16 +185,16 @@ a img {
 
 /*article*/
 
-
-.tag>.btn{
-    margin:0 7px 7px 0;
+.tag > .btn {
+    margin: 0 7px 7px 0;
     color: white;
 }
+
 /*.tag a:hover {*/
-    /*color: #ffffff;*/
-    /*background: #f4645f !important;*/
+/*color: #ffffff;*/
+/*background: #f4645f !important;*/
 /*/ / border: 1 px solid #f4645f;*/
-    /*text-decoration: none;*/
+/*text-decoration: none;*/
 /*}*/
 
 /**/
@@ -305,7 +302,6 @@ a:hover {
     text-decoration: none;
 }
 
-
 /*简书 小图标*/
 /*@font-face {
     font-family: iconfont;
@@ -316,17 +312,19 @@ ul.relation li {
     margin: 0 3px;
     display: inline-block;
 }
+
 .right-author-bar a {
     width: 50px;
     height: 50px;
-    background-color: hsla(0,0%,71%,.2);
+    background-color: hsla(0, 0%, 71%, .2);
     border-radius: 50%;
     line-height: 50px;
     display: block;
     cursor: pointer;
     margin: 0px auto;
 }
-.right-author-bar i.fa.fa-2x{
+
+.right-author-bar i.fa.fa-2x {
     margin-left: 12px;
     margin-top: 9px;
     font-size: 24px;
@@ -337,16 +335,16 @@ ul.relation li {
     color: #fff;
     background-color: #00bb29;
 }
+
 .right-author-bar .github {
     color: #fff;
     background-color: #e05244;
 }
+
 .right-author-bar .qq {
     color: #fff;
     background-color: #498ad5;
 }
-
-
 
 /*简书*/
 
@@ -359,43 +357,49 @@ ul.relation li {
 .note-list li {
     position: relative;
     width: 100%;
-   // border-bottom: 1px solid #f0f0f0;
+/ / border-bottom: 1 px solid #f0f0f0;
     word-wrap: break-word;
     line-height: 20px;
 }
+
 /*.note-list  .wrap-img {*/
-    /*width: 125px;*/
-    /*height: 100px;*/
+/*width: 125px;*/
+/*height: 100px;*/
 /*}*/
 
-.note-list  .wrap-img img {
+.note-list .wrap-img img {
     width: 100%;
     height: 100%;
     border-radius: 4px;
     border: 1px solid #f0f0f0;
 }
+
 /*.note-list .have-img>div {*/
-    /*padding-right: 135px;*/
+/*padding-right: 135px;*/
 /*}*/
 
 .note-list .time-and-tag-block {
     margin-bottom: 10px;
 }
+
 .note-list .author {
     margin-bottom: 14px;
     font-size: 13px;
 }
+
 .note-list .title {
     margin: -7px 0 4px;
     font-size: 24px;
     font-weight: 700;
     line-height: 1.5;
-    color:#0A0;
+    color: #0A0;
     text-decoration: none;
 }
-.note-list .title:visited{
+
+.note-list .title:visited {
     text-decoration: none;
 }
+
 .note-list .abstract {
     margin: 0 0 8px;
     font-size: 13px;
@@ -403,21 +407,21 @@ ul.relation li {
 }
 
 .note-list .meta {
-    padding-right: 0!important;
+    padding-right: 0 !important;
     font-size: 12px;
     font-weight: 400;
     line-height: 20px;
 }
+
 .note-list .post-date {
     color: #959595;
 }
 
-
-
 /*点赞*/
-.praise-list .list-group-item{
+.praise-list .list-group-item {
     margin-bottom: 20px;
 }
+
 #go_parise {
     position: fixed;
     bottom: 50px;
@@ -429,14 +433,14 @@ ul.relation li {
     outline: none;
     z-index: 100;
 }
+
 .post-meta .praise {
     color: #d9534f;
 }
 
-
 /*markdown 过滤样式*/
 
-.post-content h1,.post-content h2,.post-content h3{
+.post-content h1{
     /*强制把markdown的标题 变成linux.cn 样子*/
     display: block;
     font-weight: 300;
@@ -452,12 +456,62 @@ ul.relation li {
     text-shadow: 1px 1px 1px #666;
     box-shadow: 1px 1px 2px #666;
 }
+.post-content h2{
+    /*强制把markdown的标题 变成linux.cn 样子*/
+    display: block;
+    font-weight: 300;
+    background-image: linear-gradient(to right bottom, #F44336, #FFC107);
+    background-color: #F44336;
+    color: #FFF;
+    font-size: 1.2em;
+    line-height: 1.8em;
+    margin: 10px 10px 10px 0;
+    padding: 8px 15px;
+    letter-spacing: 3px;
+    border-left: solid #333 10px;
+    text-shadow: 1px 1px 1px #666;
+    box-shadow: 1px 1px 2px #666;
+}
+.post-content h3{
+    /*强制把markdown的标题 变成linux.cn 样子*/
+    display: block;
+    font-weight: 300;
+    background-image: linear-gradient(to right bottom, #F44336, #FFC107);
+    background-color: #F44336;
+    color: #FFF;
+    font-size: 1em;
+    line-height: 1.8em;
+    margin: 10px 10px 10px 0;
+    padding: 8px 15px;
+    letter-spacing: 3px;
+    border-left: solid #333 10px;
+    text-shadow: 1px 1px 1px #666;
+    box-shadow: 1px 1px 2px #666;
+}
 /*行内代码块*/
-.post-content p>code{
+.post-content p > code {
     -moz-border-radius: 4px;
     margin: 0 4px;
     color: #74e67c;
     background-color: #111;
 }
 
+/*aside.sidebar {*/
+    /*position: fixed;*/
+    /*right: 0;*/
+    /*top: 0;*/
+    /*bottom: 0;*/
+    /*z-index: 1040;*/
+    /*box-shadow: inset 0 2px 6px #000;*/
+    /*background: #222;*/
+    /*-webkit-transform: translateZ(0);*/
+/*}*/
 
+/*.ztree li a.curSelectedNode {*/
+    /*padding-top: 0px;*/
+    /*background-color: #FFE6B0;*/
+    /*color: black;*/
+    /*height: 16px;*/
+    /*border: 1px #FFB951 solid;*/
+    /*opacity: 0.8;*/
+/*}*/

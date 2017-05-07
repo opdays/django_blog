@@ -106,14 +106,34 @@
 
 
 {% endblock %}
+{% block right-container %}
+    <aside class="sidebar wihite-block" style="position: fixed;">
+    <ul id="tree" class="list-group" style="list-style: none;">
 
+    </ul>
+    </aside>
+
+{% endblock %}
 {% load static %}
 {% block custom_css %}
 {% endblock %}
 {% block custom_js %}
+<script src="{% static '/jquery/jquery.ztree.core-3.5.min.js' %}"></script>
+<script src="{% static '/jquery/jquery.ztree_toc.js' %}"></script>
+    <script>
+    	$(document).ready(function(){
+		$('#tree').ztree_toc({
+			is_auto_number:true,
+            documment_selector: '.post-content',
+            is_highlight_selected_line:true,
+            ztreeStyle: {
 
-
-
+			}
+		});
+		$("#right-container").removeClass("col-lg-offset-1 col-md-offset-1");
+		$("aside.wihite-block").css("background","#222");
+	});
+    </script>
     <script>
         /*百度分享*/
         var logo = location.protocol + "//" + location.host + "/static/images.jpg";
