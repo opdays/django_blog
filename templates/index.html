@@ -253,25 +253,6 @@
             cursor: pointer;
         }
 
-        .music-player {
-            position: fixed;
-            top: 10px;
-            left: 84px;
-            z-index: 83;
-            cursor: move;
-            background: rgba(250, 250, 250, 0.8);
-            min-width: 300px;
-        }
-
-        @media screen and (max-width: 800px) {
-            .music-player {
-                top: auto !important;
-                bottom: 0 !important;
-                left: 0 !important;
-                margin: 0 !important;
-                min-width: 66px;
-            }
-        }
 
     </style>
 </head>
@@ -288,16 +269,14 @@
         </h2>
         <h3 title="For Future, For Freedom." aria-hidden="true">Yang Yang's blog</h3>
         <p><font aria-hidden="true">»</font>
-            <a href="http://blog.opdays.com" aria-label="点击查看博客文章列表">博客</a> <font aria-hidden="true">/</font>
+            <a href="http://blog.opdays.com/article/page/" aria-label="点击查看博客文章列表">博客</a> <font aria-hidden="true">/</font>
             <!-- <a href="https://github.com/barretlee/slides#slides" aria-label="小胡子哥的演讲" target="_blank">演讲</a> <font aria-hidden="true">/</font> -->
-            <a href="http://blog.opdays.com" aria-label="查看个人信息">关于</a>
+            <a href="http://blog.opdays.com/article/page/" aria-label="查看个人信息">关于</a>
         </p>
     </div>
 
 </div>
-<div class="music-player">
     {% include "163.html" %}
-</div>
 </body>
 <script src="{% static 'jquery-3.2.1.js' %}"></script>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
