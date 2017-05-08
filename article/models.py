@@ -6,17 +6,23 @@ class Article(models.Model):
     date_time = models.DateTimeField('时间',auto_now_add=True)
     content = models.TextField('内容',blank=True, null=True)
     image_url = models.CharField('图片地址',max_length=255,blank=True,null=True)
-
+    view = models.BigIntegerField(default=0)  # 阅读数
     # discuess = models.ForeignKey('Discuss')
-    class Meta:  # 按时间下降排序
+    class Meta:
         db_table = 'article'
-        ordering = ['-date_time']
+        ordering = ['-date_time']# 按时间下降排序
         verbose_name = '文章'
         verbose_name_plural = '文章管理'
     def __str__(self):
         return self.title
 
-
+    def viewed(self):
+        """
+        增加阅读数
+        :return:
+        """
+        self.view += 1
+        self.save(update_fields=['view'])
 class Tag(models.Model):
     id = models.AutoField(primary_key=True)
     tag = models.CharField('标签',max_length=100,default='未分类')
