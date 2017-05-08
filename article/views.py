@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Article, Tag, FriendLink
-from django.http import Http404
+from django.http import Http404,HttpResponse
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage
 
@@ -54,12 +54,17 @@ def article_list(request, page):
 
 
 def article_detail(request, id):
+
     try:
         article = Article.objects.get(id=str(id))
-        article.viewed()
     except:
         Http404
-    return render(request, "article_detail.html", context={"article": article})
+    response = render(request, "article_detail.html", context={"article": article})
+    if not request.COOKIES.get(id):
+        response.set_cookie(id, "viewd",path="/article")
+        article.viewed()
+
+    return response
 
 
 def tag_list(request, tag, page):
