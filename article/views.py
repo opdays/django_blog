@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Article, Tag, FriendLink
-from django.http import Http404
+from django.http import Http404,HttpResponse
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage
 
@@ -31,7 +31,7 @@ def blog_global_val(request):
         year_month_number.append([key[0], key[1], counter[key]])  # 把字典转化为（年，月，数目）元组为元素的列表
         year_month_number.sort(reverse=True)  # 排序
     return {
-        "recently_articles": articles[0:5],
+        "recently_articles": zip(range(1,7),articles[0:5]),
         "tags": tags,
         "firendlink": firendlink,
         'blog': settings.BLOG,
@@ -54,11 +54,17 @@ def article_list(request, page):
 
 
 def article_detail(request, id):
+
     try:
         article = Article.objects.get(id=str(id))
     except:
         Http404
-    return render(request, "article_detail.html", context={"article": article})
+    response = render(request, "article_detail.html", context={"article": article})
+    if not request.COOKIES.get(id):
+        response.set_cookie(id, "viewd",path="/article")
+        article.viewed()
+
+    return response
 
 
 def tag_list(request, tag, page):
