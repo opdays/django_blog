@@ -1,0 +1,60 @@
+/*markdown 过滤样式*/
+
+.post-content h1 {
+    /*强制把markdown的标题 变成linux.cn 样子*/
+    display: block;
+    font-weight: 300;
+    background-image: linear-gradient(to right bottom, #F44336, #FFC107);
+    background-color: #F44336;
+    color: #FFF;
+    font-size: 1.4em;
+    line-height: 1.8em;
+    margin: 10px 10px 10px 0;
+    padding: 8px 15px;
+    letter-spacing: 3px;
+    border-left: solid #333 10px;
+    text-shadow: 1px 1px 1px #666;
+    box-shadow: 1px 1px 2px #666;
+}
+
+.post-content h2 {
+    /*强制把markdown的标题 变成linux.cn 样子*/
+    display: block;
+    font-weight: 300;
+    background-image: linear-gradient(to right bottom, #337ab7, #66d9ef);
+    background-color: #F44336;
+    color: #FFF;
+    font-size: 1.2em;
+    line-height: 1.8em;
+    margin: 10px 10px 10px 0;
+    padding: 8px 15px;
+    letter-spacing: 3px;
+    border-left: solid #333 10px;
+    text-shadow: 1px 1px 1px #666;
+    box-shadow: 1px 1px 2px #666;
+}
+
+.post-content h3 {
+    /*强制把markdown的标题 变成linux.cn 样子*/
+    display: block;
+    font-weight: 300;
+    background-image: linear-gradient(to right bottom, #75715e, #a6e22e);
+    background-color: #F44336;
+    color: #FFF;
+    font-size: 1em;
+    line-height: 1.8em;
+    margin: 10px 10px 10px 0;
+    padding: 8px 15px;
+    letter-spacing: 3px;
+    border-left: solid #333 10px;
+    text-shadow: 1px 1px 1px #666;
+    box-shadow: 1px 1px 2px #666;
+}
+
+/*行内代码块*/
+.post-content p > code {
+    -moz-border-radius: 4px;
+    margin: 0 4px;
+    color: #74e67c;
+    background-color: #111;
+}

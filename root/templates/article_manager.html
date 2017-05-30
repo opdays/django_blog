@@ -1,0 +1,50 @@
+{% extends "_root_base.html" %}
+{% load custom_markdown %}
+{% block content %}
+        <div class="content-header">
+        <button class="btn btn-success">添加文章</button>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    文章标题
+                </th>
+                <th>
+                    发布时间
+                </th>
+                <th>
+                    标签
+                </th>
+                <th>
+                    浏览量
+                </th>
+                <th>
+                    操作
+                </th>
+            </tr>
+            {% for article in articles %}
+            <tr>
+                <td>{{ article.title }}</td>
+                <td>{{ article.date_time|date:'Y-m-d H:m' }}</td>
+                <td>
+                    {% for tag in article.tags.all %}
+                        {% color_tag tag color=tag.color %}
+                    {% endfor %}
+                </td>
+                <td>
+                    {{ article.view }}
+                </td>
+                <td>
+                    <a href="/root/article/{{ article.id }}" class="btn btn-sm btn-blue"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+                    <a class="btn btn-sm btn-danger"><i class="fa fa-trash-o" id="{{ article.id }}"></i>&nbsp;删除</a>
+                    <a href="/article/{{ article.id }}" class="btn btn-sm btn-green"><i class="fa fa-eye" id="{{ article.id }}"></i>&nbsp;预览</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+{% endblock %}
+{% block custom_js %}
+{% endblock %}

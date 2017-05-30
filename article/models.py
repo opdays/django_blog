@@ -7,6 +7,8 @@ class Article(models.Model):
     content = models.TextField('内容',blank=True, null=True)
     image_url = models.CharField('图片地址',max_length=255,blank=True,null=True)
     view = models.BigIntegerField(default=0)  # 阅读数
+    type = models.CharField('文章类型',choices=(('html',"富文本"),('markdown',"markdown")),
+                            max_length=155,default='markdown',null=False,blank=False)
     # discuess = models.ForeignKey('Discuss')
     class Meta:
         db_table = 'article'
@@ -15,7 +17,14 @@ class Article(models.Model):
         verbose_name_plural = '文章管理'
     def __str__(self):
         return self.title
-
+    def to_dict(self):
+        return dict(
+            id=self.id,
+            title=self.title,
+            content=self.content,
+            image_url=self.image_url,
+            tag=[tag.to_dict() for tag in self.tags.all()]
+        )
     def viewed(self):
         """
         增加阅读数
@@ -36,6 +45,11 @@ class Tag(models.Model):
         verbose_name_plural = '标签管理'
     def __str__(self):
         return self.tag
+    def to_dict(self):
+        return dict(
+            tag = self.tag,
+            color = self.color,
+        )
 
 class FriendLink(models.Model):
     id=models.AutoField(primary_key=True)

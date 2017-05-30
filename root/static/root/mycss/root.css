@@ -1,0 +1,21 @@
+.btn-blue{
+    background-color: #1e88e5;
+    color: white;
+}
+.btn-blue:hover{
+    background-color: #0d81e8;
+    color: white;
+}
+
+.btn-green{
+    background-color: #4ac551;
+
+    color: white;
+}
+.btn-green:hover{
+    background-color: #0e9815;
+    color: white;
+}
+.content-header{
+    margin-bottom: 10px;
+}

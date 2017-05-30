@@ -58,7 +58,7 @@ def article_detail(request, id):
     try:
         article = Article.objects.get(id=str(id))
     except:
-        Http404
+        raise Http404
     response = render(request, "article_detail.html", context={"article": article})
     if not request.COOKIES.get(id):
         response.set_cookie(id, "viewd",path="/article")

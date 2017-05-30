@@ -26,7 +26,11 @@
             </div>
         </div>
         <div class="post-content">
+            {% if article.type  == 'markdown' %}
             {{ article.content|custom_markdown }}
+                {% else %}
+                {{ article.content|safe }}
+            {% endif %}
         </div>
         <footer class="post-footer clearfix">
             <div>
@@ -111,33 +115,27 @@
 
 {% endblock %}
 {% block right-container %}
-    <aside class="sidebar wihite-block" style="position: fixed;">
-    <ul id="tree" class="list-group" style="list-style: none;">
-
-    </ul>
-    </aside>
-
+    {{ block.super }}
 {% endblock %}
 {% load static %}
 {% block custom_css %}
+    {% if article.type == 'markdown' %}
+        <link rel="stylesheet" href="/static/code.css"/> <!--markdown代码高亮标题-->
+         <link rel="stylesheet" href="/static/article/md.css"/> <!--转换标题-->
+    {% else %}
+        <link rel="stylesheet" href="/static/root/lib/wangEditor/dist/css/sublime.css" /> <!--富文本代码高亮-->
+    {% endif %}
 {% endblock %}
 {% block custom_js %}
-<script src="{% static '/jquery/jquery.ztree.core-3.5.min.js' %}"></script>
-<script src="{% static '/jquery/jquery.ztree_toc.js' %}"></script>
+    <script src="/static/article/md.js"></script> <!--转换一些表格图片-->
+    {% if article.type == 'html' %}
     <script>
-    	$(document).ready(function(){
-		$('#tree').ztree_toc({
-			is_auto_number:true,
-            documment_selector: '.post-content',
-            is_highlight_selected_line:true,
-            ztreeStyle: {
 
-			}
-		});
-		$("#right-container").removeClass("col-lg-offset-1 col-md-offset-1");
-		$("aside.wihite-block").css("background","#222");
-	});
+    	$(document).ready(function(){
+    	    $('pre').css('padding','0px');
+	    });
     </script>
+    {% endif %}
     <script>
         /*百度分享*/
         var logo = location.protocol + "//" + location.host + "/static/images.jpg";
