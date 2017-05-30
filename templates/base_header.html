@@ -1,9 +1,12 @@
-<nav id="header" class="navbar navbar-default navbar-inverse" role="navigation" style="animation: fushang 0.5s">
+<nav id="header" class="navbar navbar-default" role="navigation" style="animation: fushang 0.5s">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="/home.html"><i class="fa fa-home fa-2x pull-left hidden-lg hidden-md"
-                                                style="line-height: 30px"></i><span
-                    class="hidden-xs hidden-sm">{{ blog }}</span></a>
+                                                         style="line-height: 30px"></i>
+{#                <span class="hidden-xs hidden-sm">#}
+                    <img class="base-logo hidden-xs hidden-sm" src="/static/logo.png">
+{#                </span>#}
+            </a>
             <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#menu">
                 <span class="sr-only">切换导航</span>
@@ -14,12 +17,9 @@
         </div>
         <div class="collapse navbar-collapse" id="menu">
             <ul class="nav navbar-nav">
-                <li><a href="{% url 'article_list' page='' %}"><i class="fa fa-th-list pull-left"></i>文章</a></li>
-                <li><a href="#"><i class="fa fa-user pull-left"></i>关于</a></li>
+                <li><a href="{% url 'article_list' page='' %}">文章</a></li>
+                <li><a href="#">关于</a></li>
 
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/admin"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
             </ul>
 
         </div>

@@ -6,8 +6,8 @@
 
 
         <div class="post-head">
-            <h1 class="post-title"><a href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a>
-            </h1>
+            <h3 class="post-title"><a href="{% url 'article_detail' id=article.id %}">{{ article.title }}</a>
+            </h3>
             <div class="post-meta">
                     <span class="author">标签：
                         {% for tag in article.tags.all %}
