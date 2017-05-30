@@ -1,6 +1,6 @@
 from . import views, api
 from django.conf.urls import url
-
+from django.views.generic import TemplateView
 urlpatterns = [
     url(r'^page/(?P<page>\d*)$', views.article_list, name="article_list"),
     url(r'^(?P<tag>\w+)/(?P<page>\d*)$', views.tag_list, name="tag_list"),
@@ -10,5 +10,7 @@ urlpatterns = [
     url(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]+)/(?P<page>\d*)$',
         views.year_month_list,
         name="year_month_list"),
-    url(r'^about$', views.about, name="about"),
+    url(r'^upload$', views.upload, name="upload"),
+    #https://docs.djangoproject.com/en/dev/ref/class-based-views/#built-in-class-based-views-api
+    url(r'^about$',TemplateView.as_view(template_name='about.html')),
 ]

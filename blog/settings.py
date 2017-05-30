@@ -175,6 +175,10 @@ SUIT_CONFIG = {
 # 'width': 600,
 # 'height': 400,
 # }
-
-
+#http://python.usyiyi.cn/django_182/ref/settings.html#std:setting-MEDIA_ROOT 上传路径
+MEDIA_ROOT = os.path.join(BASE_DIR, "static/upload")
+#模型ImageFiled的保存路径 /tmp/photos/2017/05/31/logo.png
+#MEDIA_URL = 'http://192.168.174.131:8000/static/upload/'
+MEDIA_URL = yaml.get('MEDIA_URL')
+#通过模型对象o.image.url  获取到 /images/photos/2017/05/31/logo.png 访问路径
 QQWRY = os.path.join(BASE_DIR, "other/qqwry.dat")

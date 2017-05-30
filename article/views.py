@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Article, Tag, FriendLink
+from .models import Article, Tag, FriendLink,UploadImage
 from django.http import Http404,HttpResponse
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage
@@ -88,16 +88,22 @@ def year_month_list(request,year,month,page):
 
 
 
-def about(request):
-    return render(request,"about.html")
-
-
-
-
-
-
-
-
+from django import forms
+class ImageForm(forms.Form):
+    title = forms.CharField()
+    image = forms.ImageField()
+def upload(request):
+    if request.method == 'POST':
+        print(request.POST,request.FILES)
+        image_form = ImageForm(request.POST,request.FILES)
+        if image_form.is_valid():
+            image = image_form.cleaned_data['image']
+            title = image_form.cleaned_data['title']
+            obj = UploadImage.objects.create(image=image,title=title)
+            return HttpResponse(obj.image.url)
+        else:
+            return HttpResponse("error")
+    return HttpResponse("error")
 from django.views.generic.dates import MonthArchiveView
 
 

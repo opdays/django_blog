@@ -23,7 +23,7 @@
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="form-group">
-                    <input type="text" class="form-control" value="{{ article.image_url }}">
+                    <input type="text" class="form-control" name="image_url" value="{{ article.image_url }}">
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">
@@ -60,10 +60,10 @@
             $('#add').click(function () {
                 var id = $(this).attr('edit');
                 {% if article.type == 'markdown' %}
-                    var article_content = $('textarea').html();
+                    var content = $('textarea').html();
 
                     {% else %}
-                    var article_content = editor.$txt.html();
+                    var content = editor.$txt.html();
 
                 {% endif %}
                 $.ajax({
@@ -72,17 +72,18 @@
                     contentType:"application/json; charset=utf-8",
                     dataType:"json",
                     data: JSON.stringify({
-                        article_content: article_content,
+                        content: content,
+                        image_url: $('input[name=image_url]').val(),
                     }),
                     success: function (result) {
                         if (result.data === "success") {
-                            alert("添加成功");
+                            alert("更新成功");
                         } else {
-                            alert("添加失败");
+                            alert("更新失败");
                         }
                     },
                     error: function () {
-                        alert("添加失败");
+                        alert("更新失败");
                     }
                 });
             });

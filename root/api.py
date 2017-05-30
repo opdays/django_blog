@@ -31,12 +31,7 @@ class ArticleApi(View):
     def put(self, request, id,*args, **kw):
         if id:
             data=json.loads(request.body.decode())
-            article = dict(
-                #title=data.get("article_title"),
-                content=data.get("article_content"),
-                image_url=data.get("article_image_url")
-            )
-            Article.objects.filter(id=id).update(**article)
+            Article.objects.filter(id=id).update(**data)
             return JsonResponse({"data": "success"})
         else:
             return JsonResponse({"data": "error"})

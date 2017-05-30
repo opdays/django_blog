@@ -51,6 +51,13 @@
     <script>
         $(function () {
             var editor = new wangEditor('edit_block');
+            editor.config.uploadImgUrl = '/article/upload';
+            editor.config.uploadParams = {
+                title: "autoimage"
+            };
+
+            editor.config.hideLinkImg = true;
+            editor.config.uploadImgFileName = 'image';
             editor.create();
             $('#add').click(function () {
                 $.ajax({
