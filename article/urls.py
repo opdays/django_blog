@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^(?P<year>[0-9]{4})/(?P<month>[0-9]+)/(?P<page>\d*)$',
         views.year_month_list,
         name="year_month_list"),
+    url(r'^about$', views.about, name="about"),
 ]

@@ -88,7 +88,8 @@ def year_month_list(request,year,month,page):
 
 
 
-
+def about(request):
+    return render(request,"about.html")
 
 
 

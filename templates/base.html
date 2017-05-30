@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <title>{{ blog }}</title>
     <meta content='width=device-width,initial-scale=1,maximum-scale=1' name='viewport'>
-    <meta name="keywords" content="python,linux,jquery,mysql,django，flask，编程,开发,运维,云计算,网络,互联网" />
-    <meta name="description" content="想法，随笔，思考，感叹，瞬间，笔记..." />
+    <meta name="keywords" content="python,linux,mysql,django，flask，编程,开发,运维,云计算,网络,互联网"/>
+    <meta name="description" content="杨洋个人随笔，杨洋个人比较，杨洋技术博客，工作笔记，杨洋娱乐博客，django博客"/>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/static/bootstrap/font-awesome-4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="/static/css/main.css"/>
@@ -20,12 +20,12 @@
 {% include "base_header.html" %}
 <!--导航条end-->
 <div id="wrapper">
-   {% block wrapper %}
+    {% block wrapper %}
     {% endblock %}
 
-<!--footer-->
-{% include "base_footer.html" %}
-<!--footer-->
+    <!--footer-->
+    {% include "base_footer.html" %}
+    <!--footer-->
 
 </div>
 <button class="btn" id="go_top" type="button">Top</button>
@@ -38,21 +38,21 @@
 {% endblock %}
 <script>
     $(function () {
-            var header = new Headroom(document.getElementById("header"), {
-        tolerance: 10,
-        offset : 80,
-        classes: {
-           initial : "",
-        // 向上滚动时设置的class
-        pinned : "navbar-fixed-top",
-        // 向下滚动时所设置的class
-        unpinned : ""
-        }
-    });
-    header.init();
+        var header = new Headroom(document.getElementById("header"), {
+            tolerance: 10,
+            offset: 80,
+            classes: {
+                initial: "",
+                // 向上滚动时设置的class
+                pinned: "navbar-fixed-top",
+                // 向下滚动时所设置的class
+                unpinned: ""
+            }
+        });
+        header.init();
         $("[data-toggle='tooltip']").tooltip();
         $("section").addClass("mysection");
-	    $("body").show();
+        $("body").show();
     });
 </script>
 </html>
