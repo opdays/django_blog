@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from article.models import Article
+from article.models import Article,Tag,FriendLink,Praise
 from django.http import Http404, HttpResponseForbidden, HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
@@ -36,7 +36,13 @@ def root_logout(request):
 
 @login_required(login_url='/root/login')
 def root_index(request):
-    return render(request, "_root_base.html")
+    context = {
+        "article_count":Article.objects.count(),
+        "tag_count":Tag.objects.count(),
+        "praise_count":Praise.objects.count(),
+        "friend_count":FriendLink.objects.count()
+    }
+    return render(request, "_root_base.html",context=context)
 
 
 @login_required(login_url='/root/login')

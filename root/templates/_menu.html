@@ -1,17 +1,53 @@
-<ul class="list-group">
-    <li class="list-group-item">
-        <span><i class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;<a href="/root">仪表盘</a></span>
-    </li>
-    <li class="list-group-item">
-        <i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;<a href="/root/article">文章管理</a>
-    </li>
-    <li class="list-group-item">
-        <i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;<a href="#">标签管理</a>
-    </li>
-    <li class="list-group-item">
-        <i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;&nbsp;<a href="#">友链管理</a>
-    </li>
-    <li class="list-group-item">
-        <i class="fa fa-comment-o"></i>&nbsp;&nbsp;&nbsp;<a href="#">评论管理</a>
-    </li>
-</ul>
+{#<ul class="list-group">#}
+{#    <li class="list-group-item">#}
+{#        <span><i class="fa fa-home"></i>&nbsp;&nbsp;&nbsp;<a href="/root">仪表盘</a></span>#}
+{#    </li>#}
+{#    <li class="list-group-item">#}
+{#        <i class="fa fa-book"></i>&nbsp;&nbsp;&nbsp;<a href="/root/article">文章管理</a>#}
+{#    </li>#}
+{#    <li class="list-group-item">#}
+{#        <i class="fa fa-tag"></i>&nbsp;&nbsp;&nbsp;<a href="#">标签管理</a>#}
+{#    </li>#}
+{#    <li class="list-group-item">#}
+{#        <i class="fa fa-pencil-square-o"></i>&nbsp;&nbsp;&nbsp;<a href="#">友链管理</a>#}
+{#    </li>#}
+{#    <li class="list-group-item">#}
+{#        <i class="fa fa-comment-o"></i>&nbsp;&nbsp;&nbsp;<a href="#">评论管理</a>#}
+{#    </li>#}
+{#</ul>#}
+<!-- left side start-->
+<div class="left-side sticky-left-side">
+
+    <!--logo and iconic logo start-->
+    <div class="logo">
+        <a href="/"><img src="/static/logo.png" alt=""></a>
+    </div>
+
+    <div class="logo-icon text-center">
+        {#            <a href="index.html">后台</a>#}
+    </div>
+
+    <!--logo and iconic logo end-->
+
+
+    <div class="left-side-inner">
+
+        <!--sidebar nav start-->
+        <ul class="nav nav-pills nav-stacked custom-nav">
+            <li class="active"><a href="/root/"><i class="fa fa-home"></i> <span>仪表盘</span></a></li>
+            <li class="menu-list"><a href="/root/article"><i class="fa fa-book"></i> <span>文章管理</span></a>
+            </li>
+            <li class="menu-list"><a href="/root/article/tag"><i class="fa fa-tag"></i> <span>标签管理</span></a>
+            </li>
+            <li class="menu-list"><a href="/root/article/friendlink"><i class="fa fa-pencil-square-o"></i> <span>友链管理</span></a>
+            </li>
+            <li class="menu-list"><a href="/root/article/praise"><i class="fa fa-comment-o"></i> <span>评论管理</span></a>
+            </li>
+
+
+        </ul>
+        <!--sidebar nav end-->
+
+    </div>
+</div>
+<!-- left side end-->

@@ -2,7 +2,7 @@
 <html>
 <head>
     {% include "_meta.html" %}
-    <title>空白页</title>
+    <title>博客后台</title>
     <style>
         #edit_block {
             height: 400px;
@@ -10,43 +10,179 @@
     </style>
 </head>
 <body>
-{% include "_header.html" %}
-<div class="container-fluid">
-    <div class="row">
+<section>
+    <div class="sticky-header">
+        {% include "_menu.html" %}
+    </div>
+    <!-- main content start-->
+    <div class="main-content">
 
-        <div class="col-lg-2 col-md-2 col-sm-2">
-            {% include "_menu.html" %}
+        <!-- header section start-->
+        {% include "_header.html" %}
+        <!-- header section end-->
+
+        <!-- page heading start-->
+        <div class="page-heading">
+            {{ titile }}
         </div>
-        <div class="col-lg-10 col-md-10 col-sm-10">
-            {% block content %}
-                <div class="content-body">
-                    <div class="row">
+        <!-- page heading end-->
 
-
-                        <div class="root-content">
-                            <div id="edit_block">
-                                <p>基佬 写点什么吧</p>
-
+        <!--body wrapper start-->
+        <div class="wrapper">
+            {% block wrapper %}
+                <div class="row">
+                    <div class="col-md-6">
+                        <!--statistics start-->
+                        <div class="row state-overview">
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="panel purple">
+                                    <div class="symbol">
+                                        <i class="fa fa-book"></i>
+                                    </div>
+                                    <div class="state-value">
+                                        <div class="value">{{ article_count }}</div>
+                                        <div class="title">文章数</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="panel red">
+                                    <div class="symbol">
+                                        <i class="fa fa-tags"></i>
+                                    </div>
+                                    <div class="state-value">
+                                        <div class="value">{{ tag_count }}</div>
+                                        <div class="title">标签数</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6">
-                            <input type="text" class="form-control" name="article_title" placeholder="文章标题">
+                        <div class="row state-overview">
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="panel blue">
+                                    <div class="symbol">
+                                        <i class="fa fa-comment-o"></i>
+                                    </div>
+                                    <div class="state-value">
+                                        <div class="value">{{ praise_count }}</div>
+                                        <div class="title">评论数</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-xs-12 col-sm-6">
+                                <div class="panel green">
+                                    <div class="symbol">
+                                        <i class="fa fa-eye"></i>
+                                    </div>
+                                    <div class="state-value">
+                                        <div class="value">{{ friend_count }}</div>
+                                        <div class="title">友链数</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-lg-6 col-md-6">
-                            <input type="text" class="form-control" name="article_image_url" placeholder="图片url">
+                        <!--statistics end-->
+                    </div>
+                    <div class="col-md-6">
+                        <!--more statistics box start-->
+                        <div class="panel deep-purple-box">
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-7 col-sm-7 col-xs-7">
+                                        <div id="graph-donut" class="revenue-graph">
+                                            <svg height="220" version="1.1" width="355"
+                                                 xmlns="http://www.w3.org/2000/svg"
+                                                 style="overflow: hidden; position: relative;">
+                                                <desc style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">Created
+                                                    with Raphaël 2.1.2
+                                                </desc>
+                                                <defs style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></defs>
+                                                <path fill="none" stroke="#4acacb"
+                                                      d="M177.5,176.66666666666669A66.66666666666667,66.66666666666667,0,0,0,219.07879551323234,57.88811835950217"
+                                                      stroke-width="2" opacity="1"
+                                                      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 1;"></path>
+                                                <path fill="#4acacb" stroke="none"
+                                                      d="M177.5,179.66666666666669A69.66666666666667,69.66666666666667,0,0,0,220.94984131132782,55.54308368567977L239.86819326984852,31.832177539253266A100,100,0,0,1,177.5,210Z"
+                                                      stroke-width="3"
+                                                      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                                <path fill="none" stroke="#6a8bc0"
+                                                      d="M219.07879551323234,57.88811835950217A66.66666666666667,66.66666666666667,0,0,0,115.45101113025744,85.6203481426209"
+                                                      stroke-width="2" opacity="0"
+                                                      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
+                                                <path fill="#6a8bc0" stroke="none"
+                                                      d="M220.94984131132782,55.54308368567977A69.66666666666667,69.66666666666667,0,0,0,112.65880663111902,84.52326380903884L89.08019086061685,75.25899610323478A95,95,0,0,1,236.7497836063561,35.7405686622906Z"
+                                                      stroke-width="3"
+                                                      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                                <path fill="none" stroke="#5ab6df"
+                                                      d="M115.45101113025744,85.6203481426209A66.66666666666667,66.66666666666667,0,0,0,135.91301928453285,162.10534981569367"
+                                                      stroke-width="2" opacity="0"
+                                                      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
+                                                <path fill="#5ab6df" stroke="none"
+                                                      d="M112.65880663111902,84.52326380903884A69.66666666666667,69.66666666666667,0,0,0,134.0416051523368,164.45009055739988L118.2385524804593,184.25012348736345A95,95,0,0,1,89.08019086061685,75.25899610323478Z"
+                                                      stroke-width="3"
+                                                      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                                <path fill="none" stroke="#fe8676"
+                                                      d="M135.91301928453285,162.10534981569367A66.66666666666667,66.66666666666667,0,0,0,177.47905604932066,176.66666337679857"
+                                                      stroke-width="2" opacity="0"
+                                                      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); opacity: 0;"></path>
+                                                <path fill="#fe8676" stroke="none"
+                                                      d="M134.0416051523368,164.45009055739988A69.66666666666667,69.66666666666667,0,0,0,177.4781135715401,179.6666632287545L177.47015487028193,204.99999531193794A95,95,0,0,1,118.2385524804593,184.25012348736345Z"
+                                                      stroke-width="3"
+                                                      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);"></path>
+                                                <text x="177.5" y="100" text-anchor="middle"
+                                                      font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+                                                      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: 800; font-stretch: normal; font-size: 15px; line-height: normal; font-family: Arial;"
+                                                      font-size="15px" font-weight="800"
+                                                      transform="matrix(1.5118,0,0,1.5118,-90.8385,-56.6351)"
+                                                      stroke-width="0.6614583333333333">
+                                                    <tspan dy="5.9921875"
+                                                           style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">New
+                                                        Visit
+                                                    </tspan>
+                                                </text>
+                                                <text x="177.5" y="120" text-anchor="middle"
+                                                      font="10px &quot;Arial&quot;" stroke="none" fill="#ffffff"
+                                                      style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0); text-anchor: middle; font-style: normal; font-variant: normal; font-weight: normal; font-stretch: normal; font-size: 14px; line-height: normal; font-family: Arial;"
+                                                      font-size="14px"
+                                                      transform="matrix(1.4498,0,0,1.4498,-79.8303,-50.5216)"
+                                                      stroke-width="0.6897656249999999">
+                                                    <tspan dy="4.9921875"
+                                                           style="-webkit-tap-highlight-color: rgba(0, 0, 0, 0);">at
+                                                        least 70%
+                                                    </tspan>
+                                                </text>
+                                            </svg>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-5 col-sm-5 col-xs-5">
+                                        <ul class="bar-legend">
+                                            <li><span class="blue"></span> Open rate</li>
+                                            <li><span class="green"></span> Click rate</li>
+                                            <li><span class="purple"></span> Share rate</li>
+                                            <li><span class="red"></span> Unsubscribed rate</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <button id="add" class="btn btn-primary">添加文章</button>
+                        <!--more statistics box end-->
                     </div>
                 </div>
             {% endblock %}
         </div>
+        <!--body wrapper end-->
+
+        <!--footer section start-->
+        {% include "_footer.html" %}
+        <!--footer section end-->
 
 
     </div>
-</div>
+    <!-- main content end-->
 
 
-{% include "_footer.html" %}
+</section>
 {% block custom_js %}
     <script>
         $(function () {
@@ -63,8 +199,8 @@
                 $.ajax({
                     url: "/root/api/article",
                     method: "POST",
-                    contentType:"application/json",
-                    dateType:"json",
+                    contentType: "application/json",
+                    dateType: "json",
                     data: JSON.stringify({
                         title: $('input[name=article_title]').val(),
                         image_url: $('input[name=article_image_url]').val(),

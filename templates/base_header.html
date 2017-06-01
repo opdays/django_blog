@@ -3,9 +3,9 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="/home.html"><i class="fa fa-home fa-2x pull-left hidden-lg hidden-md"
                                                          style="line-height: 30px"></i>
-{#                <span class="hidden-xs hidden-sm">#}
-                    <img class="base-logo hidden-xs hidden-sm" src="/static/logo.png">
-{#                </span>#}
+                {#                <span class="hidden-xs hidden-sm">#}
+                <img class="base-logo hidden-xs hidden-sm" src="/static/logo.png">
+                {#                </span>#}
             </a>
             <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#menu">
@@ -15,14 +15,21 @@
                 <span class="icon-bar"></span>
             </button>
         </div>
+
         <div class="collapse navbar-collapse" id="menu">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav" style="z-index: 100">
                 <li><a href="{% url 'article_list' page='' %}">文章</a></li>
                 <li><a href="/article/about">关于</a></li>
-
             </ul>
-
+             <form class="navbar-form navbar-right hidden-xs" style="margin-top: 14px"
+                   action="/article/page/" role="search">
+                    <div class="form-group">
+                        <input type="text" name="q" class="form-control" placeholder="搜索关键字">
+                    </div>
+                </form>
         </div>
+
+
 
 
     </div>

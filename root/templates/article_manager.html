@@ -1,13 +1,17 @@
 {% extends "_root_base.html" %}
 {% load custom_markdown %}
-{% block content %}
+{% block wrapper %}
         <div class="content-header">
-        <button class="btn btn-success">添加文章</button>
+            <a href="/root/article/write/html" class="btn btn-default btn-success">写富文本文章</a>
+             <a href="/root/article/write/markdown" class="btn btn-default btn-success">写markdown文章</a>
         </div>
         <table class="table table-bordered">
             <tr>
                 <th>
                     文章标题
+                </th>
+                <th>
+                    类型
                 </th>
                 <th>
                     发布时间
@@ -25,6 +29,7 @@
             {% for article in articles %}
             <tr>
                 <td>{{ article.title }}</td>
+                <td>{{ article.get_type_display }}</td>
                 <td>{{ article.date_time|date:'Y-m-d H:m' }}</td>
                 <td>
                     {% for tag in article.tags.all %}

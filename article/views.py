@@ -44,7 +44,11 @@ def blog_global_val(request):
 
 
 def article_list(request, page):
-    articles = Article.objects.all()
+    if request.GET.get("q"):
+        q=request.GET.get("q")
+        articles = Article.objects.filter(content__contains=q).all()
+    else:
+        articles = Article.objects.all()
     paginator = Paginator(articles, settings.PER_PAGE_NUM)
     try:
         articles = paginator.page(int(page if page else 1))
