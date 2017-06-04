@@ -1,0 +1,36 @@
+{% extends "_root_base.html" %}
+{% load custom_markdown %}
+{% block wrapper %}
+        <div class="content-header">
+            <a href="#" class="btn btn-default btn-success">增加新链接</a>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    链接名
+                </th>
+                <th>
+                    地址
+                </th>
+                <th>
+                    操作
+                </th>
+            </tr>
+            {% for friend in friends %}
+            <tr>
+                <td>{{ friend.linkname }}</td>
+                <td>{{ friend.linkurl }}</td>
+                <td>
+                    <a href="#" class="btn btn-sm btn-blue"><i class="fa fa-edit"></i>&nbsp;编辑</a>
+
+                    <a class="btn btn-sm btn-danger"><i class="fa fa-trash-o" id="{{ friend.id }}"></i>&nbsp;删除</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+{% endblock %}
+{% block custom_js %}
+{% endblock %}

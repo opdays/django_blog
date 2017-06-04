@@ -1,0 +1,139 @@
+{% extends "_root_base.html" %}
+{% load custom_markdown %}
+{% block wrapper %}
+        <div class="content-header">
+            <a href="javascript:;" onclick="Tagcreate();" class="btn btn-default btn-success">增加新标签</a>
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    标签名
+                </th>
+                <th>
+                    标签颜色
+                </th>
+                <th>
+                    操作
+                </th>
+            </tr>
+            {% for tag in tags %}
+            <tr id="{{ tag.id }}">
+                <td>{% color_tag tag color=tag.color %}</td>
+                <td>{{ tag.color }}</td>
+                <td>
+                    <button type="button"
+                            onclick="tagEdit({{ tag.id }});" class="btn btn-sm btn-blue">
+                        <i class="fa fa-edit"></i>&nbsp;编辑</button>
+                    <a class="btn btn-sm btn-danger"><i class="fa fa-trash-o" id=""></i>&nbsp;删除</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">模态框（Modal）标题</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input class="form-control" type="hidden" value="" name="id">
+                    <input class="form-control" type="text" value="" name="tag">
+                </div>
+                <div class="form-group">
+                    <input class="form-control" type="text" value="" name="color">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary " id="tag-add">提交添加</button>
+                <button type="button" class="btn btn-primary " id="tag-modify">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+{% endblock %}
+{% block custom_js %}
+    <script>
+    function tagEdit(id) {
+        var tagLine = $("#"+id);
+        //选出button所在的哪一行
+        $(".form-control[name=id]").val(id);
+        tagLine.children().each(function(index,element){
+            //遍历这一行孩子 td
+            if (index == 0 ){
+                $(".modal-title").text($(element).text());
+                $(".form-control[name=tag]").val($(element).text());
+            }
+            if (index == 1 ){
+
+                $(".form-control[name=color]").val($(element).text());
+            }
+        });
+        $("#tag-add").hide();
+        $("#tag-modify").show();
+        $('#myModal').modal({
+            keyboard: true
+        });
+    }
+    function Tagcreate() {
+        $("#tag-add").show();
+        $("#tag-modify").hide();
+        $(".modal-title").text("添加新标签");
+        var tag = $(".form-control[name=tag]").val("");
+        var color = $(".form-control[name=color]").val("");
+        $('#myModal').modal({
+            keyboard: true
+        });
+    }
+    //ready事件
+    $(function () {
+        //tag put 更新
+        $("#tag-modify").click(function () {
+            var tag = $(".form-control[name=tag]").val();
+            var color = $(".form-control[name=color]").val();
+            var id = $(".form-control[name=id]").val();
+            $.ajax({
+                url:"/root/api/tag/" + id,
+                method:"PUT",
+                data: JSON.stringify({tag:tag,color:color}),
+                dataType:"json",
+                contentType:"application/json",
+                success:function () {
+                    window.location.reload();
+                },
+                error:function () {
+                    alert("error");
+                }
+
+            });
+        });
+        //tag post 添加
+        $("#tag-add").click(function () {
+            var tag = $(".form-control[name=tag]").val();
+            var color = $(".form-control[name=color]").val();
+            $.ajax({
+                url:"/root/api/tag/",
+                method:"POST",
+                data: JSON.stringify({tag:tag,color:color}),
+                dataType:"json",
+                contentType:"application/json",
+                success:function () {
+                    window.location.reload();
+                },
+                error:function () {
+                    alert("error");
+                }
+
+            });
+        });
+    });
+    </script>
+{% endblock %}

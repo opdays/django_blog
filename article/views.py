@@ -3,7 +3,7 @@ from .models import Article, Tag, FriendLink,UploadImage
 from django.http import Http404,HttpResponse
 from django.conf import settings
 from django.core.paginator import Paginator, EmptyPage
-
+from django.db.models import Q
 
 # Create your views here.
 # from .templatetags import custom_markdown,color_tag
@@ -46,7 +46,7 @@ def blog_global_val(request):
 def article_list(request, page):
     if request.GET.get("q"):
         q=request.GET.get("q")
-        articles = Article.objects.filter(content__contains=q).all()
+        articles = Article.objects.filter(Q(content__contains=q)|Q(title__contains=q)).all()
     else:
         articles = Article.objects.all()
     paginator = Paginator(articles, settings.PER_PAGE_NUM)

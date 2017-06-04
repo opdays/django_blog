@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db import models
-from .models import Article,Tag,FriendLink
+from .models import Article,Tag,FriendLink,Praise
 # Register your models here.
 from pagedown.widgets import AdminPagedownWidget
 from .form import ArticleForm
@@ -31,3 +31,4 @@ admin.site.register(Article,ArticleAdmin)
 admin.site.register(Tag,TagAdmin)
 
 admin.site.register(FriendLink)
+admin.site.register(Praise)

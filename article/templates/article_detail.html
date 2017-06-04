@@ -2,7 +2,13 @@
 
 {% load custom_markdown %}
 {% block left-container %}
-    <article class="article-block article-detail" id="{{ article.id }}">
+    {% if article.type == 'markdown' %}
+        <link rel="stylesheet" href="/static/code.css"/> <!--markdown代码高亮标题-->
+        <link rel="stylesheet" href="/static/article/md.css"/> <!--转换标题-->
+    {% else %}
+        <link rel="stylesheet" href="/static/root/lib/wangEditor/dist/css/sublime.css"/> <!--富文本代码高亮-->
+    {% endif %}
+    <article class="article-block article-detail {{ article.type }}" id="{{ article.id }}">
 
 
         <div class="post-head">
@@ -27,8 +33,8 @@
         </div>
         <div class="post-content">
             {% if article.type  == 'markdown' %}
-            {{ article.content|custom_markdown }}
-                {% else %}
+                {{ article.content|custom_markdown }}
+            {% else %}
                 {{ article.content|safe }}
             {% endif %}
         </div>
@@ -100,7 +106,7 @@
                     <h4 id="city"></h4>
                     <h4 id="contry"></h4>
                     描述:<input class="form-control" type="text" id="description">
-{#                    {% include "demo2.html" %}速度太慢fuck#}
+                    {#                    {% include "demo2.html" %}速度太慢fuck#}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -119,87 +125,37 @@
 {% endblock %}
 {% load static %}
 {% block custom_css %}
-    {% if article.type == 'markdown' %}
-        <link rel="stylesheet" href="/static/code.css"/> <!--markdown代码高亮标题-->
-         <link rel="stylesheet" href="/static/article/md.css"/> <!--转换标题-->
-    {% else %}
-        <link rel="stylesheet" href="/static/root/lib/wangEditor/dist/css/sublime.css" /> <!--富文本代码高亮-->
-    {% endif %}
+
 {% endblock %}
 {% block custom_js %}
-    <script src="/static/article/md.js"></script> <!--转换一些表格图片-->
-    {% if article.type == 'html' %}
-    <script>
 
-    	$(document).ready(function(){
-    	    $('pre').css('padding','0px');
-	    });
-    </script>
-    {% endif %}
-    <script>
-        /*百度分享*/
-        var logo = location.protocol + "//" + location.host + "/static/images.jpg";
-        window._bd_share_config = {
-            "common": {
-                "bdSnsKey": {},
-                "bdText": "{{ article.title }}",
-                "bdMini": "2",
-                "bdMiniList": false,
-                "bdPic": {% if article.image_url  %} "{{ article.image_url  }}" {% else %} logo {% endif %},
-                "bdStyle": "0",
-                "bdSize": "4",
-                bdDesc: "{{ article.title }}",
-                bdUrl: window.location.href,
-            },
-            "slide": {
-                "type": "slide",
-                "bdImg": "7",
-                "bdPos": "left",
-                "bdTop": "183.66665649414062"
-            }
-        };
-        with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
-        $(function () {
-            $('.btn.praise').click(function () {
-                var result = null;
-                $.ajax({
-                    url: "{%  url "query_ip" %}",
-                    type: "GET",
-                    dateType: "json",
-                    success: function (result) {
-                        $(".modal-body #contry").html(result.contry);
-                        $(".modal-body #city").html(result.city);
-                        $(".modal-body #ip").html(result.ip);
-                    },
-                });
 
-                $('#praise_modal').modal();
-            });
-            $("#submit_praise").click(function () {
-                var postObject = {};
-                postObject.ip = $(".modal-body #ip").text();
-                postObject.contry = $(".modal-body #contry").text();
-                postObject.city = $(".modal-body #city").text();
-                postObject.description = $(".modal-body #description").val();
-                postObject.article_id = $("article.article-block.article-detail").attr('id');
-                if (description.length >= 10) {
-                    alert("不能多于200个字符");
-                    return true;
-                }
-                console.log(postObject.description);
-                $.ajax({
-                    url: "{% url "submit_praise" %}",
-                    type: "POST",
-                    data: postObject,
-                    success: function (result) {
-                        location.reload();
+        <script>
+
+            $(document).ready(function () {
+                $('pre').css('padding', '0px');
+                // /*百度分享*/
+                var logo = location.protocol + "//" + location.host + "/static/images.jpg";
+                window._bd_share_config = {
+                    "common": {
+                        "bdSnsKey": {},
+                        "bdText": "{{ article.title }}",
+                        "bdMini": "2",
+                        "bdMiniList": false,
+                        "bdPic": "",
+                        "bdStyle": "0", "bdSize": "4",
+                        bdDesc: "{{ article.title }}",
+                        bdUrl: window.location.href,
                     },
-                    error: function (error) {
-                        alert("描述重复了");
+                    "slide": {
+                        "type": "slide",
+                        "bdImg": "7",
+                        "bdPos": "left",
+                        "bdTop": "183.66665649414062"
                     }
-
-                });
+                };
+                with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
             });
-        })
-    </script>
+
+        </script>
 {% endblock %}

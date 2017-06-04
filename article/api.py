@@ -57,3 +57,6 @@ def sumbit_praise(request):
         )),status=500)
 
 
+
+
+

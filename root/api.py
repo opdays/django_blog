@@ -1,6 +1,6 @@
 import json
 from django.views import View
-from article.models import Article
+from article.models import Article,Tag
 from django.http import JsonResponse
 
 
@@ -35,3 +35,18 @@ class ArticleApi(View):
             return JsonResponse({"data": "success"})
         else:
             return JsonResponse({"data": "error"})
+class TagApi(View):
+    def put(self, request, id,*args, **kw):
+        if id:
+            data=json.loads(request.body.decode())
+            Tag.objects.filter(id=id).update(**data)
+            return JsonResponse({"data": "success"})
+        else:
+            return JsonResponse({"data": "error"})
+    def post(self, request, *args, **kw):
+        data = json.loads(request.body.decode())
+        try:
+            Tag.objects.create(**data)
+        except:
+            return JsonResponse({"data": "error"})
+        return JsonResponse({"data": "success"})

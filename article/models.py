@@ -24,6 +24,8 @@ class Article(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return "/article/%i" % self.id
     def to_dict(self):
         return dict(
             id=self.id,
@@ -43,6 +45,12 @@ class Article(models.Model):
 
 
 class Tag(models.Model):
+    """
+    文章标签
+    文章N - 标签M
+    会有一张关联表 存对应关系
+    manytomany放到哪里感觉都可以  删除一个文章 关联的标签不会删 删除一个标签 关联的文章不会删 只会删除关系的表的关系
+    """
     id = models.AutoField(primary_key=True)
     tag = models.CharField('标签', max_length=100, default='未分类')
     color = models.CharField('颜色', max_length=16, default='#777')
@@ -80,6 +88,8 @@ class FriendLink(models.Model):
 class Praise(models.Model):
     """
     文章点赞 一个文章可以有多个赞
+    文章N - 1赞
+
     """
     id = models.AutoField(primary_key=True)
     ip = models.CharField('IP地址', max_length=32, null=True, blank=True, default=None)
@@ -89,10 +99,12 @@ class Praise(models.Model):
     date_time = models.DateTimeField('时间', auto_now_add=True)
 
     article = models.ForeignKey(Article, related_name='praises', blank=False)
+    #删除文章 文章关联的赞 全部被删除 CASCADE  默认的选项
+    #删除一个赞 文章少一个赞
 
     class Meta:
         unique_together = (("ip", "description", "article"),)
-
+        #同一个ip对一篇文章的评论 不能重复 3列唯一索引
 
 class UploadImage(models.Model):
     """

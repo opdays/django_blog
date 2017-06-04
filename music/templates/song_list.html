@@ -1,0 +1,48 @@
+{% extends "blog_base.html" %}
+{% load static %}
+{% block left-container %}
+
+
+    <article class="article-block article-detail">
+        <table class="table">
+            <tr>
+                <td>
+                    网易id
+                </td>
+                <td>
+                    歌曲名
+                </td>
+                {#            <td>#}
+                {#                歌曲图片#}
+                {#            </td>#}
+                {#            <td>#}
+                {#                歌曲地址#}
+                {#            </td>#}
+            </tr>
+            {% for song in song_list %}
+                <tr>
+                    <td>
+                        {{ song.song_id }}
+                    </td>
+                    <td>
+                        {{ song.song_name }}
+                    </td>
+                    <td>
+                        {#                    <img src="{{ song.song_pic }}">#}
+                    </td>
+                    <td>
+                        <button class="btn btn-success play" id="{{ song.song_id }}">播放</button>
+                    </td>
+
+                </tr>
+
+            {% endfor %}
+        </table>
+
+    </article>
+
+{% endblock %}
+{% block custom_js%}
+{% endblock %}
+
+

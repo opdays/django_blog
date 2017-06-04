@@ -4,13 +4,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>{{ blog }}</title>
+    <title>
+        {% if article.title %}
+            {{ article.title }}
+            {% else %}
+            {{ blog }}
+        {% endif %}
+
+    </title>
     <meta content='width=device-width,initial-scale=1,maximum-scale=1' name='viewport'>
-    <meta name="keywords" content="python,linux,mysql,django，flask，编程,开发,运维,云计算,网络,互联网"/>
-    <meta name="description" content="杨洋个人随笔，杨洋个人比较，杨洋技术博客，工作笔记，杨洋娱乐博客，django博客"/>
+    <meta name="keywords" content="python,linux,mysql,django博客，flask，编程,开发,运维,云计算,网络,互联网"/>
+    <meta name="description" content="杨洋个人主页，采用django+bootstrap+mysql制作,主要记录自己在工作和学习中的问题"/>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/static/bootstrap/font-awesome-4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="/static/css/main.css"/>
+<link rel="stylesheet" href="/static/player/skPlayer.min.css"/>
+<link rel="stylesheet" href="/static/css/main.css"/>
 
     {% block custom_css %}
     {% endblock %}
@@ -19,6 +27,7 @@
 <!--导航条start-->
 {% include "base_header.html" %}
 <!--导航条end-->
+
 <div id="wrapper">
     {% block wrapper %}
     {% endblock %}
@@ -26,14 +35,29 @@
     <!--footer-->
     {% include "base_footer.html" %}
     <!--footer-->
+<div id="skPlayer">
 
+</div>
 </div>
 <button class="btn" id="go_top" type="button">Top</button>
 </body>
 <script src="{% static 'jquery-3.2.1.js' %}"></script>
+<script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.js"></script>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+<script src="{% static 'article/md.js' %}"></script> <!--转换一些表格图片-->
 <script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/headroom.js' %}"></script>
+<script src="{% static 'player/skPlayer_modify.js' %}"></script>
+<script>
+    skPlayer({
+      music:750181235 ,//歌单id(登陆网页版网易云音乐，进入歌单详情后，在url中可找到歌单id，例：'http://music.163.com/#/playlist?id=317921676'),
+       theme:'red',
+        //loop:true,
+   });
+    $(function () {
+        $("#skPlayer").draggable();
+    })
+</script>
 {% block custom_js %}
 {% endblock %}
 <script>

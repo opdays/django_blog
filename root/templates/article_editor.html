@@ -47,6 +47,9 @@
         $(function () {
             var editor = new wangEditor('edit_block');
             editor.create();
+{#            var E = window.wangEditor;#}
+{#            var editor = new E('#edit_block');#}
+{#            editor.create();#}
 {#            $('#edit_block').html({{ article.content }});#}
 {#            editor.$txt.html('{{ article.content }}');#}
 {#            $.ajax({#}

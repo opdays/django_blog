@@ -1,0 +1,46 @@
+{% extends "_root_base.html" %}
+{% load custom_markdown %}
+{% block wrapper %}
+        <div class="content-header">
+        </div>
+        <table class="table table-bordered">
+            <tr>
+                <th>
+                    IP
+                </th>
+                <th>
+                    国家
+                </th>
+                <th>
+                    城市
+                </th>
+                <th>
+                    内容
+                </th>
+                <th>
+                    时间
+                </th>
+                <th>
+                    文章
+                </th>
+            </tr>
+            {% for praise in praises reversed%}
+            <tr>
+                <td>{{ praise.ip }}</td>
+                <td>{{ praise.contry }}</td>
+                <td>{{ praise.city }}</td>
+                <td>{{ praise.description }}</td>
+                <td>{{ praise.date_time }}</td>
+                <td>{{ praise.article.title }}</td>
+                <td>
+                    <a class="btn btn-sm btn-danger"><i class="fa fa-trash-o" id="{{ praise.id }}"></i>&nbsp;删除</a>
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+{% endblock %}
+{% block custom_js %}
+{% endblock %}

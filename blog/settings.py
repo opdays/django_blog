@@ -37,7 +37,7 @@ SECRET_KEY = '^3jdhax4m6_czq(@bktyem+pgsnpm*l2t@it5(w_)w&l#l6b^j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(yaml.get('DEBUG'))
 
-ALLOWED_HOSTS = ['blog.opdays.com', '192.168.174.131', '127.0.0.1']
+ALLOWED_HOSTS = ['blog.opdays.com', 'opdays.com', 'www.opdays.com','192.168.174.131', '127.0.0.1']
 
 # Application definition
 
@@ -49,9 +49,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     'article',
     'root',
+    'music',
     'pagedown',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
