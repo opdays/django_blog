@@ -954,34 +954,35 @@ $(function () {
     //   });
     // });
     if ($.support.pjax) {
-        var loadLayer = '<div id="loadLayer" style="position:fixed;left:0;right:0;top:0;bottom:0;background:rgba(255,255,255,0.8);text-align:center;line-height:400px;font-size:30px;z-index:82;display:none;">' + '玩命加载中...' + '</div>';
-        var x = $(document).pjax('a[target!=_blank]', '#left-container', {fragment:'#left-container', timeout:8000});
+        var loadLayer = '<div id="loadLayer" style="position:fixed;left:0;right:0;top:0;bottom:0;background:rgba(255,255,255,0.8);text-align:center;line-height:400px;font-size:30px;z-index:82;display: block">' + '玩命加载中...' + '</div>';
+        $(document).pjax('a[target!=_blank]', '#left-container', {fragment: '#left-container', timeout: 8000});
         $(document).on('pjax:send', function () { //pjax链接点击后显示加载动画；
 
-            $(loadLayer).appendTo($('html')).fadeIn(300);
-        });
-        $(document).on('pjax:beforeReplace',function (contents,options) {
-           console.log(contents);
-           console.log(options);
+            // $(loadLayer).appendTo($('html')).fadeIn(300);
         });
         $(document).on('pjax:complete', function () { //pjax链接加载完成后隐藏加载动画；
-            $('#loadLayer').remove();
-
+            // $(loadLayer).remove();
             //在这里完成之后需要做一些事情
             //a标签的页面的js 和css 没有加载
             //在头部加css
-                $("<link>").attr({ rel: "stylesheet", type: "text/css", href: "/static/article/md.css"});
+            $("<link>").attr({rel: "stylesheet", type: "text/css", href: "/static/article/md.css"});
 
             if ($("[href='/static/root/lib/wangEditor/dist/css/sublime.css']") !== undefined) {
-                $("<link>").attr({ rel: "stylesheet",
-                    type: "text/css", href: "/static/root/lib/wangEditor/dist/css/sublime.css"})
+                $("<link>").attr({
+                    rel: "stylesheet",
+                    type: "text/css", href: "/static/root/lib/wangEditor/dist/css/sublime.css"
+                })
             }
             $.getScript("/static/article/md.js");
 
         });
-        $(document).on('submit', 'form[data-pjax]', function(event) {
-          $.pjax.submit(event, '#left-container',{fragment:'#left-container'});
-        })
+        // $(document).on('pjax:complete', function () {
+        //     $(loadLayer).empty();
+        //     console.log(loadLayer);
+        // });
+        $(document).on('submit', 'form[data-pjax]', function (event) {
+            $.pjax.submit(event, '#left-container', {fragment: '#left-container'});
+        });
     }
 }();
 

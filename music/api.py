@@ -1,6 +1,5 @@
 from music.NEMbox.api import NetEase
-from django.http import HttpResponseRedirect, HttpResponse,StreamingHttpResponse
-from .models import Playlist,Songlist
+from django.http import HttpResponseRedirect, HttpResponse
 import json
 from requests import get
 

@@ -598,7 +598,7 @@ position: absolute;
     color: #fff;
     font-size: 2em;
     text-align: center;
-    cursor: url(link.cur),pointer;
+    cursor: pointer;
     -webkit-transform: rotate(0);
     -moz-transform: rotate(0);
     -ms-transform: rotate(0);
