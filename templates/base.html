@@ -43,6 +43,7 @@
 </body>
 <script src="{% static 'jquery-3.2.1.js' %}"></script>
 <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.js"></script>
+<script src="{% static 'js/jquery.ui.touch.js' %}"></script>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'article/md.js' %}"></script> <!--转换一些表格图片-->
 <script src="{% static 'js/main.js' %}"></script>
@@ -56,6 +57,7 @@
    });
     $(function () {
         $("#skPlayer").draggable();
+        //switchDiv();
     })
 </script>
 {% block custom_js %}

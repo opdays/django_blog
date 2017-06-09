@@ -1,7 +1,7 @@
 html, body {
-    /*background-color: #2F4052;*/
-    background: url(/static/image/1.jpg) no-repeat 0px 0px;;
-    background-attachment: fixed;
+    background-color: #2F4052;
+    /*background: url(/static/image/1.jpg) no-repeat 0px 0px;;*/
+    /*background-attachment: fixed;*/
 }
 
 .base-logo {
@@ -581,7 +581,8 @@ div.wihite-block {
     cursor: move;
     position:fixed;
     left:0px;
-    top:70px
+    top:60px;
+    z-index: 1050;
 }
 .switch {
 position: absolute;

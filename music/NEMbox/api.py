@@ -166,6 +166,7 @@ class NetEase(object):
 
     def __init__(self):
         self.header = {
+            'X-Real-Ip':'211.161.244.70',
             'Accept': '*/*',
             'Accept-Encoding': 'gzip,deflate,sdch',
             'Accept-Language': 'zh-CN,zh;q=0.8,gl;q=0.6,zh-TW;q=0.4',
@@ -179,6 +180,7 @@ class NetEase(object):
         self.cookies = {'appver': '1.5.2'}
         self.playlist_class_dict = {}
         self.session = requests.Session()
+
         self.storage = Storage()
         self.session.cookies = LWPCookieJar(self.storage.cookie_path)
         try:
