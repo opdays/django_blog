@@ -159,6 +159,7 @@ SUIT_CONFIG = {
     # 搜索的时候将?q=xxxxx传入的url
     'MENU': (
         {'app': 'article', 'label': '文章'},
+        {'app': 'music', 'label': '音乐'},
     ),
     'LIST_PER_PAGE': 17,
 }

@@ -713,7 +713,8 @@ if __name__ == '__main__':
     ne = NetEase()
     #print(geturl_new_api(ne.songs_detail([27902910])[0]))  # MD 128k, fallback
     #print(ne.songs_detail_new_api([27902910]))
-    print(ne.song_detail(27902910))
+    # print(ne.get_artist_album(44266)[0])
+    #print(ne.songs_detail_new_api([35093341]))
     # print(ne.song_tlyric(27902910))
     #a=ne.playlist_detail(714871062)
     #musiclist = []
@@ -724,5 +725,19 @@ if __name__ == '__main__':
     #        "pic":x.get("album").get("picUrl"),
     #    })
     #print(musiclist)
+    musiclist = []
+    artist = ne.artists(7763)
+    for x in artist:
+        musiclist.append({
+            "song_id": x.get("id"),
+            "song_name": x.get("name"),
+            #"song_lyrics": ne.song_lyric(x.get("id")),
+            "song_url": ne.songs_detail_new_api([x.get("id")])[0].get("url") ,
+            "song_pic_big":x.get("album").get("picUrl"),
+            "song_pic": x.get("album").get("picUrl") + "?param=200y200",
+            "song_artist":",".join([artists.get("name") for artists in x.get("artists")])
+            }
+        )
+    print(musiclist)
     #print(ne.songs_detail([405079776])[0]['mp3Url'])  # old api
     # print(requests.get(ne.songs_detail([405079776])[0]['mp3Url']).status_code)  # 404

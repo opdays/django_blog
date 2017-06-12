@@ -25,9 +25,11 @@ html, body {
 }
 
 .right-avator-bar {
-
+    margin-bottom: 10px;
 }
-
+.wihite-block.muisc-pannel {
+    height: 500px;
+}
 .navbar-default .navbar-nav > li > a {
     color: #313131;
 }
@@ -78,27 +80,26 @@ html, body {
 img#avator {
     width: 200px;
     height: 200px;
-    -webkit-transition: transform 1s;
+
     /*transform 旋转属性
     transition 过度属性  定义过度属性为旋转属性 过度时间为1s
      */
 }
 
-img#avator:hover {
-    transform: rotate(360deg);
-    /*鼠标移动头像 旋转360度   触发过度属性定义的旋转属性*/
-}
+/*img#avator:hover {*/
+    /*transform: rotate(360deg);*/
+    /*!*鼠标移动头像 旋转360度   触发过度属性定义的旋转属性*!*/
+/*}*/
 
 @-webkit-keyframes mymove /* Safari and Chrome */
 {
     /*http://www.runoob.com/cssref/css3-pr-animation-keyframes.html*/
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {;
-    }
+    from {-webkit-transform: rotate(0deg);}
+    to {-webkit-transform: rotate(360deg);}
 }
-
+.xuanzhuan {
+    animation: mymove 14s linear infinite;
+}
 .panel-black > .panel-heading {
     color: #ddd;
     background-color: #101010;
@@ -346,11 +347,13 @@ ul.relation li {
 .right-author-bar .github {
     color: #fff;
     background-color: #e05244;
+    text-align: center;
 }
 
 .right-author-bar .qq {
     color: #fff;
     background-color: #498ad5;
+    text-align: center;
 }
 
 /*简书*/
@@ -578,11 +581,13 @@ div.wihite-block {
 
 }
 #skPlayer{
-    cursor: move;
     position:fixed;
     left:0px;
-    top:60px;
+    top:76px;
     z-index: 1050;
+}
+#skPlayer .skPlayer-picture{
+    cursor: move;
 }
 .switch {
 position: absolute;
@@ -609,4 +614,41 @@ position: absolute;
 }
 
 #skPlayer .skPlayer-list{
+}
+
+#Tips {
+    position: fixed;
+    font-size: 1.4em;
+    text-shadow: none;
+    border-radius: 0 5px 5px 0;
+    z-index: 5000;
+    top: 10px;
+    left: 0;
+    background-color: rgba(0,0,0,.3);
+    padding: 15px;
+    color: #fff;
+    -webkit-transition: .5s;
+    -moz-transition: .5s;
+    -ms-transition: .5s;
+    transition: .5s;
+    -webkit-transform: translate3d(-100%,0,0);
+    -moz-transform: translate3d(-100%,0,0);
+    -ms-transform: translate3d(-100%,0,0);
+    transform: translate3d(-100%,0,0);
+}
+.alert{
+    margin-top:16px;
+    right: 0px;
+    position: absolute;
+}
+/*.music-back {*/
+    /*position: fixed;*/
+    /*width: 100%;*/
+    /*height:100%;*/
+        /*background-position: center center;*/
+    /*background-repeat: no-repeat;*/
+/*}*/
+.music-pannel{
+    background-repeat: no-repeat;
+    background-position: center center;
 }

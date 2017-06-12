@@ -40,6 +40,8 @@ from music.NEMbox.config import Config
 from music.NEMbox.storage import Storage
 from music.NEMbox.utils import notify
 from music.NEMbox import logger
+import threading
+
 
 # 歌曲榜单地址
 top_list_all = {
@@ -204,7 +206,6 @@ class NetEase(object):
         except IOError as e:
             log.error(e)
             self.session.cookies.save()
-
     def return_toplists(self):
         return [l[0] for l in top_list_all.values()]
 
@@ -553,7 +554,7 @@ class NetEase(object):
             music_id)
         try:
             data = self.httpRequest('GET', action)
-            if 'lrc' in data and data['lrc']['lyric'] is not None:
+            if 'lrc' in data and data['lrc'].get('lyric') is not None:
                 lyric_info = data['lrc']['lyric']
             else:
                 lyric_info = '未找到歌词'
@@ -709,7 +710,15 @@ class NetEase(object):
             temp = self.playlist_class_dict[data]
 
         return temp
-    def myapi1(self,playlistid):
+    ##################
+    def go_get_song(self,id):
+        try:
+            response = requests.get("http://127.0.0.1:8080/song/detail?id=" + str(id))
+            return response.json().get("song_url")
+        except:
+            return None
+
+    def api_playlist(self,playlistid):
         """
         根据歌单id 获取一些歌曲信息
         :param playlistid:
@@ -717,23 +726,49 @@ class NetEase(object):
         """
         a = self.playlist_detail(playlistid)
         musiclist = []
-        for x in a:
+        def get_music_list(x):
             musiclist.append({
                 "song_name": x.get("name"),
                 "song_id": x.get("id"),
-                "song_url": self.songs_detail_new_api([x.get("id")])[0]['url'],
-                # "song_lyrics": self.song_lyric(x.get("id")),
-                "song_pic": x.get("album").get("picUrl"),
+                #"song_url": self.songs_detail_new_api([x.get("id")])[0]['url'],
+                "song_url":self.go_get_song(x.get("id")),
+                "song_lyrics": self.song_lyric(x.get("id")),
+                "song_pic": x.get("album").get("picUrl") + "?param=200y200",
+                "song_pic_big": x.get("album").get("picUrl"),
                 "song_artists": ",".join([artist.get("name") for artist in x.get("artists")])
             })
-        return musiclist
+        for x in a:
+            get_music_list(x)
+        #     t = threading.Thread(target=get_music_list, args=(x,))
+        #     threads.append(t)
+        # for t in threads:
+        #     print(t.name)
+        #     t.start()
+        # for t in threads:
+        #     t.join()
 
+        return musiclist
+    def api_artist(self,artistid):
+        musiclist = []
+        artist = self.artists(artistid)
+        for x in artist:
+            musiclist.append({
+                "song_id": x.get("id"),
+                "song_name": x.get("name"),
+                # "song_lyrics": ne.song_lyric(x.get("id")),
+                #"song_url": self.songs_detail_new_api([x.get("id")])[0].get("url"),
+                "song_url": self.go_get_song(x.get("id")),
+                "song_pic_big": x.get("album").get("picUrl"),
+                "song_pic": x.get("album").get("picUrl") + "?param=200y200",
+                "song_artists": ",".join([artists.get("name") for artists in x.get("artists")])
+            })
+        return musiclist
 if __name__ == '__main__':
     ne = NetEase()
     # print(geturl_new_api(ne.songs_detail([27902910])[0]))  # MD 128k, fallback
     # print(ne.songs_detail_new_api([27902910])[0]['url'])
     # print(ne.song_tlyric(27902910))
     # print(ne.playlist_detail(714871062))
-    print(ne.myapi1())
+    print(ne.api_playlist())
     #print(ne.songs_detail([405079776])[0]['mp3Url'])  # old api
     # print(requests.get(ne.songs_detail([405079776])[0]['mp3Url']).status_code)  # 404

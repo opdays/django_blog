@@ -29,6 +29,7 @@
         }
     </style>
     <article class="article-block article-detail">
+        <h1>歌单</h1>
         {% for play in play_list %}
             <div class="col-md-3 col-lg-3 ">
                 <div class="play-item">
@@ -41,6 +42,28 @@
                 </span>
                     </div>
                     <a href="javascript:switchPlay({{ play.play_id }},'{{ play.big_image }}');" class="switch-play" target="_blank">
+                        <i class="fa fa-play fa-3x"></i>
+                    </a>
+
+                </div>
+
+            </div>
+        {% endfor %}
+    </article>
+    <article class="article-block article-detail">
+        <h1>歌手</h1>
+        {% for artist in artist_list %}
+            <div class="col-md-3 col-lg-3 ">
+                <div class="play-item">
+
+                    <img src="{{ artist.sm_image }}" alt="{{ artist.artist_name }}">
+
+                    <div class="play-item-footer">
+                <span>
+                    {{ artist.artist_name|truncatechars:"9" }}
+                </span>
+                    </div>
+                    <a href="javascript:switchArtist({{ artist.artist_id }},'{{ artist.big_image }}');" class="switch-play" target="_blank">
                         <i class="fa fa-play fa-3x"></i>
                     </a>
 

@@ -1,7 +1,7 @@
 /**
  * Created by Scott on 2016/7/7.
  */
-;(function(window,document){
+;(function (window, document) {
     //公共方法
     var Public = {
         'timeFormat': function (time) {
@@ -22,16 +22,16 @@
         'ajax': function (options) {
             var options = options || {};
             var xhr = new XMLHttpRequest();
-            xhr.open('GET',options.url);
-            xhr.setRequestHeader('Accept','*/*');
+            xhr.open('GET', options.url);
+            xhr.setRequestHeader('Accept', '*/*');
             xhr.send(null);
-            options.ajaxBefore && options.ajaxBefore();
-            xhr.onreadystatechange = function() {
+            options.Before && options.Before();
+            xhr.onreadystatechange = function () {
                 if (xhr.readyState == 4) {
                     var status = xhr.status;
                     if (status >= 200 && status < 300) {
                         options.success && options.success(xhr.responseText, xhr.responseXML);
-                        options.ajaxComplete && options.ajaxComplete();
+                        options.Complete && options.Complete();
                     } else {
                         options.fail && options.fail(status);
                     }
@@ -41,58 +41,61 @@
         }
     };
     //对象主体
-    skPlayer = function(options){
+    skPlayer = function (options) {
         //配置检测
-        if(typeof options.music === 'number'){
-            var music,target,audio,playBtn,currentTime,totalTime,currentVolume,totalVolume,quietVolume,currentTime_text,totalTime_text,cover,duration,musicItem,listSwitch;
+        var Tips;
+        if (typeof options.music === 'number') {
+            var music, target, audio, playBtn, currentTime, totalTime, currentVolume, totalVolume, quietVolume, currentTime_text, totalTime_text, cover, duration, musicItem, listSwitch;
             var sign = false;
+            var avator;
+
             Public.ajax({
-                url: window.location.protocol + '//' +window.location.host + '/music/api/playlist/' + options.music,
-                success:function(responseText){
+                url: window.location.protocol + '//' + window.location.host + (options.prefix || '/music/api/playlist/') + options.music,
+                success: function (responseText) {
                     //初始化
-                        music = JSON.parse(responseText);
-                        target = document.getElementById('skPlayer');
+                    music = JSON.parse(responseText);
+                    target = document.getElementById('skPlayer');
                     var HTMLcontent = '<audio src="' + music[0]["song_url"] + '" preload="auto"></audio>';
-                        HTMLcontent+= '<div class="skPlayer-picture">';
-                        HTMLcontent+= '    <img src="' + music[0]["song_pic"] + '" alt="" class="skPlayer-cover">';
-                        HTMLcontent+= '    <a href="javascript:;" class="skPlayer-play-btn">';
-                        HTMLcontent+= '        <span class="skPlayer-left"></span>';
-                        HTMLcontent+= '        <span class="skPlayer-right"></span>';
-                        HTMLcontent+= '    </a>';
-                        HTMLcontent+= '</div>';
-                        HTMLcontent+= '<div class="skPlayer-control">';
-                        HTMLcontent+= '    <p class="skPlayer-name">' + music[0].song_name + '</p>';
-                        HTMLcontent+= '    <p class="skPlayer-author">' + music[0].song_artists + '</p>';
-                        HTMLcontent+= '    <div class="skPlayer-percent">';
-                        HTMLcontent+= '        <div class="skPlayer-line"></div>';
-                        HTMLcontent+= '    </div>';
-                        HTMLcontent+= '    <p class="skPlayer-time">';
-                        HTMLcontent+= '        <span class="skPlayer-cur">00:00</span>/<span class="skPlayer-total">00:00</span>';
-                        HTMLcontent+= '    </p>';
-                        HTMLcontent+= '    <div class="skPlayer-volume skPlayer-hasList">';
-                        HTMLcontent+= '        <i class="skPlayer-icon" data-volume="0"></i>';
-                        HTMLcontent+= '        <div class="skPlayer-percent">';
-                        HTMLcontent+= '            <div class="skPlayer-line"></div>';
-                        HTMLcontent+= '        </div>';
-                        HTMLcontent+= '    </div>';
-                        HTMLcontent+= '    <div class="skPlayer-list-switch">';
-                        HTMLcontent+= '        <i class="skPlayer-list-icon"></i>';
-                        HTMLcontent+= '    </div>';
-                        HTMLcontent+= '</div>';
-                        HTMLcontent+= '<div class="switch" onclick="switchDiv();"></div>';
-                        HTMLcontent+= '<ul class="skPlayer-list">';
-                    for(var item in music){
-                        HTMLcontent+= '    <li data-index="' + item + '">';
-                        HTMLcontent+= '        <i class="skPlayer-list-sign"></i>';
-                        HTMLcontent+= '        <span class="skPlayer-list-index">' + (parseInt(item)+1) + '</span>';
-                        HTMLcontent+= '        <span class="skPlayer-list-name">' + music[item]["song_name"] + '</span>';
-                        HTMLcontent+= '        <span class="skPlayer-list-author" title="' + music[item].song_artists + '">' + music[item].song_artists + '</span>';
-                        HTMLcontent+= '    </li>';
+                    HTMLcontent += '<div class="skPlayer-picture">';
+                    HTMLcontent += '    <img src="' + music[0]["song_pic"] + '" alt="" class="skPlayer-cover">';
+                    HTMLcontent += '    <a href="javascript:;" class="skPlayer-play-btn">';
+                    HTMLcontent += '        <span class="skPlayer-left"></span>';
+                    HTMLcontent += '        <span class="skPlayer-right"></span>';
+                    HTMLcontent += '    </a>';
+                    HTMLcontent += '</div>';
+                    HTMLcontent += '<div class="skPlayer-control">';
+                    HTMLcontent += '    <p class="skPlayer-name">' + music[0].song_name + '</p>';
+                    HTMLcontent += '    <p class="skPlayer-author">' + music[0].song_artists + '</p>';
+                    HTMLcontent += '    <div class="skPlayer-percent">';
+                    HTMLcontent += '        <div class="skPlayer-line"></div>';
+                    HTMLcontent += '    </div>';
+                    HTMLcontent += '    <p class="skPlayer-time">';
+                    HTMLcontent += '        <span class="skPlayer-cur">00:00</span>/<span class="skPlayer-total">00:00</span>';
+                    HTMLcontent += '    </p>';
+                    HTMLcontent += '    <div class="skPlayer-volume skPlayer-hasList">';
+                    HTMLcontent += '        <i class="skPlayer-icon" data-volume="0"></i>';
+                    HTMLcontent += '        <div class="skPlayer-percent">';
+                    HTMLcontent += '            <div class="skPlayer-line"></div>';
+                    HTMLcontent += '        </div>';
+                    HTMLcontent += '    </div>';
+                    HTMLcontent += '    <div class="skPlayer-list-switch">';
+                    HTMLcontent += '        <i class="skPlayer-list-icon"></i>';
+                    HTMLcontent += '    </div>';
+                    HTMLcontent += '</div>';
+                    HTMLcontent += '<div class="switch" onclick="switchDiv();"></div>';
+                    HTMLcontent += '<ul class="skPlayer-list">';
+                    for (var item in music) {
+                        HTMLcontent += '    <li data-index="' + item + '">';
+                        HTMLcontent += '        <i class="skPlayer-list-sign"></i>';
+                        HTMLcontent += '        <span class="skPlayer-list-index">' + (parseInt(item) + 1) + '</span>';
+                        HTMLcontent += '        <span class="skPlayer-list-name">' + music[item]["song_name"] + '</span>';
+                        HTMLcontent += '        <span class="skPlayer-list-author" title="' + music[item].song_artists + '">' + music[item].song_artists + '</span>';
+                        HTMLcontent += '    </li>';
                     }
-                        HTMLcontent+= '</ul>';
+                    HTMLcontent += '</ul>';
 
                     target.innerHTML = HTMLcontent;
-                    if(options.theme === 'red'){
+                    if (options.theme === 'red') {
                         target.className = 'skPlayer-red';
                     }
                     audio = target.querySelector('audio');
@@ -108,67 +111,94 @@
                     musicItem = target.querySelectorAll('.skPlayer-list li');
                     listSwitch = target.querySelector('.skPlayer-list-switch');
                     target.classList.add('skPlayer-list-on');
-
+                    $(".right-avator-bar img").attr("src", music[0].song_pic);
+                    // $(".wihite-block.muisc-pannel").css("background-image",`url(${music[0].song_pic_big})`);
+                    // $('#skPlayer').draggable({ appendTo: 'body' });
+                    // var appendTo = $('.skPlayer-picture').draggable('option', 'appendTo');
+                    // $('.skPlayer-picture').draggable('option', 'appendTo', 'body');
+                    $("#skPlayer").draggable({handle:".skPlayer-picture"}); //点击图片可以移动
+                    //自定义转动图片
+                    audio.old_play = audio.play;
+                    audio.old_pause = audio.pause;
+                    audio.play = function () {
+                        audio.old_play();
+                        $(".right-avator-bar img").addClass("xuanzhuan");
+                    };
+                    audio.pause = function () {
+                        audio.old_pause();
+                        $(".right-avator-bar img").removeClass("xuanzhuan");
+                    };
                     //事件绑定
                     handleEvent();
                     return "success"; //加载成功给个信号
 
                 },
-                fail:function(status){
+                fail: function (status) {
                     console.error('歌单拉取失败！');
+                    $(".alert strong").text("歌单拉取失败..");
+                    $(".alert").removeClass("alert-warning").addClass("alert-danger").fadeOut(2000);
                     sign = true;
                 },
-                ajaxBefore: function () {
-                    var loadPlayList = '<div id="loadPlayList" style="position:fixed;left:0;right:0;top:0;bottom:0;background:rgba(255,255,255,0.8);text-align:center;line-height:400px;font-size:30px;z-index:82;">' + '正在向网易云申请资源...' + '</div>';
-                    $(loadPlayList).appendTo($('html')).fadeIn(300);
+                Before: function () {
+                    Tips = '<div class="alert alert-warning">'
+                    Tips += '<a href="#" class="close" data-dismiss="alert">'
+                    // Tips += '&times;'
+                    Tips += '</a>'
+                    Tips += '<strong>正在拉取网易云音乐资源很慢一般需要30s...</strong>'
+                    Tips += '</div>';
+                    $(Tips).appendTo($('#content-header')).fadeIn(300);
                 },
-                ajaxComplete: function () {
-                    $(loadPlayList).text("加载完成...");
-                    $(loadPlayList).fadeOut(1000);
+                Complete: function () {
+                    // $(Tips).filter($("strong")).text("加载完成...");
+                    $(".alert strong").text("加载完成..");
+                    $(".alert").removeClass("alert-warning").addClass("alert-success").fadeOut(2000);
                 },
             });
-            if(sign){
+            if (sign) {
                 return;
             }
         }
 
         //可播放状态
-        function canPlayThrough(){
-            if(options.loop === true){
+        function canPlayThrough() {
+            if (options.loop === true) {
                 audio.loop = true;
             }
             duration = this.duration;
             currentTime_text.innerHTML = '00:00';
             totalTime_text.innerHTML = Public.timeFormat(parseInt(duration));
-            if(audio.volume == 1){
+            if (audio.volume == 1) {
                 audio.volume = 0.7;
                 currentVolume.style.width = '70%';
             }
         }
+
         //歌曲时长变动
         function durationChange() {
             duration = this.duration;
         }
+
         //时间更新
-        function timeUpdate(){
+        function timeUpdate() {
             var curTime = parseInt(audio.currentTime);
             var playPercent = (curTime / duration) * 100;
             currentTime.style.width = playPercent.toFixed(2) + '%';
             currentTime_text.innerHTML = Public.timeFormat(curTime);
         }
+
         //播放结束
-        function audioEnd(){
-            if(Array.isArray(music) && music.length !== 1){
+        function audioEnd() {
+            if (Array.isArray(music) && music.length !== 1) {
                 var index = parseInt(target.querySelector('.skPlayer-curMusic').getAttribute('data-index')) + 1;
-                if(index < music.length){
-                    if(target.querySelector('.skPlayer-curMusic').nextSibling !== 1){
+                if (index < music.length) {
+                    if (target.querySelector('.skPlayer-curMusic').nextSibling !== 1) {
                         target.querySelector('.skPlayer-curMusic').nextSibling.nextSibling.classList.add('skPlayer-curMusic');
-                    }else{
+                    } else {
                         target.querySelector('.skPlayer-curMusic').nextSibling.classList.add('skPlayer-curMusic');
                     }
                     target.querySelector('.skPlayer-curMusic').classList.remove('skPlayer-curMusic');
                     var data = music[index];
-                }else{
+                } else {
                     target.querySelector('.skPlayer-list li').classList.add('skPlayer-curMusic');
                     target.querySelectorAll('.skPlayer-curMusic')[1].classList.remove('skPlayer-curMusic');
                     var data = music[0];
@@ -177,74 +207,88 @@
                 target.querySelector('.skPlayer-author').innerHTML = data.song_artists;
                 target.querySelector('.skPlayer-cover').src = data.song_pic;
                 audio.src = data.song_url;
-                if(playBtn.classList.contains('skPlayer-pause')){
-                    audio.play();
+                //播放完成自动换图片
+                $(".right-avator-bar img").attr("src", data.song_pic);
+                // $(".wihite-block.muisc-pannel").css("background-image",`url(${data.song_pic_big})`);
+                if (playBtn.classList.contains('skPlayer-pause')) {
+                   try {
+                        audio.play();
+                        $(Tips).removeClass("alert-warning").addClass("alert-success").text("开始播放:" + data["song_name"]).remove().appendTo($('#content-header')).slideDown('slow').fadeOut(3000);
+                    }catch (e){
+                        $(Tips).text("播放失败").appendTo($('#content-header')).fadeIn('show').fadeOut(3000);
+                    }
+
                 }
-            }else{
+            } else {
                 playBtn.classList.remove('skPlayer-pause');
                 cover.classList.remove('skPlayer-pause');
             }
             currentTime_text.innerHTML = '00:00';
             currentTime.style.width = 0;
         }
+
         //播放控制
-        function playClick(){
-            if(audio.paused){
+        function playClick() {
+            if (audio.paused) {
                 audio.play();
-            }else{
+            } else {
                 audio.pause();
             }
-            if(playBtn.classList.contains('skPlayer-pause')){
+            if (playBtn.classList.contains('skPlayer-pause')) {
                 playBtn.classList.remove('skPlayer-pause');
                 cover.classList.remove('skPlayer-pause');
-            }else{
+            } else {
                 playBtn.classList.add('skPlayer-pause');
                 cover.classList.add('skPlayer-pause');
             }
         }
+
         //进度控制
-        function timeLineClick(event){
+        function timeLineClick(event) {
             var e = window.event || event;
             var clickPercent;
-            if(e.pageX){
+            if (e.pageX) {
                 clickPercent = (e.pageX - Public.leftDistance(this)) / this.offsetWidth;
-            }else{
+            } else {
                 clickPercent = (e.clientX - Public.leftDistance(this)) / this.offsetWidth;
             }
             currentTime.style.width = clickPercent * 100 + '%';
             audio.currentTime = parseInt(clickPercent * duration);
         }
+
         //音量控制
         function volumeLineClick(event) {
             var e = window.event || event;
-            if(quietVolume.classList.contains('skPlayer-quiet')){
+            if (quietVolume.classList.contains('skPlayer-quiet')) {
                 quietVolume.classList.remove('skPlayer-quiet');
             }
             var clickPercent;
-            if(e.pageX){
+            if (e.pageX) {
                 clickPercent = (e.pageX - Public.leftDistance(this)) / this.offsetWidth;
-            }else{
+            } else {
                 clickPercent = (e.clientX - Public.leftDistance(this)) / this.offsetWidth;
             }
             currentVolume.style.width = clickPercent * 100 + '%';
             audio.volume = clickPercent.toFixed(2);
         }
+
         //静音控制
-        function volumeQuiet(){
-            if(audio.volume != 0){
-                quietVolume.setAttribute('data-volume',audio.volume);
+        function volumeQuiet() {
+            if (audio.volume != 0) {
+                quietVolume.setAttribute('data-volume', audio.volume);
                 audio.volume = 0;
                 currentVolume.style.width = 0;
                 quietVolume.classList.add('skPlayer-quiet');
-            }else{
+            } else {
                 audio.volume = quietVolume.getAttribute('data-volume');
-                currentVolume.style.width = quietVolume.getAttribute('data-volume') * 100 +'%';
-                quietVolume.setAttribute('data-volume','0');
+                currentVolume.style.width = quietVolume.getAttribute('data-volume') * 100 + '%';
+                quietVolume.setAttribute('data-volume', '0');
                 quietVolume.classList.remove('skPlayer-quiet');
             }
         }
-        function changeMusic(){
-            if(!this.classList.contains('skPlayer-curMusic')){
+
+        function changeMusic() {
+            if (!this.classList.contains('skPlayer-curMusic')) {
                 target.querySelector('.skPlayer-curMusic').classList.remove('skPlayer-curMusic');
                 this.classList.add('skPlayer-curMusic');
                 var index = this.getAttribute('data-index');
@@ -253,19 +297,28 @@
                 target.querySelector('.skPlayer-author').innerHTML = data.song_artists;
                 target.querySelector('.skPlayer-cover').src = data.song_pic;
                 audio.src = data.song_url;
-                if(playBtn.classList.contains('skPlayer-pause')){
-                    audio.play();
+                $(".right-avator-bar img").attr("src", data.song_pic);
+                // $(".wihite-block.muisc-pannel").css("background-image",`url(${data.song_pic_big})`);
+                if (playBtn.classList.contains('skPlayer-pause')) {
+                    try {
+                        audio.play();
+                        $(Tips).removeClass("alert-warning").addClass("alert-success").text("开始播放:" + data["song_name"]).remove().appendTo($('#content-header')).slideDown('slow').fadeOut(3000);
+                    }catch (e){
+                        $(Tips).text("播放失败").appendTo($('#content-header')).fadeIn('show').fadeOut(3000);
+                    }
                 }
                 currentTime_text.innerHTML = '00:00';
                 currentTime.style.width = 0;
             }
         }
-        function switchList(){
-            target.classList.contains('skPlayer-list-on') ? target.classList.remove('skPlayer-list-on') : target.classList.add('skPlayer-list-on') ;
+
+        function switchList() {
+            target.classList.contains('skPlayer-list-on') ? target.classList.remove('skPlayer-list-on') : target.classList.add('skPlayer-list-on');
 
         }
+
         //事件绑定函数
-        function handleEvent(){
+        function handleEvent() {
             //audio.addEventListener('canplaythrough', canPlayThrough);
             playBtn.addEventListener('click', playClick);
             audio.addEventListener('canplay', canPlayThrough);
@@ -275,36 +328,96 @@
             totalTime.addEventListener('click', timeLineClick);
             totalVolume.addEventListener('click', volumeLineClick);
             quietVolume.addEventListener('click', volumeQuiet);
-            if(Array.isArray(music)){
-                for(var item in music){
-                    musicItem[item].addEventListener('click',changeMusic);
+            if (Array.isArray(music)) {
+                for (var item in music) {
+                    musicItem[item].addEventListener('click', changeMusic);
                 }
                 target.querySelector('.skPlayer-list li:nth-child(1)').classList.add('skPlayer-curMusic');
-                listSwitch.addEventListener('click',switchList);
+                listSwitch.addEventListener('click', switchList);
             }
+            $(".qq").off('click').click(function () {
+                var index = $(".skPlayer-curMusic").removeClass("skPlayer-curMusic").attr("data-index");
+                if (Number(index) === Number(music.length) -1){
+                    index = 1;
+                }else{
+                    index = Number(index) +1;
+                }
+                $("[data-index="+ index +"]").addClass("skPlayer-curMusic");
+                var data = music[index];
+                target.querySelector('.skPlayer-name').innerHTML = data.song_name;
+                target.querySelector('.skPlayer-author').innerHTML = data.song_artists;
+                target.querySelector('.skPlayer-cover').src = data.song_pic;
+                audio.src = data.song_url;
+                $(".right-avator-bar img").attr("src", data.song_pic);
+                if (playBtn.classList.contains('skPlayer-pause')) {
+                   try {
+                        audio.play();
+                        $(Tips).removeClass("alert-warning").addClass("alert-success").text("开始播放:" + data["song_name"]).remove().appendTo($('#content-header')).slideDown('slow').fadeOut(3000);
+                    }catch (e){
+                        $(Tips).text("播放失败").appendTo($('#content-header')).fadeIn('show').fadeOut(3000);
+                    }
+                }
+                currentTime_text.innerHTML = '00:00';
+                currentTime.style.width = 0;
+
+
+            });
+            $(".github").off('click').click(function () {
+                var index = $(".skPlayer-curMusic").removeClass("skPlayer-curMusic").attr("data-index");
+                if (Number(index) === 0){
+                    index = Number(music.length) - 1;
+                }else{
+                    index = Number(index) -1 ;
+                }
+                $("[data-index="+ index +"]").addClass("skPlayer-curMusic");
+                var data = music[index];
+                target.querySelector('.skPlayer-name').innerHTML = data.song_name;
+                target.querySelector('.skPlayer-author').innerHTML = data.song_artists;
+                target.querySelector('.skPlayer-cover').src = data.song_pic;
+                audio.src = data["song_url"];
+                $(".right-avator-bar img").attr("src", data.song_pic);
+                if (playBtn.classList.contains('skPlayer-pause')) {
+                    try {
+                        audio.play();
+                        $(Tips).removeClass("alert-warning").addClass("alert-success").text("开始播放:" + data["song_name"]).remove().appendTo($('#content-header')).slideDown('slow').fadeOut(3000);
+                    }catch (e){
+                        $(Tips).text("播放失败").appendTo($('#content-header')).fadeIn('show').fadeOut(3000);
+                    }
+                }
+                currentTime_text.innerHTML = '00:00';
+                currentTime.style.width = 0;
+
+
+            });
         }
     };
     //暴露接口
     window.skPlayer = skPlayer;
-})(window,document);
+})(window, document);
 //处理模块化
-if(typeof module !== 'undefined' && typeof module.exports !== 'undefined'){
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
     module.exports = window.skPlayer;
 }
 
 var switchDiv = function () {
     var play = $("#skPlayer");
     var width = "380px";
-    if (play.css("width") == "100px"){
-        play.css("width",width);
-        $(".skPlayer-control").fadeToggle("show");
-    } else if (play.css("width") == width){
-        play.css("width","100px").removeClass("skPlayer-list-on");
-        $(".skPlayer-control").fadeToggle("show");
+    if (play.css("width") == "100px") {
+        play.css("width", width);
+        $(".skPlayer-control").css("display", "block")
+    } else if (play.css("width") == width) {
+        play.css("width", "100px").removeClass("skPlayer-list-on");
+        $(".skPlayer-control").css("display", "none")
     }
 
 };
-var switchPlay = function (play_id,big_image) {
-    skPlayer({music:play_id, theme:'red'});
-    $(".article-block.article-detail").css("background-image",`url(${big_image})`);
+
+
+var switchPlay = function (play_id) {
+    skPlayer({music: play_id, theme: 'red',prefix:"/music/api/playlist/"});
+    //$(".article-block.article-detail").css("background-image",`url(${big_image})`);
+};
+
+var switchArtist = function (artist_id) {
+    skPlayer({music: artist_id, theme: 'red',prefix:"/music/api/artistlist/"});
 };

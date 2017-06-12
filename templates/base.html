@@ -27,7 +27,6 @@
 <!--导航条start-->
 {% include "base_header.html" %}
 <!--导航条end-->
-
 <div id="wrapper">
     {% block wrapper %}
     {% endblock %}
@@ -52,13 +51,9 @@
 <script>
     skPlayer({
       music:750181235 ,//歌单id(登陆网页版网易云音乐，进入歌单详情后，在url中可找到歌单id，例：'http://music.163.com/#/playlist?id=317921676'),
-       theme:'red',
+       theme:'red'
         //loop:true,
    });
-    $(function () {
-        $("#skPlayer").draggable();
-        //switchDiv();
-    })
 </script>
 {% block custom_js %}
 {% endblock %}
