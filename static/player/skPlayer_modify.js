@@ -389,6 +389,8 @@
 
 
             });
+            //auto play
+            playClick();
         }
     };
     //暴露接口
@@ -420,4 +422,7 @@ var switchPlay = function (play_id) {
 
 var switchArtist = function (artist_id) {
     skPlayer({music: artist_id, theme: 'red',prefix:"/music/api/artistlist/"});
+};
+var togglePlayer = function () {
+    $("#skPlayer").toggle()
 };

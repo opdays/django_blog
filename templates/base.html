@@ -38,7 +38,7 @@
 
 </div>
 </div>
-<button class="btn" id="go_top" type="button">Top</button>
+<button class="btn" id="go_top" type="button"><i class="fa fa-rocket"></i></button>
 </body>
 <script src="{% static 'jquery-3.2.1.js' %}"></script>
 <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.js"></script>
@@ -49,11 +49,11 @@
 <script src="{% static 'js/headroom.js' %}"></script>
 <script src="{% static 'player/skPlayer_modify.js' %}"></script>
 <script>
-    skPlayer({
-      music:750181235 ,//歌单id(登陆网页版网易云音乐，进入歌单详情后，在url中可找到歌单id，例：'http://music.163.com/#/playlist?id=317921676'),
-       theme:'red'
-        //loop:true,
-   });
+{#    skPlayer({#}
+{#      music:750181235 ,//歌单id(登陆网页版网易云音乐，进入歌单详情后，在url中可找到歌单id，例：'http://music.163.com/#/playlist?id=317921676'),#}
+{#       theme:'red'#}
+{#        //loop:true,#}
+{#   });#}
 </script>
 {% block custom_js %}
 {% endblock %}
