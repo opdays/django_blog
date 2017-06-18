@@ -1,48 +1,78 @@
-{% extends "blog_base.html" %}
-{% load static %}
-{% block left-container %}
+{% extends "base.html" %}
+{% block wrapper %}
+    <div class="container" style="position: relative">
+        <div id="content-header">
 
+        </div>
+        <div class="row" style="margin-top: 40px">
 
-    <article class="article-block article-detail">
-        <table class="table">
-            <tr>
-                <td>
-                    网易id
-                </td>
-                <td>
-                    歌曲名
-                </td>
-                {#            <td>#}
-                {#                歌曲图片#}
-                {#            </td>#}
-                {#            <td>#}
-                {#                歌曲地址#}
-                {#            </td>#}
-            </tr>
-            {% for song in song_list %}
-                <tr>
-                    <td>
-                        {{ song.song_id }}
-                    </td>
-                    <td>
-                        {{ song.song_name }}
-                    </td>
-                    <td>
-                        {#                    <img src="{{ song.song_pic }}">#}
-                    </td>
-                    <td>
-                        <button class="btn btn-success play" id="{{ song.song_id }}">播放</button>
-                    </td>
+            <div id="left-container" class="col-xs-12 col-md-12 col-lg-12 col-sm-12">
+                <style>
+                    {#                    .right-avator-bar #test-l,  #test-r{#}
+                    {#                        width: 400px;#}
+                    {#                        height: 400px;#}
+                    {#                    }#}
+                    .right-author-bar .github{
+                        position: absolute;
+                            top: -291px;
+    left: 59px;
+                    }
+                    .right-author-bar .qq{
+                        position: absolute;
+                            top: -291px;
+    left: 59px;
+                    }
+                    .right-author-bar .weixin {
+                        position: absolute;
+                        top: -286px;
+    left: 168px;
+                    }
 
-                </tr>
+                </style>
+                <div class="col-xs-6 col-md-6 col-lg-6 col-sm-6">
+                    <div class="wihite-block">
+                        <div class="right-avator-bar">
+                            <img class="img-circle img-responsive center-block" id="test-l"
+                                 src="http://p4.music.126.net/AOejiSQ1M3t6wzRURvtopg==/18632324046199367.jpg"/>
+                        </div>
+                        <div class="row right-author-bar">
+                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                <a class="github" data-toggle="tooltip" data-placement="top"
+                                   title="上一曲"
+                                   href="javascript:;" target="_blank"><i
+                                        class="fa fa-backward fa-2x" style="margin-right: 14px;"></i></a>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                <a class="weixin" href="javascript:togglePlayer();" data-toggle="tooltip"
+                                   data-placement="top" title="隐藏/显示"><i class="fa fa-2x  fa-music"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-md-6 col-lg-6 col-sm-6">
+                    <div class="wihite-block">
+                        <div class="right-avator-bar">
+                            <img class="img-circle img-responsive center-block" id="test-r"
+                                 src="http://p4.music.126.net/AOejiSQ1M3t6wzRURvtopg==/18632324046199367.jpg"/>
+                        </div>
+                        <div class="row right-author-bar">
+                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                <a class="qq" target="_blank" data-toggle="tooltip" data-placement="top" title="下一曲"
+                                   href="javascript:;"><i
+                                        class="fa fa-forward fa-2x"></i></a>
+                            </div>
+                        </div>
+                    </div>
 
-            {% endfor %}
-        </table>
+                </div>
 
-    </article>
+            </div>
 
+        </div>
+
+    </div>
 {% endblock %}
-{% block custom_js%}
-{% endblock %}
-
-

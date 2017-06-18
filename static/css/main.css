@@ -39,9 +39,9 @@ html, body {
 / / border-color: #3b8cff;
 }
 
-.navbar-default .navbar-nav > li > a:focus, .navbar-default .navbar-nav > li > a:hover {
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:visited {
     color: #333;
- background-color: #0b93fa;
+ background-color: #a1b3c0;
 }
 
 .navbar-default .navbar-brand {
@@ -91,14 +91,23 @@ img#avator {
     /*!*鼠标移动头像 旋转360度   触发过度属性定义的旋转属性*!*/
 /*}*/
 
-@-webkit-keyframes mymove /* Safari and Chrome */
+@-webkit-keyframes mymove-shun /* Safari and Chrome */
 {
     /*http://www.runoob.com/cssref/css3-pr-animation-keyframes.html*/
     from {-webkit-transform: rotate(0deg);}
     to {-webkit-transform: rotate(360deg);}
 }
+@-webkit-keyframes mymove-ni /* Safari and Chrome */
+{
+    /*http://www.runoob.com/cssref/css3-pr-animation-keyframes.html*/
+    from {-webkit-transform: rotate(360deg);}
+    to {-webkit-transform: rotate(0deg);}
+}
 .xuanzhuan {
-    animation: mymove 14s linear infinite;
+    animation: mymove-shun 14s linear infinite;
+}
+.xuanzhuan-ni {
+    animation: mymove-ni 14s linear infinite;
 }
 .panel-black > .panel-heading {
     color: #ddd;
@@ -583,7 +592,7 @@ div.wihite-block {
 #skPlayer{
     position:fixed;
     left:0px;
-    top:76px;
+    bottom:0px;
     z-index: 1050;
 }
 #skPlayer .skPlayer-picture{

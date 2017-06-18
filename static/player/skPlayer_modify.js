@@ -45,16 +45,21 @@
         //配置检测
         var Tips;
         if (typeof options.music === 'number') {
+
             var music, target, audio, playBtn, currentTime, totalTime, currentVolume, totalVolume, quietVolume, currentTime_text, totalTime_text, cover, duration, musicItem, listSwitch;
             var sign = false;
             var avator;
-
             Public.ajax({
-                url: window.location.protocol + '//' + window.location.host + (options.prefix || '/music/api/playlist/') + options.music,
+                url: options.url || (window.location.protocol + '//' + window.location.host + (options.prefix || '/music/api/playlist/') + options.music),
                 success: function (responseText) {
                     //初始化
-                    music = JSON.parse(responseText);
-                    target = document.getElementById('skPlayer');
+                    window.music = JSON.parse(responseText);
+                    music = window.music;
+                    window.target = document.getElementById('skPlayer');
+                    target = window.target;
+                    if (options.type && options.type == "song") {
+                        music = [music];
+                    }
                     var HTMLcontent = '<audio src="' + music[0]["song_url"] + '" preload="auto"></audio>';
                     HTMLcontent += '<div class="skPlayer-picture">';
                     HTMLcontent += '    <img src="' + music[0]["song_pic"] + '" alt="" class="skPlayer-cover">';
@@ -94,11 +99,13 @@
                     }
                     HTMLcontent += '</ul>';
 
+
                     target.innerHTML = HTMLcontent;
                     if (options.theme === 'red') {
                         target.className = 'skPlayer-red';
                     }
-                    audio = target.querySelector('audio');
+                    window.audio = target.querySelector('audio');
+                    audio = window.audio;
                     playBtn = target.querySelector('.skPlayer-play-btn');
                     currentTime = target.querySelector('.skPlayer-percent').querySelector('.skPlayer-line');
                     totalTime = target.querySelector('.skPlayer-percent');
@@ -110,13 +117,14 @@
                     cover = target.querySelector('.skPlayer-cover');
                     musicItem = target.querySelectorAll('.skPlayer-list li');
                     listSwitch = target.querySelector('.skPlayer-list-switch');
+
                     target.classList.add('skPlayer-list-on');
                     $(".right-avator-bar img").attr("src", music[0].song_pic);
                     // $(".wihite-block.muisc-pannel").css("background-image",`url(${music[0].song_pic_big})`);
                     // $('#skPlayer').draggable({ appendTo: 'body' });
                     // var appendTo = $('.skPlayer-picture').draggable('option', 'appendTo');
                     // $('.skPlayer-picture').draggable('option', 'appendTo', 'body');
-                    $("#skPlayer").draggable({handle:".skPlayer-picture"}); //点击图片可以移动
+                    $("#skPlayer").draggable({handle: ".skPlayer-picture"}); //点击图片可以移动
                     //自定义转动图片
                     audio.old_play = audio.play;
                     audio.old_pause = audio.pause;
@@ -211,10 +219,10 @@
                 $(".right-avator-bar img").attr("src", data.song_pic);
                 // $(".wihite-block.muisc-pannel").css("background-image",`url(${data.song_pic_big})`);
                 if (playBtn.classList.contains('skPlayer-pause')) {
-                   try {
+                    try {
                         audio.play();
                         $(Tips).removeClass("alert-warning").addClass("alert-success").text("开始播放:" + data["song_name"]).remove().appendTo($('#content-header')).slideDown('slow').fadeOut(3000);
-                    }catch (e){
+                    } catch (e) {
                         $(Tips).text("播放失败").appendTo($('#content-header')).fadeIn('show').fadeOut(3000);
                     }
 
@@ -227,6 +235,7 @@
             currentTime.style.width = 0;
         }
 
+        window.audioEnd = audioEnd;
         //播放控制
         function playClick() {
             if (audio.paused) {
@@ -303,7 +312,7 @@
                     try {
                         audio.play();
                         $(Tips).removeClass("alert-warning").addClass("alert-success").text("开始播放:" + data["song_name"]).remove().appendTo($('#content-header')).slideDown('slow').fadeOut(3000);
-                    }catch (e){
+                    } catch (e) {
                         $(Tips).text("播放失败").appendTo($('#content-header')).fadeIn('show').fadeOut(3000);
                     }
                 }
@@ -313,8 +322,19 @@
         }
 
         function switchList() {
-            target.classList.contains('skPlayer-list-on') ? target.classList.remove('skPlayer-list-on') : target.classList.add('skPlayer-list-on');
+            target.classList.contains('skPlayer-list-on') ? !function () {
+                    //如果是打开状态 关闭
+                    $(target).css("top", "490px").slideDown('slow');
+                    target.classList.remove('skPlayer-list-on');
 
+                }()
+                : !function () {
+                    //如果是关闭状态 打开
+                    $(target).css("top", "318px").slideDown('slow');
+                    target.classList.add('skPlayer-list-on');
+                }();
+
+            // target.classList.contains('skPlayer-list-on') ?  : $(target).css("bottom","172px").slideDown('slow');
         }
 
         //事件绑定函数
@@ -336,13 +356,16 @@
                 listSwitch.addEventListener('click', switchList);
             }
             $(".qq").off('click').click(function () {
-                var index = $(".skPlayer-curMusic").removeClass("skPlayer-curMusic").attr("data-index");
-                if (Number(index) === Number(music.length) -1){
-                    index = 1;
-                }else{
-                    index = Number(index) +1;
+                if(!Array.isArray(music)){
+                    music=[music];
                 }
-                $("[data-index="+ index +"]").addClass("skPlayer-curMusic");
+                var index = $(".skPlayer-curMusic").removeClass("skPlayer-curMusic").attr("data-index");
+                if (Number(index) === Number(music.length) - 1) {
+                    index = 1;
+                } else {
+                    index = Number(index) + 1;
+                }
+                $("[data-index=" + index + "]").addClass("skPlayer-curMusic");
                 var data = music[index];
                 target.querySelector('.skPlayer-name').innerHTML = data.song_name;
                 target.querySelector('.skPlayer-author').innerHTML = data.song_artists;
@@ -350,10 +373,10 @@
                 audio.src = data.song_url;
                 $(".right-avator-bar img").attr("src", data.song_pic);
                 if (playBtn.classList.contains('skPlayer-pause')) {
-                   try {
+                    try {
                         audio.play();
                         $(Tips).removeClass("alert-warning").addClass("alert-success").text("开始播放:" + data["song_name"]).remove().appendTo($('#content-header')).slideDown('slow').fadeOut(3000);
-                    }catch (e){
+                    } catch (e) {
                         $(Tips).text("播放失败").appendTo($('#content-header')).fadeIn('show').fadeOut(3000);
                     }
                 }
@@ -364,12 +387,15 @@
             });
             $(".github").off('click').click(function () {
                 var index = $(".skPlayer-curMusic").removeClass("skPlayer-curMusic").attr("data-index");
-                if (Number(index) === 0){
-                    index = Number(music.length) - 1;
-                }else{
-                    index = Number(index) -1 ;
+                if(!Array.isArray(music)){
+                    music=[music];
                 }
-                $("[data-index="+ index +"]").addClass("skPlayer-curMusic");
+                if (Number(index) === 0) {
+                    index = Number(music.length) - 1;
+                } else {
+                    index = Number(index) - 1;
+                }
+                $("[data-index=" + index + "]").addClass("skPlayer-curMusic");
                 var data = music[index];
                 target.querySelector('.skPlayer-name').innerHTML = data.song_name;
                 target.querySelector('.skPlayer-author').innerHTML = data.song_artists;
@@ -380,7 +406,7 @@
                     try {
                         audio.play();
                         $(Tips).removeClass("alert-warning").addClass("alert-success").text("开始播放:" + data["song_name"]).remove().appendTo($('#content-header')).slideDown('slow').fadeOut(3000);
-                    }catch (e){
+                    } catch (e) {
                         $(Tips).text("播放失败").appendTo($('#content-header')).fadeIn('show').fadeOut(3000);
                     }
                 }
@@ -416,13 +442,80 @@ var switchDiv = function () {
 
 
 var switchPlay = function (play_id) {
-    skPlayer({music: play_id, theme: 'red',prefix:"/music/api/playlist/"});
+    skPlayer({music: play_id, theme: 'red', prefix: "/music/api/playlist/"});
     //$(".article-block.article-detail").css("background-image",`url(${big_image})`);
 };
 
 var switchArtist = function (artist_id) {
-    skPlayer({music: artist_id, theme: 'red',prefix:"/music/api/artistlist/"});
+    skPlayer({music: artist_id, theme: 'red', prefix: "/music/api/artistlist/"});
 };
 var togglePlayer = function () {
     $("#skPlayer").toggle()
+};
+
+var playASong = function (song_id) {
+    skPlayer({
+        music: song_id,
+        theme: 'red',
+        url: "http://" + location.host + "/song/detail?id=" + song_id,
+        type: "song"
+    });
+};
+var plusASong = function (song_id) {
+    $.ajax({
+        url: "http://" + location.host + "/song/detail?id=" + song_id,
+        method: "get",
+        success: function (data) {
+            if (window.music && Array.isArray(window.music)) {
+                //如果是列表push进去
+                window.music.push(data);
+            } else {
+                //如果是对象 push到列表
+                window.music = [window.music];
+                window.music.push(data);
+            }
+
+            var ul = $(".skPlayer-list");
+            var li = $("[data-index]");
+            var dataIndex = li.last().attr("data-index");
+            var newLi = li.last().clone().attr("data-index", parseInt(dataIndex) + 1).removeClass("skPlayer-curMusic");
+            newLi.html(
+                '<i class="skPlayer-list-sign"></i>' +
+                '<span class="skPlayer-list-index">' + parseInt(parseInt(dataIndex) + 2) + '</span>' +
+                '<span class="skPlayer-list-name">' + data.song_name + '</span>' +
+                '<span class="skPlayer-list-author" title="' + data.song_artists + '">' + data.song_artists + '</span> '
+            );
+            newLi.appendTo(ul);
+            newLi.click(function () {
+                console.log(this);
+                if (!this.classList.contains('skPlayer-curMusic')) {
+                    target.querySelector('.skPlayer-curMusic').classList.remove('skPlayer-curMusic');
+                    this.classList.add('skPlayer-curMusic');
+                    var index = this.getAttribute('data-index');
+                    var data = music[index];
+                    target.querySelector('.skPlayer-name').innerHTML = data.song_name;
+                    target.querySelector('.skPlayer-author').innerHTML = data.song_artists;
+                    target.querySelector('.skPlayer-cover').src = data.song_pic;
+                    audio.src = data.song_url;
+                    $(".right-avator-bar img").attr("src", data.song_pic);
+                    // $(".wihite-block.muisc-pannel").css("background-image",`url(${data.song_pic_big})`);
+                    if ($(".skPlayer-play-btn").hasClass('skPlayer-pause')) {
+                        try {
+                            audio.play();
+                        } catch (e) {
+                        }
+                    }
+                    currentTime_text.innerHTML = '00:00';
+                    currentTime.style.width = 0;
+                }
+            });
+            audio.addEventListener('ended',window.audioEnd);
+            // var li = '<li data-index="' + item + '">';
+            // li += '<i class="skPlayer-list-sign"></i>';
+            // li +='<span class="skPlayer-list-index">' + (parseInt(item) + 1) + '</span>'; <span class="skPlayer-list-name">' + music[item]["song_name"] + '</span>';
+            // li +='<span class="skPlayer-list-author" title="' + music[item].song_artists + '">' + music[item].song_artists + '</span>';
+            // li +='</li>';
+        }
+    })
+
 };

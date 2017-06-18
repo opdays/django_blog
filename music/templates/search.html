@@ -1,0 +1,80 @@
+{% extends "blog_base.html" %}
+{% load static %}
+{% block left-container %}
+    <style>
+        .search-play{
+                width: 50px;
+    height: 50px;
+    padding: 9px;
+    color: aliceblue;
+    font-size: 16px;
+    border: 0px;
+    background-color: #158816;
+    border-radius: 50px;
+        }
+    .search-plus{
+                width: 50px;
+    height: 50px;
+    padding: 9px;
+    color: aliceblue;
+    font-size: 16px;
+    border: 0px;
+    background-color: #e71555;
+    border-radius: 50px;
+        }
+    </style>
+    <article class="article-block article-detail">
+        <div class="form-group">
+            <form  data-pjax method="post" action="/music/search">
+                <input class="form-control" type="text" placeholder="想听什么搜什么" name="key">
+            </form>
+
+        </div>
+    </article>
+    {% if result %}
+        <article class="article-block article-detail">
+            <p>搜索时间{{ now |date:'Y-m-d H:i:s' }}</p>
+            <p>关键字{{ key }}一共搜索到:{{ length }}首歌(缓存1小时)</p>
+        <table class="table ">
+        <tr>
+            <th>
+                歌名
+            </th>
+            <th>
+                歌手
+            </th>
+            <th>
+                播放
+            </th>
+            <th>
+                添加到列表
+            </th>
+        </tr>
+
+            {% for line in result %}
+                <tr>
+                    <td>
+                        {{ line.song_name }}
+                    </td>
+                <td>
+                    {{ line.song_artists }}
+                </td>
+                <td>
+                    <btn class="btn search-play" onclick="playASong({{ line.song_id }})">
+                        <i class="fa fa-play-circle fa-2x"></i></btn>
+                </td>
+                <td>
+                    <btn class="btn search-plus" onclick="plusASong({{ line.song_id }})">
+                        <i class="fa fa-plus-circle fa-2x"></i></btn>
+                </td>
+                </tr>
+            {% endfor %}
+        </table>
+        </article>
+    {% endif %}
+
+{% endblock %}
+{% block custom_js %}
+{% endblock %}
+
+

@@ -6,6 +6,8 @@ urlpatterns = [
     url(r'^api/playlist/(?P<playid>\d+)', api.play),
     url(r'^api/artistlist/(?P<artistid>\d+)', api.artist),
     url(r'^playlist$', views.song_list,name="play_list"),
+    url(r'^search', views.search,name="search"),
+    url(r'^test', views.test,name="test"),
 
 ]
 

@@ -186,3 +186,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "static/upload")
 MEDIA_URL = yaml.get('MEDIA_URL')
 #通过模型对象o.image.url  获取到 /images/photos/2017/05/31/logo.png 访问路径
 QQWRY = os.path.join(BASE_DIR, "other/qqwry.dat")
+
+CACHE_BACKEND = 'locmem:///?timeout=300&max_entries=400'
+#http://djangobook.py3k.cn/2.0/chapter15/

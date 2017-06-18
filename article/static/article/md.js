@@ -53,7 +53,7 @@ $(function () {
 
         //a标签打开标签页
         $('.post-content a').attr("target", "_blank");
-        $('article.html pre').css('padding', '0px');
+        $('.html pre').css('padding', '0px');
 
     });
 }();

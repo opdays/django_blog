@@ -43,21 +43,30 @@ def updateP():
                                                                          play=p)
             except:
                 continue
-                # p = Playlist.objects.create(
-                #     play_name="一个孤独的人听首歌吧",
-                #     play_id=755501358,
-                #     big_image="http://p3.music.126.net/bUo74IWbS79FT1JDDME1Fw==/18889609765365752.jpg",
-                #     sm_image="http://p3.music.126.net/bUo74IWbS79FT1JDDME1Fw==/18889609765365752.jpg?param=200y200"
-                # )
-                # muslist = ne.api_playlist("755501358")
-                # for x in muslist:
-                #     Songlist.objects.create(song_name=x.get("song_name"),
-                #                             song_id=x.get("song_id"),
-                #                             song_url=x.get("song_url"),
-                #                             song_pic=x.get("song_pic"),
-                #                             song_pic_big=x.get("song_pic_big"),
-                #                             song_artists=x.get("song_artists"),
-                #                             play=p)
+
+
+def addP(playid):
+    p = Playlist.objects.get(play_id=playid)
+    muslist = ne.api_playlist(str(playid))
+    for x in muslist:
+        try:
+            Songlist.objects.create(song_name=x.get("song_name"),
+                                    song_id=x.get("song_id"),
+                                    song_url=x.get("song_url"),
+                                    song_pic=x.get("song_pic"),
+                                    song_pic_big=x.get("song_pic_big"),
+                                    song_artists=x.get("song_artists"),
+                                    play=p)
+        except:
+            Songlist.objects.filter(song_id=x.get("song_id")).update(
+                song_name=x.get("song_name"),
+                song_id=x.get("song_id"),
+                song_url=x.get("song_url"),
+                song_pic=x.get("song_pic"),
+                song_pic_big=x.get("song_pic_big"),
+                song_artists=x.get("song_artists"),
+                play=p
+            )
 
 
 def run():
@@ -75,4 +84,4 @@ def run():
     # big_image
     #
     # sm_image
-    updateP()
+    addP(321674374)
