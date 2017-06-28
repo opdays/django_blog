@@ -92,6 +92,7 @@ def year_month_list(request,year,month,page):
 
 
 
+
 from django import forms
 class ImageForm(forms.Form):
     title = forms.CharField()

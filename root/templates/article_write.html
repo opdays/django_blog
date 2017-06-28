@@ -4,18 +4,20 @@
     <div class="content-body">
         <div class="row">
 
-
-            <div class="root-content">
-                <div id="edit_block">
-                    <p> 写点什么吧</p>
-
+            <div class="container" style="padding: 20px">
+                <div class="root-content">
+                    {#                <div id="edit_block">#}
+                    {#                    <p> 写点什么吧</p>#}
+                    {#                </div>#}
+                    <div id="summernote">Hello Summernote</div>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" name="article_title" placeholder="文章标题">
+                    <input type="text" class="form-control" name="article_image_url" placeholder="图片url">
+                    <button id="add" class="btn btn-primary">添加文章</button>
                 </div>
             </div>
-            <div class="form-group">
-                <input type="text" class="form-control" name="article_title" placeholder="文章标题">
-                <input type="text" class="form-control" name="article_image_url" placeholder="图片url">
-            <button id="add" class="btn btn-primary">添加文章</button>
-            </div>
+
 
         </div>
     </div>
@@ -25,16 +27,13 @@
 {% block custom_js %}
 
     <script>
-
-        $(function () {
-            var editor = new wangEditor('edit_block');
-            editor.config.uploadImgUrl = '/article/upload';
-            editor.config.uploadParams = {
-                title: "autoimage"
-            };
-            editor.config.hideLinkImg = true;
-            editor.config.uploadImgFileName = 'image';
-            editor.create();
+        $(document).ready(function () {
+            $('#summernote').summernote({
+                height: 300,                 // set editor height
+                minHeight: 300,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: true
+            });
             $('#add').click(function () {
                 $.ajax({
                     url: "/root/api/article",
@@ -44,7 +43,7 @@
                     data: JSON.stringify({
                         title: $('input[name=article_title]').val(),
                         image_url: $('input[name=article_image_url]').val(),
-                        content: editor.$txt.html(),
+                        content: $('#summernote').summernote('code'),
                     }),
                     success: function (result) {
                         if (result.data === "success") {
@@ -59,6 +58,39 @@
                 });
             });
         });
+        {#        $(function () {#}
+        {#            var editor = new wangEditor('edit_block');#}
+        {#            editor.config.uploadImgUrl = '/article/upload';#}
+        {#            editor.config.uploadParams = {#}
+        {#                title: "autoimage"#}
+        {#            };#}
+        {#            editor.config.hideLinkImg = true;#}
+        {#            editor.config.uploadImgFileName = 'image';#}
+        {#            editor.create();#}
+        {#            $('#add').click(function () {#}
+        {#                $.ajax({#}
+        {#                    url: "/root/api/article",#}
+        {#                    method: "POST",#}
+        {#                    contentType: "application/json",#}
+        {#                    dateType: "json",#}
+        {#                    data: JSON.stringify({#}
+        {#                        title: $('input[name=article_title]').val(),#}
+        {#                        image_url: $('input[name=article_image_url]').val(),#}
+        {#                        content: editor.$txt.html(),#}
+        {#                    }),#}
+        {#                    success: function (result) {#}
+        {#                        if (result.data === "success") {#}
+        {#                            alert("添加成功");#}
+        {#                        } else {#}
+        {#                            alert("添加失败");#}
+        {#                        }#}
+        {#                    },#}
+        {#                    error: function () {#}
+        {#                        alert("添加失败");#}
+        {#                    }#}
+        {#                });#}
+        {#            });#}
+        {#        });#}
 
     </script>
 {% endblock %}

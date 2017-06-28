@@ -35,9 +35,9 @@
                         <!--图片-->
                         {% if article.image_url %}
                             <!--xs 手机图片占全屏-->
-                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-4">
+                            <div class="col-lg-4 col-md-4 col-xs-12 col-sm-4" style="overflow: hidden;">
                                 <a href="{% url 'article_detail' id=article.id %}"><img
-                                        src="{{ article.image_url }}" class="img-responsive img-rounded"
+                                        src="{{ article.image_url }}" class="img-responsive img-rounded article-image"
                                         alt=""></a>
 
                             </div>

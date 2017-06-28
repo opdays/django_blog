@@ -7,7 +7,7 @@
     <title>
         {% if article.title %}
             {{ article.title }}
-            {% else %}
+        {% else %}
             {{ blog }}
         {% endif %}
 
@@ -17,10 +17,27 @@
     <meta name="description" content="杨洋个人主页，采用django+bootstrap+mysql制作,主要记录自己在工作和学习中的问题"/>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/static/bootstrap/font-awesome-4.7.0/css/font-awesome.min.css"/>
-<link rel="stylesheet" href="/static/player/skPlayer.min.css"/>
-<link rel="stylesheet" href="/static/css/main.css"/>
+    <link rel="stylesheet" href="/static/player/skPlayer.min.css"/>
+    <link rel="stylesheet" href="/static/css/main.css"/>
+
+    <script src="{% static 'jquery-3.2.1.js' %}"></script>
 
     {% block custom_css %}
+        <style>
+            {#        .touming{#}
+            {#            opacity: 0.5;#}
+            {#        }#}
+            #chat_modal .modal-content {
+                height: 496px;
+{#                background-image: url(http://p3.music.126.net/bUo74IWbS79FT1JDDME1Fw==/18889609765365752.jpg);#}
+            }
+
+            #client ul > li {
+                background-color: none;
+                border: none;
+            }
+        </style>
+
     {% endblock %}
 </head>
 <body>
@@ -34,13 +51,49 @@
     <!--footer-->
     {% include "base_footer.html" %}
     <!--footer-->
-<div id="skPlayer">
+    <div id="skPlayer">
 
+    </div>
 </div>
+
+<!--websocket modal -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="chat_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="chatroom-title">golang websocket聊天室</h4>
+            </div>
+            <div class="modal-body" style="overflow: hidden">
+                <div class="col-sm-12 col-xs-12 col-lg-12 col-md-12 touming" style="height: 300px;overflow: auto">
+                    <ul class="list-group" id="client">
+                    </ul>
+                </div>
+                {#                <div class="col-lg-4 col-md-4">#}
+                {#                    <ul class="list-group" id="online"></ul>#}
+                {#                </div>#}
+            </div>
+            <div class="modal-footer">
+                <input type="text" class="form-control form-inline touming" name="send_input"
+                       onkeypress="if (event.keyCode == 13) $('#sub_send').click();"
+                       style="margin-bottom: 10px">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-success" id="sub_send">发送</button>
+
+
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
 </div>
+<button class="btn btn-danger chat" id="chatroom" type="button" data-toggle="modal" data-target="#chat_modal">聊天室
+</button>
+
+<!--websocket modal -->
+
 <button class="btn" id="go_top" type="button"><i class="fa fa-rocket"></i></button>
 </body>
-<script src="{% static 'jquery-3.2.1.js' %}"></script>
 <script src="https://cdn.bootcss.com/jqueryui/1.12.1/jquery-ui.js"></script>
 <script src="{% static 'js/jquery.ui.touch.js' %}"></script>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
@@ -49,11 +102,11 @@
 <script src="{% static 'js/headroom.js' %}"></script>
 <script src="{% static 'player/skPlayer_modify.js' %}"></script>
 <script>
-{#    skPlayer({#}
-{#      music:750181235 ,//歌单id(登陆网页版网易云音乐，进入歌单详情后，在url中可找到歌单id，例：'http://music.163.com/#/playlist?id=317921676'),#}
-{#       theme:'red'#}
-{#        //loop:true,#}
-{#   });#}
+    {#    skPlayer({#}
+    {#      music:750181235 ,//歌单id(登陆网页版网易云音乐，进入歌单详情后，在url中可找到歌单id，例：'http://music.163.com/#/playlist?id=317921676'),#}
+    {#       theme:'red'#}
+    {#        //loop:true,#}
+    {#   });#}
 </script>
 {% block custom_js %}
 {% endblock %}
@@ -74,6 +127,69 @@
         $("[data-toggle='tooltip']").tooltip();
         $("section").addClass("mysection");
         $("body").show();
+
+        //代码换行握草；
+        $('pre').each(function () {
+            var sty = $(this).attr('style');
+            $(this).replaceWith('<pre style="' + sty + '"><code>' + $(this).html() + '</code></pre>').css("padding", "10px");
+        });
+        $('blockquote').each(function () {
+            $(this).css("border-left", "5px solid #087cf4").css("background-color", "#d9534f");
+        });
     });
+    //
+    <!--websocket modal -->
+    $(function () {
+        var ws = new WebSocket('ws://' + window.location.hostname + ':8081/ws');
+        var client = $('#client');
+        var online = $('#chatroom-title');
+        //用户获取一个随机图片
+        {#        var image = null;#}
+        {#        $.get({#}
+        {#            url: "/music/api/randompic",#}
+        {#            async: false,#}
+        {#            success: function (response) {#}
+        {#                image = response;#}
+        {#            }#}
+        {#        });#}
+        ws.onopen = function () {
+            console.log("open");
+        };
+        ws.onmessage = function (e) {
+            var data = JSON.parse(e.data);
+            {#            if (data.Image != "" || data.Image != " ") {#}
+            {#                image = data.Image;#}
+            {#            }#}
+            if (data.Online !== 0) {
+                //第一次连接推送消息
+                online.text("golang websocket聊天室 当前在线:" + data.Online);
+
+                //每次有人连接 更新标题
+            }
+            //后端向所有客户端推送消息
+            if (data.Message !== null) {
+                $('<li class="list-group-item" style="background: none;border:none"><image ' +
+                    'style="width:50px;height:50px;border-radius:50px" ' +
+                    'src=' + data.Image + '/>' + data.Ip + ":" + data.Message.message + '</li>').appendTo(client);
+            }
+
+
+            console.log(data);
+        };
+        ws.onclose = function (e) {
+            console.log("close");
+        };
+        $("#sub_send").click(function () {
+            var clientlist = $("#clientlist");
+            var message = $('[name=send_input]').val();
+            ws.send(JSON.stringify({
+                    message: message,
+                })
+            );
+            $('[name=send_input]').val('');
+        });
+    });
+    //
+    <!--websocket modal -->
 </script>
 </html>

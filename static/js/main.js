@@ -953,6 +953,18 @@ $(function () {
     //       );
     //   });
     // });
+    var initEvent=function(){
+        $(function () {
+        $(".article-image").mouseenter(function () {
+            $(this).css("transform", "scale(2)");
+        }).mouseleave(function () {
+            $(this).css("transform", "");
+        });
+    });
+    };
+    initEvent();
+
+    //
     if ($.support.pjax) {
         var loadLayer = '<div id="loadLayer" style="position:fixed;left:0;right:0;top:0;bottom:0;background:rgba(255,255,255,0.8);text-align:center;line-height:400px;font-size:30px;z-index:82;display: block">' + '玩命加载中...' + '</div>';
         $(document).pjax('a[target!=_blank]', '#left-container', {fragment: '#left-container', timeout: 8000});
@@ -974,6 +986,7 @@ $(function () {
                 })
             }
             $.getScript("/static/article/md.js");
+            initEvent();
 
         });
         // $(document).on('pjax:complete', function () {
@@ -985,6 +998,7 @@ $(function () {
         });
     }
 }();
+
 
 /*
  typeof history.pushState === 'function' && (function () {

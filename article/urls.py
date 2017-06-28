@@ -12,5 +12,6 @@ urlpatterns = [
         name="year_month_list"),
     url(r'^upload$', views.upload, name="upload"),
     #https://docs.djangoproject.com/en/dev/ref/class-based-views/#built-in-class-based-views-api
+    url(r'^chat$',TemplateView.as_view(template_name='chat.html')),
     url(r'^about$',TemplateView.as_view(template_name='about.html')),
 ]

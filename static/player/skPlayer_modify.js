@@ -505,11 +505,39 @@ var plusASong = function (song_id) {
                         } catch (e) {
                         }
                     }
-                    currentTime_text.innerHTML = '00:00';
-                    currentTime.style.width = 0;
+                    $(".skPlayer-cur").html('00:00');
+                    $(".skPlayer-line").css("width","0px");
                 }
             });
-            audio.addEventListener('ended',window.audioEnd);
+            audio.addEventListener('ended',function () {
+            if (Array.isArray(music) && music.length !== 1) {
+                var index = parseInt(target.querySelector('.skPlayer-curMusic').getAttribute('data-index')) + 1;
+                if (index < music.length) {
+                    if (target.querySelector('.skPlayer-curMusic').nextSibling !== 1) {
+                        target.querySelector('.skPlayer-curMusic').nextSibling.classList.add('skPlayer-curMusic');
+                    } else {
+                        target.querySelector('.skPlayer-curMusic').nextSibling.classList.add('skPlayer-curMusic');
+                    }
+                    target.querySelector('.skPlayer-curMusic').classList.remove('skPlayer-curMusic');
+                    var data = music[index];
+                } else {
+                    target.querySelector('.skPlayer-list li').classList.add('skPlayer-curMusic');
+                    target.querySelectorAll('.skPlayer-curMusic')[1].classList.remove('skPlayer-curMusic');
+                    var data = music[0];
+                }
+                target.querySelector('.skPlayer-name').innerHTML = data["song_name"];
+                target.querySelector('.skPlayer-author').innerHTML = data.song_artists;
+                target.querySelector('.skPlayer-cover').src = data.song_pic;
+                audio.src = data.song_url;
+                //播放完成自动换图片
+                $(".right-avator-bar img").attr("src", data.song_pic);
+                // $(".wihite-block.muisc-pannel").css("background-image",`url(${data.song_pic_big})`);
+                $(".skPlayer-play-btn").toggleClass("skPlayer-pause");
+                    audio.play();
+            }
+            $(".skPlayer-cur").html('00:00');
+            $(".skPlayer-line").css("width","0px");
+            });
             // var li = '<li data-index="' + item + '">';
             // li += '<i class="skPlayer-list-sign"></i>';
             // li +='<span class="skPlayer-list-index">' + (parseInt(item) + 1) + '</span>'; <span class="skPlayer-list-name">' + music[item]["song_name"] + '</span>';

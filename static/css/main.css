@@ -27,9 +27,11 @@ html, body {
 .right-avator-bar {
     margin-bottom: 10px;
 }
+
 .wihite-block.muisc-pannel {
     height: 500px;
 }
+
 .navbar-default .navbar-nav > li > a {
     color: #313131;
 }
@@ -41,7 +43,7 @@ html, body {
 
 .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:visited {
     color: #333;
- background-color: #a1b3c0;
+    background-color: #a1b3c0;
 }
 
 .navbar-default .navbar-brand {
@@ -87,28 +89,40 @@ img#avator {
 }
 
 /*img#avator:hover {*/
-    /*transform: rotate(360deg);*/
-    /*!*鼠标移动头像 旋转360度   触发过度属性定义的旋转属性*!*/
+/*transform: rotate(360deg);*/
+/*!*鼠标移动头像 旋转360度   触发过度属性定义的旋转属性*!*/
 /*}*/
 
 @-webkit-keyframes mymove-shun /* Safari and Chrome */
 {
     /*http://www.runoob.com/cssref/css3-pr-animation-keyframes.html*/
-    from {-webkit-transform: rotate(0deg);}
-    to {-webkit-transform: rotate(360deg);}
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
 }
+
 @-webkit-keyframes mymove-ni /* Safari and Chrome */
 {
     /*http://www.runoob.com/cssref/css3-pr-animation-keyframes.html*/
-    from {-webkit-transform: rotate(360deg);}
-    to {-webkit-transform: rotate(0deg);}
+    from {
+        -webkit-transform: rotate(360deg);
+    }
+    to {
+        -webkit-transform: rotate(0deg);
+    }
 }
+
 .xuanzhuan {
     animation: mymove-shun 14s linear infinite;
 }
+
 .xuanzhuan-ni {
     animation: mymove-ni 14s linear infinite;
 }
+
 .panel-black > .panel-heading {
     color: #ddd;
     background-color: #101010;
@@ -452,6 +466,21 @@ ul.relation li {
     outline: none;
     z-index: 100;
 }
+#chatroom {
+    width: 100px;
+    height: 46px;
+    position: fixed;
+    right: 30px;
+    bottom: 90px;
+    padding: 9px;
+    color: aliceblue;
+    font-size: 20px;
+    border: 0px;
+    display: block;
+    background-color: #158816;
+    outline: none;
+    z-index: 100;
+}
 
 .post-meta .praise {
     color: #d9534f;
@@ -581,34 +610,38 @@ div.wihite-block {
 }
 
 /*------------*/
-.welcome.panel-default{
+.welcome.panel-default {
     border-color: #5d9fa5;
 }
+
 .welcome .panel-body {
     background-color: #5d9fa5;
     position: relative;
 
 }
-#skPlayer{
-    position:fixed;
-    left:0px;
-    bottom:0px;
+
+#skPlayer {
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
     z-index: 1050;
 }
-#skPlayer .skPlayer-picture{
+
+#skPlayer .skPlayer-picture {
     cursor: move;
 }
+
 .switch {
-position: absolute;
+    position: absolute;
     top: 10px;
     right: -25px;
     width: 25px;
     height: 68px;
     line-height: 68px;
     text-shadow: none;
-    background-color: rgba(0,255,0,.6);
+    background-color: rgba(0, 255, 0, .6);
     border-radius: 0 5px 5px 0;
-    box-shadow: 1px 1px 1px 1px rgba(0,0,0,.3);
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, .3);
     color: #fff;
     font-size: 2em;
     text-align: center;
@@ -618,11 +651,12 @@ position: absolute;
     -ms-transform: rotate(0);
     transform: rotate(0);
 }
-#skPlayer.skPlayer-red .skPlayer-control{
-        box-sizing:initial;
+
+#skPlayer.skPlayer-red .skPlayer-control {
+    box-sizing: initial;
 }
 
-#skPlayer .skPlayer-list{
+#skPlayer .skPlayer-list {
 }
 
 #Tips {
@@ -633,31 +667,38 @@ position: absolute;
     z-index: 5000;
     top: 10px;
     left: 0;
-    background-color: rgba(0,0,0,.3);
+    background-color: rgba(0, 0, 0, .3);
     padding: 15px;
     color: #fff;
     -webkit-transition: .5s;
     -moz-transition: .5s;
     -ms-transition: .5s;
     transition: .5s;
-    -webkit-transform: translate3d(-100%,0,0);
-    -moz-transform: translate3d(-100%,0,0);
-    -ms-transform: translate3d(-100%,0,0);
-    transform: translate3d(-100%,0,0);
+    -webkit-transform: translate3d(-100%, 0, 0);
+    -moz-transform: translate3d(-100%, 0, 0);
+    -ms-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
 }
-.alert{
-    margin-top:16px;
+
+.alert {
+    margin-top: 16px;
     right: 0px;
     position: absolute;
 }
+
 /*.music-back {*/
-    /*position: fixed;*/
-    /*width: 100%;*/
-    /*height:100%;*/
-        /*background-position: center center;*/
-    /*background-repeat: no-repeat;*/
+/*position: fixed;*/
+/*width: 100%;*/
+/*height:100%;*/
+/*background-position: center center;*/
+/*background-repeat: no-repeat;*/
 /*}*/
-.music-pannel{
+.music-pannel {
     background-repeat: no-repeat;
     background-position: center center;
+}
+
+.article-image {
+    cursor: pointer;
+    transition: all 0.6s;
 }

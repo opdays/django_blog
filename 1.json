@@ -1,0 +1,36 @@
+{
+  "Dev": [
+    {
+      "Ip": "x.x.x.x",
+      "Dst": "/path/to/dst/",
+      "User": "****",
+      "Password": "*********",
+      "RsyncArgs":"-rv --exclude-from .gitignore --exclude .git --exclude migrations"
+    }
+  ],
+  "Test": [
+    {
+      "Ip": "x.x.x.x",
+      "Dst": "/path/to/dst/",
+      "User": "****",
+      "Password": "*********",
+      "RsyncArgs":"-rv --exclude-from .gitignore --exclude .git --exclude migrations --exclude deploy_api/settings.py"
+    }
+  ],
+  "Uat": [
+    {
+      "Ip": "x.x.x.x",
+      "Dst": "/path/to/dst/",
+      "User": "****",
+      "Password": "*********",
+      "RsyncArgs":"-rv --exclude-from .gitignore --exclude .git --exclude migrations --exclude deploy_api/settings.py"
+    },
+    {
+      "Ip": "x.x.x.x",
+      "Dst": "/path/to/dst/",
+      "User": "****",
+      "Password": "*********",
+      "RsyncArgs":"-rv --exclude-from .gitignore --exclude .git --exclude migrations --exclude deploy_api/settings.py"
+    }
+  ]
+}

@@ -1,0 +1,74 @@
+{% extends "blog_base.html" %}
+{% load static %}
+
+{% block left-container %}
+
+
+    <article class="article-block article-detail">
+        <p>golang websocket 练习</p>
+        <div class="col-lg-8 col-md-8" style="max-height: 300px;overflow: auto">
+            <ul class="list-group" id="client">
+        </ul>
+        </div>
+        <div class="col-lg-4 col-md-4">
+            <ul class="list-group" id="online"></ul>
+        </div>
+
+    </article>
+
+    <article class="article-block article-detail">
+        <input type="text" class="form-control" name="send_input" onkeypress="if (event.keyCode == 13) $('#sub_send').click();">
+        <button class="btn btn-success btn-sm pull-right" type="button" id="sub_send">发送</button>
+    </article>
+
+
+    <nav class="pagination" role="navigation">
+        {% if articles.has_previous %}
+            <a class="page-number" href="{% url 'article_list' page=articles.previous_page_number %}"><i
+                    class="fa fa-arrow-left"></i></a>
+        {% endif %}
+        <span class="page-number">第 {{ articles.number }} 页 ⁄ 共 {{ articles.paginator.num_pages }} 页</span>
+        {% if articles.has_next %}
+            <a class="page-number" href="{% url 'article_list' page=articles.next_page_number %}"><i
+                    class="fa fa-arrow-right"></i></a>
+        {% endif %}
+    </nav>
+    <script>
+    //websocket
+    $(function () {
+            var ws = new WebSocket('ws://'+window.location.hostname+':8081/ws');
+            var client = $('#client');
+            var online = $('#online');
+            ws.onopen = function () {
+                console.log("open");
+            };
+            ws.onmessage = function (e) {
+                var data = JSON.parse(e.data);
+                if (data.Online !== 0){
+                    online.html("当前在线:"+data.Online);
+                }else{
+                    $('<li class="list-group-item">'+data.Ip+":"+data.Message.message+'</li>').appendTo(client);
+                }
+
+            };
+            ws.onclose = function (e) {
+                console.log("close");
+            };
+            $("#sub_send").click(function () {
+                var clientlist = $("#clientlist");
+                var message = $('[name=send_input]').val();
+                ws.send(JSON.stringify({
+                        message: message,
+                    })
+                );
+                $('[name=send_input]').val('');
+            });
+        });
+    </script>
+{% endblock %}
+{% block custom_js %}
+
+{% endblock %}
+
+
+

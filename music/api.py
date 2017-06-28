@@ -2,6 +2,7 @@ from music.NEMbox.api import NetEase
 from django.http import HttpResponseRedirect, HttpResponse
 import json
 from .models import Songlist,Artistlist,Playlist
+import random
 
 
 ne = NetEase()
@@ -39,3 +40,11 @@ def artist(request, artistid):
     for x in a.songs.all():
         songlist.append(x.to_dict())
     return JsonResponse(songlist,200)
+
+def random_50x50image(request):
+    num = random.randint(1, 1500)
+    try:
+        pic_url = Songlist.objects.get(pk=num).song_pic_big+"?param=50y50"
+    except:
+        pic_url = Songlist.objects.get(pk=10).song_pic_big + "?param=50y50"
+    return HttpResponse(pic_url)

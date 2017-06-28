@@ -37,7 +37,7 @@ SECRET_KEY = '^3jdhax4m6_czq(@bktyem+pgsnpm*l2t@it5(w_)w&l#l6b^j'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(yaml.get('DEBUG'))
 
-ALLOWED_HOSTS = ['blog.opdays.com', 'opdays.com', 'www.opdays.com','192.168.174.131', '127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'music',
     'pagedown',
     'django_extensions',
+    'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -189,3 +190,6 @@ QQWRY = os.path.join(BASE_DIR, "other/qqwry.dat")
 
 CACHE_BACKEND = 'locmem:///?timeout=300&max_entries=400'
 #http://djangobook.py3k.cn/2.0/chapter15/
+
+def static_url(url):
+    return os.path.join(STATIC_URL, url)

@@ -46,15 +46,20 @@ $(function () {
 !function () {
     $(function () {
         //响应式markdown 图片
-        $('.article-detail img').addClass("img-responsive img-rounded center-block");
+        $('.article-detail img').addClass("img-responsive img-rounded");
 
         //响应式markdown表格
         $('.post-content table').addClass("table table-bordered table-hover table-striped");
 
         //a标签打开标签页
         $('.post-content a').attr("target", "_blank");
-        $('.html pre').css('padding', '0px');
-
+        $('pre').each(function(){
+            var sty=$(this).attr('style');
+            $(this).replaceWith('<pre style="'+sty+'"><code>'+$(this).html()+'</code></pre>').css("padding","10px");
+        });
+        $('blockquote').each(function () {
+            $(this).css("border-left","5px solid #087cf4").css("background-color","#d9534f");
+        });
     });
 }();
 

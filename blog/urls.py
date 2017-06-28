@@ -37,6 +37,7 @@ urlpatterns = [
     url(r'^article/', include('article.urls')),
     url(r'^root/', include('root.urls')),
     url(r'^music/', include('music.urls')),
+    url(r'^summernote/', include('django_summernote.urls')),
     url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps},
     name='django.contrib.sitemaps.views.sitemap'),
 ]
