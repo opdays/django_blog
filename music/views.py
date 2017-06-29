@@ -3,7 +3,6 @@ from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import render
 from music.models import Playlist, Artistlist
 from requests import get
-import datetime
 from django.core.cache import cache
 
 
@@ -29,28 +28,20 @@ def test(request):
 
 def search(request):
     if request.method == "GET":
-        now= cache.get("now")
         key= cache.get("key")
-        result= cache.get("result")
-        length=cache.get("length")
-        print(now,key,length)
-        return render(request, "search.html", context={"result": result,
+        return render(request, "search.html", context={
                                                        "key": key,
-                                                       "length": length,
-                                                       "now": now
                                                        })
     if request.method == "POST":
-        now = datetime.datetime.now()
         key = request.POST.get("key")
-        response = get("http://opdays.com:8080/song/search", params={"key": key})
-        result = response.json()
-        length = len(result)
-        cache.set("now",now,60 * 60)
-        cache.set("key", key,60 * 60)
-        cache.set("result", result,60 * 60)
-        cache.set("length", length,60 * 60)
-        return render(request, "search.html", context={"result": result,
-                                                       "key": key,
-                                                       "length": length,
-                                                       "now": now
+        #response = get("http://opdays.com:8080/song/search", params={"key": key})
+        #result = response.json()
+        #length = len(result)
+        cache_key = cache.get("key")
+        if not cache_key:
+            cache_key=[]
+        cache_key.append(key)
+        cache.set("key",cache_key,60 * 60)
+        return render(request, "search.html", context={
+                                                       "key": cache_key,
                                                        })

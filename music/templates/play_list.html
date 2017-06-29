@@ -44,7 +44,7 @@
                     {{ play.play_name|truncatechars:"9" }}
                 </span>
                     </div>
-                    <a href="javascript:switchPlay({{ play.play_id }},'{{ play.big_image }}');" class="switch-play" target="_blank">
+                    <a href="javascript:switchPlay('cloud',{{ play.play_id }});" class="switch-play" target="_blank">
                         <i class="fa fa-play fa-2x"></i>
                     </a>
 
@@ -66,7 +66,7 @@
                     {{ artist.artist_name|truncatechars:"9" }}
                 </span>
                     </div>
-                    <a href="javascript:switchArtist({{ artist.artist_id }},'{{ artist.big_image }}');" class="switch-play" target="_blank">
+                    <a href="javascript:switchPlay('artist',{{ artist.artist_id }});" class="switch-play" target="_blank">
                         <i class="fa fa-play fa-2x"></i>
                     </a>
 

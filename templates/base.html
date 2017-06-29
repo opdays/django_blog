@@ -17,8 +17,10 @@
     <meta name="description" content="杨洋个人主页，采用django+bootstrap+mysql制作,主要记录自己在工作和学习中的问题"/>
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="/static/bootstrap/font-awesome-4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" href="/static/player/skPlayer.min.css"/>
+    {#    <link rel="stylesheet" href="/static/player/skPlayer.min.css"/>#}
+    <link rel="stylesheet" href="/static/play3/skPlayer.css"/>
     <link rel="stylesheet" href="/static/css/main.css"/>
+
 
     <script src="{% static 'jquery-3.2.1.js' %}"></script>
 
@@ -29,7 +31,7 @@
             {#        }#}
             #chat_modal .modal-content {
                 height: 496px;
-{#                background-image: url(http://p3.music.126.net/bUo74IWbS79FT1JDDME1Fw==/18889609765365752.jpg);#}
+            {#                background-image: url(http://p3.music.126.net/bUo74IWbS79FT1JDDME1Fw==/18889609765365752.jpg);#}
             }
 
             #client ul > li {
@@ -98,15 +100,86 @@
 <script src="{% static 'js/jquery.ui.touch.js' %}"></script>
 <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
 <script src="{% static 'article/md.js' %}"></script> <!--转换一些表格图片-->
+<script src="{% static 'play3/out_skPlayer.js' %}"></script>
 <script src="{% static 'js/main.js' %}"></script>
 <script src="{% static 'js/headroom.js' %}"></script>
-<script src="{% static 'player/skPlayer_modify.js' %}"></script>
+{#<script src="{% static 'player/skPlayer_modify.js' %}"></script>#}
+
 <script>
     {#    skPlayer({#}
     {#      music:750181235 ,//歌单id(登陆网页版网易云音乐，进入歌单详情后，在url中可找到歌单id，例：'http://music.163.com/#/playlist?id=317921676'),#}
     {#       theme:'red'#}
     {#        //loop:true,#}
     {#   });#}
+
+    var initPlayer = function (type, id) {
+        var player = new skPlayer({
+            autoplay: true,
+            listshow: true,
+            music: {
+                type: type || 'cloud',
+                //必需项,网易云方式指定填'cloud'
+                source: id || 321674374
+            }
+        });
+        $("#skPlayer").show();
+        return player
+    };
+    $(function () {
+        $("#skPlayer").hide();
+    });
+    var togglePlayer = function () {
+        $("#skPlayer").toggle()
+    };
+    var switchPlay = function (type, play_id) {
+        instance = false;
+        var player = initPlayer(type, play_id);
+        $("#skPlayer").draggable({handle: ".skPlayer-picture"}); //点击图片可以移动
+
+        player.oldPlay = player.play;
+        player.oldPause = player.pause;
+        player.play = function () {
+            player.oldPlay();
+            $(".right-avator-bar img").attr("src", player.dom.cover.src);
+            $(".right-avator-bar img").addClass("xuanzhuan");
+        };
+        player.pause = function () {
+            player.oldPause();
+            $(".right-avator-bar img").removeClass("xuanzhuan");
+        };
+        $('.qq').off('click').click(function () {
+            player && player.next();
+        });
+        $('.github').off('click').click(function () {
+            player && player.prev();
+        });
+        $('.facebook').off('click').click(function () {
+            player.audio.paused ? player.play() : player.pause();
+        });
+        $('.google').off('click').click(function () {
+            player.toggleMute();
+        });
+    };
+    var switchDiv = function () {
+        var play = $("#skPlayer");
+        var width = "380px";
+        if (play.css("width") == "100px") {
+            play.css("width", width);
+            $(".skPlayer-control").css("display", "block")
+        } else if (play.css("width") == width) {
+            play.css("width", "100px").removeClass("skPlayer-list-on");
+            $(".skPlayer-control").css("display", "none")
+        }
+
+    };
+    $(document).on('submit', 'form[music-pjax]', function (event) {
+        switchPlay('keywords', $('input[name=key]').val());
+        console.log($('input[name=key]').val());
+        $.pjax.submit(event, '#left-container', {fragment: '#left-container'});
+
+    });
+
+
 </script>
 {% block custom_js %}
 {% endblock %}

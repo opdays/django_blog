@@ -1,0 +1,3 @@
+{
+  "presets": ["/root/node/node_modules/babel-preset-es2015"]
+}

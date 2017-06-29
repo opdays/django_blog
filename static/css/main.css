@@ -26,6 +26,16 @@ html, body {
 
 .right-avator-bar {
     margin-bottom: 10px;
+    position: relative;
+}
+.right-avator-bar .circle{
+    width: 206px;
+    height: 205px;
+    top: -2px;
+    left: 66px;
+    background-position: -140px -580px;
+    position: absolute;
+    background-image: url(http://s2.music.126.net/style/web2/img/coverall.png?d1e3cd799db33e03e7d258709d835384);
 }
 
 .wihite-block.muisc-pannel {
@@ -80,9 +90,11 @@ html, body {
 }
 
 img#avator {
-    width: 200px;
-    height: 200px;
-
+    width: 130px;
+    height: 130px;
+    position: absolute;
+    top: 34px;
+    left: 102px;
     /*transform 旋转属性
     transition 过度属性  定义过度属性为旋转属性 过度时间为1s
      */
@@ -345,38 +357,50 @@ ul.relation li {
 }
 
 .right-author-bar a {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     background-color: hsla(0, 0%, 71%, .2);
     border-radius: 50%;
     line-height: 50px;
     display: block;
     cursor: pointer;
     margin: 0px auto;
+    position: relative;
 }
 
-.right-author-bar i.fa.fa-2x {
-    margin-left: 12px;
-    margin-top: 9px;
-    font-size: 24px;
-
-}
-
-.right-author-bar .weixin {
+.right-author-bar *{
     color: #fff;
-    background-color: #00bb29;
+    text-align: center;
 }
-
 .right-author-bar .github {
-    color: #fff;
-    background-color: #e05244;
-    text-align: center;
+    background-color: #4285f4;
+}
+.right-author-bar .twitter{
+    background-color: #ea4335;
+}
+.right-author-bar .facebook {
+    background-color: #fbbc05;
+}
+.right-author-bar .facebook i{
+   left: 11px;
+}
+.right-author-bar .weixin {
+    background-color: #4285f4;
+}
+.right-author-bar .qq {
+    background-color: #34a853;
+}
+.right-author-bar .google {
+    background-color: #ea4335;
+}
+.right-author-bar .google i{
+    left: 11px;
 }
 
-.right-author-bar .qq {
-    color: #fff;
-    background-color: #498ad5;
-    text-align: center;
+.right-author-bar  i{
+    position: absolute;
+    left: 8px;
+    top: 7px;
 }
 
 /*简书*/
@@ -598,11 +622,11 @@ ul.recent-article {
 }
 
 .note-list .article-block {
-    animation: fuzuo 1.8s;
+    /*animation: fuzuo 1.8s;*/
 }
 
 .article-block.article-detail {
-    animation: fuzuo 1.8s;
+    /*animation: fuzuo 1.8s;*/
 }
 
 div.wihite-block {
@@ -623,7 +647,7 @@ div.wihite-block {
 #skPlayer {
     position: fixed;
     left: 0px;
-    bottom: 0px;
+    bottom: 179px;
     z-index: 1050;
 }
 

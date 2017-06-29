@@ -18,23 +18,37 @@
 
 
                 {% block right-container %}
-                    <div class="wihite-block">
+                    <div class="wihite-block" style="height: 200px">
                         <div class="right-avator-bar">
                             <img class="img-circle img-responsive center-block" id="avator" src="{{ AVATOR }}"/>
+                            <span class="circle"></span>
                         </div>
-                        <div class="row right-author-bar">
-                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+
+                    </div>
+                    <div class="wihite-block">
+                    <div class="wihite-block">
+                    <div class="row right-author-bar">
+                            <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2 ">
                                 <a class="github" data-toggle="tooltip" data-placement="top"
                                    title="上一曲"
                                    href="javascript:;" target="_blank"><i
-                                        class="fa fa-backward fa-2x" style="margin-right: 14px;"></i></a>
+                                        class="fa fa-x fa-backward "></i></a>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
-                                <a class="weixin" href="javascript:togglePlayer();" data-toggle="tooltip" data-placement="top" title="隐藏/显示"><i class="fa fa-2x  fa-music"></i></a>
+                        <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+                                <a class="twitter" href="javascript:switchDiv();" data-toggle="tooltip" data-placement="top" title="放大/缩小"><i class="fa fa-x fa-arrows-alt"></i></a>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                        <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+                                <a class="facebook" href="javascript:;" data-toggle="tooltip" data-placement="top" title="播放/暂停"><i class="fa fa-x fa-play"></i></a>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+                                <a class="weixin" href="javascript:togglePlayer();" data-toggle="tooltip" data-placement="top" title="隐藏/显示"><i class="fa fa-x fa-music"></i></a>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
                                 <a class="qq" target="_blank" data-toggle="tooltip" data-placement="top" title="下一曲" href="javascript:;"><i
-                                        class="fa fa-forward fa-2x"></i></a>
+                                        class="fa fa-forward fa fa-x"></i></a>
+                            </div>
+                        <div class="col-lg-2 col-md-2 col-xs-2 col-sm-2">
+                                <a class="google" href="javascript:;" data-toggle="tooltip" data-placement="top" title="静音/正常"><i class="fa fa-x fa-volume-off"></i></a>
                             </div>
                         </div>
                     </div>
