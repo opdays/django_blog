@@ -5,10 +5,10 @@
         <div class="row">
             <div class="col-lg-12 col-md-12">
                 {% if article.type == 'html' %}
-                <div id="summernote" style="width: 100%">{{ article.content|safe }}</div>
+                    <div id="summernote" style="width: 100%">{{ article.content|safe }}</div>
                 {% else %}
 
-                <textarea style="width: 100%;height: 300px">
+                    <textarea style="width: 100%;height: 300px">
                     {{ article.content }}
                 </textarea>
                 {% endif %}
@@ -25,11 +25,11 @@
                 </div>
             </div>
             <div class="col-lg-4 col-md-4">
-                    <section class="form-group selectpicker" multiple>
-                        {% for tag in article.tags.all %}
-                            <option value="{{ tag.id }}">{{tag.tag}}</option>
-                        {% endfor %}
-                    </section>
+                <section class="form-group selectpicker" multiple>
+                    {% for tag in article.tags.all %}
+                        <option value="{{ tag.id }}">{{ tag.tag }}</option>
+                    {% endfor %}
+                </section>
             </div>
             <button id="add" class="btn btn-primary" edit="{{ article.id }}">确定</button>
 
@@ -45,26 +45,39 @@
         $(function () {
 
             $('#summernote').summernote({
-      height: 300,                 // set editor height
-  minHeight: 300,             // set minimum height of editor
-  maxHeight: null,             // set maximum height of editor
-  focus: true
-  });
-{#            $('#summernote').summernote('insertNode', node);#}
+                height: 300,                 // set editor height
+                minHeight: 300,             // set minimum height of editor
+                maxHeight: null,             // set maximum height of editor
+                focus: true
+            });
+            {#            $('#summernote').summernote('insertNode', node);#}
+            {#            var E = window.wangEditor;#}
+            {#            var editor = new E('#edit_block');#}
+            {#            editor.create();#}
+            {#            $('#edit_block').html({{ article.content }});#}
+            {#            editor.$txt.html('{{ article.content }}');#}
+            {#            $.ajax({#}
+            {#                url: "/root/api/article/13",#}
+            {#                method: "get",#}
+            {#                success: function (result) {#}
+            {#                    $('#edit_block').html(result.content);#}
+            {#                }#}
+            {#            });#}
+            {##}
             $('#add').click(function () {
                 var id = $(this).attr('edit');
                 {% if article.type == 'markdown' %}
                     var content = $('textarea').html();
 
-                    {% else %}
+                {% else %}
                     var content = $('#summernote').summernote('code');
 
                 {% endif %}
                 $.ajax({
                     url: "/root/api/article/" + id,
                     method: "PUT",
-                    contentType:"application/json; charset=utf-8",
-                    dataType:"json",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
                     data: JSON.stringify({
                         content: content,
                         image_url: $('input[name=image_url]').val(),
